@@ -74,8 +74,11 @@ export default function TopographicBackground() {
   return (
     <canvas
       ref={canvasRef}
-      className="absolute inset-0 w-full h-full pointer-events-none z-0"
-      style={{ opacity: 0.7 }}
+      className="absolute inset-0 w-full h-full pointer-events-none"
+      style={{
+        zIndex: 0,
+        opacity: 0.7,
+      }}
     />
   );
 }
