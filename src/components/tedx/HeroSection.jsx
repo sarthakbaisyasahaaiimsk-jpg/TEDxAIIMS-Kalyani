@@ -37,18 +37,7 @@ export default function HeroSection() {
       {/* Main content */}
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 w-full pt-32 pb-24">
 
-        {/* Event badge */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="flex items-center gap-3 mb-8"
-        >
-          <span className="w-6 h-px bg-ted-red" />
-          <span className="text-ted-red text-[11px] tracking-[0.45em] uppercase font-medium">
-            TEDxAIIMSKalyani · 2026
-          </span>
-        </motion.div>
+        
 
         {/* Main headline */}
         <motion.div

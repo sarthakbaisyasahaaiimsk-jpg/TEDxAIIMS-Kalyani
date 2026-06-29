@@ -62,13 +62,7 @@ const Team = () => {
       <main className="pt-32 pb-28 lg:pt-40 lg:pb-40">
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
 
-          {/* Page label */}
-          <ScrollReveal delay={0.05}>
-            <div className="flex items-center gap-3 mb-6">
-              <span className="w-5 h-px bg-ted-red" />
-              <p className="text-ted-red text-[11px] tracking-[0.45em] uppercase font-medium">01 — The Team</p>
-            </div>
-          </ScrollReveal>
+          
 
           {/* Heading */}
           <ScrollReveal delay={0.1}>

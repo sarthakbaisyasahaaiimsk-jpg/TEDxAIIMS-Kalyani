@@ -59,12 +59,7 @@ export default function SpeakersSection() {
   return (
     <section id="speakers" className="relative bg-[#060606] py-28 lg:py-40">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
-        <ScrollReveal>
-          <div className="flex items-center gap-3 mb-6">
-            <span className="w-5 h-px bg-ted-red" />
-            <p className="text-ted-red text-[11px] tracking-[0.45em] uppercase font-medium">04 — Speakers</p>
-          </div>
-        </ScrollReveal>
+        
 
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-14 gap-8">
           <ScrollReveal>

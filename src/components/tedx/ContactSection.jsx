@@ -34,14 +34,7 @@ const ContactSection = () => {
     <section id="contact" className="py-28 lg:py-40 bg-[#060606] border-t border-white/5">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
 
-        {/* Section Label */}
-        <ScrollReveal delay={0.05}>
-          <div className="flex items-center gap-3 mb-6">
-            <span className="w-5 h-px bg-ted-red" />
-            <p className="text-ted-red text-[11px] tracking-[0.45em] uppercase font-medium">Contact</p>
-          </div>
-        </ScrollReveal>
-
+        
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-start">
 
           {/* Left — headline + email */}

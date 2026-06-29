@@ -36,12 +36,7 @@ export default function RegistrationSection() {
       <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-ted-red/6 blur-[150px] rounded-full pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 lg:px-12 relative">
-        <ScrollReveal>
-          <div className="flex items-center gap-3 mb-6">
-            <span className="w-5 h-px bg-ted-red" />
-            <p className="text-ted-red text-[11px] tracking-[0.45em] uppercase font-medium">09 - Register</p>
-          </div>
-        </ScrollReveal>
+        
 
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-20 mb-16 items-end">
           <ScrollReveal>

@@ -25,12 +25,7 @@ export default function VenueSection() {
   return (
     <section id="venue" className="relative bg-black py-28 lg:py-40">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
-        <ScrollReveal>
-          <div className="flex items-center gap-3 mb-6">
-            <span className="w-5 h-px bg-ted-red" />
-            <p className="text-ted-red text-[11px] tracking-[0.45em] uppercase font-medium">07 — Venue</p>
-          </div>
-        </ScrollReveal>
+        
 
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-20 mb-14 items-end">
           <ScrollReveal>

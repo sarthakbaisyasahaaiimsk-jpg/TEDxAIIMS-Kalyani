@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
+import logo from "@/assets/logo-white.png";
 
 const navLinks = [
   { label: 'About',        href: '/#about',        type: 'anchor' },
@@ -38,11 +39,13 @@ const Navbar = () => {
         <div className="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between h-16 lg:h-20">
 
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2.5">
-            <span className="text-ted-red font-black text-lg tracking-tight">TED</span>
-            <span className="text-white/20 text-sm font-light">x</span>
-            <span className="text-white font-black text-sm tracking-tight">AIIMSKalyani</span>
-          </Link>
+         <Link to="/" className="flex items-center">
+           <img
+              src={logo}
+              alt="TEDxAIIMSKalyani"
+              className="h-14 w-auto"
+           />
+         </Link>
 
           {/* Desktop nav */}
           <div className="hidden lg:flex items-center gap-8">
