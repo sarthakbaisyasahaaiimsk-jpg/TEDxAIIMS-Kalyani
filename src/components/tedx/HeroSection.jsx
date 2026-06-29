@@ -1,12 +1,14 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-//import TopographicBackground from './TopographicBackground';
+import TopographicBackground from './TopographicBackground';
 import { ArrowDown } from 'lucide-react';
 
 export default function HeroSection() {
   return (
     <section className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-black">
-      {/*<TopographicBackground />*/}
+      <div className="absolute inset-0 z-0">
+        <TopographicBackground />
+      </div>
 
       {/* Layered gradients for depth */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-transparent to-black/80" />
