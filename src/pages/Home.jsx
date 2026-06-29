@@ -15,26 +15,30 @@ import Footer from '@/components/tedx/Footer';
 import SneakPeekSection from "@/components/tedx/SneakPeekSection";
 import PastSponsorsSection from "@/components/tedx/PastSponsorsSection";
 import ContactSection from "@/components/tedx/ContactSection";
+import GlobalBackground from "@/components/tedx/GlobalBackground";
 
 export default function Home() {
   return (
     <div className="bg-black min-h-screen">
       <Navbar />
-      <HeroSection />
-      <AboutSection />
-      <ThemeSection />
-      <FrontiersSection />
-     <SpeakersSection />
-     <SneakPeekSection />
-     <ScheduleSection />
-     <ExperienceSection />
-     <VenueSection />
-     <SponsorsSection />
-     <PastSponsorsSection />
-     <RegistrationSection />
-     <FAQSection />
-     <ContactSection />
-     <Footer />
+      <GlobalBackground />
+      <div className="relative bg-black overflow-hidden">
+        <HeroSection />
+        <AboutSection />
+        <ThemeSection />
+        <FrontiersSection />
+        <SpeakersSection />
+        <SneakPeekSection />
+        <ScheduleSection />
+        <ExperienceSection />
+        <VenueSection />
+        <SponsorsSection />
+        <PastSponsorsSection />
+        <RegistrationSection />
+        <FAQSection />
+        <ContactSection />
+        <Footer />
+      </div>
     </div>
   );
 }
