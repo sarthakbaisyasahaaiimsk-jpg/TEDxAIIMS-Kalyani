@@ -48,7 +48,7 @@ const Navbar = () => {
          </Link>
 
           {/* Desktop nav */}
-          <div className="hidden lg:flex items-center gap-8">
+          <div className="flex flex-1 justify-end items-center gap-8 lg:gap-12">
             {navLinks.map((link) =>
               link.type === 'route' ? (
                 <Link
