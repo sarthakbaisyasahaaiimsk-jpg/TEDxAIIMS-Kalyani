@@ -12,6 +12,9 @@ import SponsorsSection from '@/components/tedx/SponsorsSection';
 import RegistrationSection from '@/components/tedx/RegistrationSection';
 import FAQSection from '@/components/tedx/FAQSection';
 import Footer from '@/components/tedx/Footer';
+import SneakPeekSection from "@/components/tedx/SneakPeekSection";
+import PastSponsorsSection from "@/components/tedx/PastSponsorsSection";
+import ContactSection from "@/components/tedx/ContactSection";
 
 export default function Home() {
   return (
@@ -21,14 +24,17 @@ export default function Home() {
       <AboutSection />
       <ThemeSection />
       <FrontiersSection />
-      <SpeakersSection />
-      <ScheduleSection />
-      <ExperienceSection />
-      <VenueSection />
-      <SponsorsSection />
-      <RegistrationSection />
-      <FAQSection />
-      <Footer />
+     <SpeakersSection />
+     <SneakPeekSection />
+     <ScheduleSection />
+     <ExperienceSection />
+     <VenueSection />
+     <SponsorsSection />
+     <PastSponsorsSection />
+     <RegistrationSection />
+     <FAQSection />
+     <ContactSection />
+     <Footer />
     </div>
   );
 }

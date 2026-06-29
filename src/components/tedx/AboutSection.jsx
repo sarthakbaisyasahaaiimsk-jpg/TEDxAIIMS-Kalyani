@@ -1,95 +1,131 @@
-import React from 'react';
-import ScrollReveal from './ScrollReveal';
-import AnimatedCounter from './AnimatedCounter';
 import { motion } from 'framer-motion';
+import ScrollReveal from './ScrollReveal';
 
-export default function AboutSection() {
+const AboutSection = () => {
   return (
-    <section id="about" className="relative bg-black py-28 lg:py-40 overflow-hidden">
-      {/* Subtle vertical rail */}
-      <div className="absolute left-[38%] top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-white/4 to-transparent hidden xl:block" />
-
+    <section id="about" className="py-28 lg:py-40 bg-black">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
-        <ScrollReveal>
-          <div className="flex items-center gap-3 mb-14">
+
+        {/* Section Label */}
+        <ScrollReveal delay={0.05}>
+          <div className="flex items-center gap-3 mb-6">
             <span className="w-5 h-px bg-ted-red" />
             <p className="text-ted-red text-[11px] tracking-[0.45em] uppercase font-medium">01 — About</p>
           </div>
         </ScrollReveal>
 
-        <div className="grid lg:grid-cols-5 gap-16 lg:gap-20 mb-28">
-          {/* Left — wide */}
-          <div className="lg:col-span-3">
-            <ScrollReveal>
-              <h2 className="text-5xl lg:text-6xl font-black text-white tracking-tight leading-none mb-10">
-                Ideas Worth<br />
-                <span className="text-ted-red">Spreading</span>
-              </h2>
-              <p className="text-white/60 text-lg leading-relaxed mb-6 font-light">
-                TED is a nonprofit organization devoted to Ideas Worth Spreading —
-                usually in the form of short, powerful talks by today's leading thinkers
-                and doers. TED's mission: make great ideas accessible and spark
-                conversations that change lives.
-              </p>
-              <p className="text-white/35 text-base leading-relaxed font-light">
-                TEDx is a grassroots initiative created in the spirit of TED's mission.
-                It brings the power of TED to local communities worldwide through
-                independently organized events — each a stage for voices that might
-                otherwise go unheard.
-              </p>
-            </ScrollReveal>
-          </div>
+        {/* Main Heading */}
+        <ScrollReveal delay={0.1}>
+          <h2 className="text-4xl lg:text-6xl font-black tracking-tight text-white mb-6 max-w-3xl">
+            Ideas that move the world forward.
+          </h2>
+        </ScrollReveal>
 
-          {/* Right — mission card */}
-          <div className="lg:col-span-2">
-            <ScrollReveal delay={0.15}>
-              <motion.div
-                whileHover={{ y: -3 }}
-                className="relative bg-[#0f0f0f] border border-white/6 p-8 lg:p-10 h-full"
-              >
-                {/* Red corner accent */}
-                <div className="absolute top-0 left-0 w-12 h-12 border-t border-l border-ted-red/40" />
-                <div className="absolute bottom-0 right-0 w-12 h-12 border-b border-r border-ted-red/20" />
+        <ScrollReveal delay={0.15}>
+          <p className="text-white/60 text-lg leading-relaxed max-w-2xl mb-24">
+            TEDxAIIMSKalyani is where medicine meets curiosity — a stage for the ideas that define the frontier of human knowledge, care, and possibility.
+          </p>
+        </ScrollReveal>
 
-                <span className="text-ted-red text-[10px] tracking-[0.35em] uppercase font-medium block mb-4">
-                  Our Mission
-                </span>
-                <h3 className="text-white text-2xl font-bold tracking-tight mb-5 leading-tight">
-                  TEDxAIIMSKalyani
-                </h3>
-                <p className="text-white/55 text-sm leading-relaxed mb-5">
-                  A platform where medical professionals, researchers, technologists,
-                  and visionaries converge to share ideas that challenge the status quo.
-                  Rooted in one of India's premier medical institutions, we bridge
-                  clinical excellence with bold innovation.
-                </p>
-                <p className="text-white/30 text-sm leading-relaxed">
-                  From the operating theatre to the research lab, from policy corridors
-                  to startup garages — we amplify voices that dare to imagine a different
-                  future for healthcare and humanity.
-                </p>
-                <div className="w-12 h-0.5 bg-ted-red mt-8" />
-              </motion.div>
-            </ScrollReveal>
-          </div>
+        {/* Divider */}
+        <ScrollReveal delay={0.2}>
+          <div className="border-t border-white/5 mb-24" />
+        </ScrollReveal>
+
+        {/* Sub-sections grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-0 border border-white/5">
+
+          {/* About TED */}
+          <ScrollReveal delay={0.2}>
+            <motion.div
+              whileHover={{ backgroundColor: 'rgba(255,255,255,0.02)' }}
+              transition={{ duration: 0.3 }}
+              className="p-10 lg:p-12 border-b lg:border-b-0 lg:border-r border-white/5"
+            >
+              <div className="flex items-center gap-3 mb-8">
+                <span className="w-5 h-px bg-ted-red" />
+                <p className="text-ted-red text-[10px] tracking-[0.35em] uppercase font-medium">TED</p>
+              </div>
+              <h3 className="text-2xl font-black tracking-tight text-white mb-5">
+                What is TED?
+              </h3>
+              <p className="text-white/60 text-sm leading-relaxed mb-6">
+                TED is a nonprofit organisation devoted to the power of ideas. Founded in 1984, TED began as a single conference bringing together thought leaders from Technology, Entertainment, and Design — and has since expanded to cover virtually every dimension of human inquiry.
+              </p>
+              <p className="text-white/60 text-sm leading-relaxed">
+                Under the banner of <span className="text-white/80 font-medium">Ideas Worth Spreading</span>, TED talks have reached hundreds of millions of people worldwide, sparking conversations, shifting perspectives, and driving action across science, business, art, and global affairs.
+              </p>
+            </motion.div>
+          </ScrollReveal>
+
+          {/* About TEDx */}
+          <ScrollReveal delay={0.25}>
+            <motion.div
+              whileHover={{ backgroundColor: 'rgba(255,255,255,0.02)' }}
+              transition={{ duration: 0.3 }}
+              className="p-10 lg:p-12 border-b lg:border-b-0 lg:border-r border-white/5"
+            >
+              <div className="flex items-center gap-3 mb-8">
+                <span className="w-5 h-px bg-ted-red" />
+                <p className="text-ted-red text-[10px] tracking-[0.35em] uppercase font-medium">TEDx</p>
+              </div>
+              <h3 className="text-2xl font-black tracking-tight text-white mb-5">
+                What is TEDx?
+              </h3>
+              <p className="text-white/60 text-sm leading-relaxed mb-6">
+                TEDx is a programme of locally, independently organised events that bring people together to share a TED-like experience. The <span className="text-white/80 font-medium">x</span> in TEDx stands for independently organised — each event is run by a passionate community organiser under a free license granted by TED.
+              </p>
+              <p className="text-white/60 text-sm leading-relaxed">
+                TEDx events preserve the spirit and format of TED: short, powerful talks from diverse voices, curated to challenge assumptions and celebrate human potential. They happen in schools, hospitals, city squares, and everywhere ideas deserve a stage.
+              </p>
+            </motion.div>
+          </ScrollReveal>
+
+          {/* About TEDxAIIMSKalyani */}
+          <ScrollReveal delay={0.3}>
+            <motion.div
+              whileHover={{ backgroundColor: 'rgba(255,255,255,0.02)' }}
+              transition={{ duration: 0.3 }}
+              className="p-10 lg:p-12"
+            >
+              <div className="flex items-center gap-3 mb-8">
+                <span className="w-5 h-px bg-ted-red" />
+                <p className="text-ted-red text-[10px] tracking-[0.35em] uppercase font-medium">TEDxAIIMSKalyani</p>
+              </div>
+              <h3 className="text-2xl font-black tracking-tight text-white mb-5">
+                Our Event
+              </h3>
+              <p className="text-white/60 text-sm leading-relaxed mb-6">
+                TEDxAIIMSKalyani is hosted at AIIMS Kalyani — the All India Institute of Medical Sciences, Kalyani — one of India's premier institutions at the intersection of medical education, research, and public health.
+              </p>
+              <p className="text-white/60 text-sm leading-relaxed">
+                In 2026, we bring together clinicians, researchers, engineers, artists, and innovators under one roof to explore ideas that bridge <span className="text-white/80 font-medium">healthcare and human progress</span>. Because the most vital ideas of our time live at the boundary between disciplines.
+              </p>
+            </motion.div>
+          </ScrollReveal>
+
         </div>
 
-        {/* Stats row */}
-        <ScrollReveal>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-white/5">
+        {/* Bottom stat strip */}
+        <ScrollReveal delay={0.35}>
+          <div className="grid grid-cols-2 lg:grid-cols-4 border-x border-b border-white/5">
             {[
-              { end: 12, suffix: '+', label: 'Speakers' },
-              { end: 500, suffix: '+', label: 'Attendees' },
-              { end: 30, suffix: '+', label: 'Institutions' },
-              { end: 50, suffix: '+', label: 'Innovation Leaders' },
-            ].map((stat) => (
-              <div key={stat.label} className="bg-black py-10 px-6">
-                <AnimatedCounter end={stat.end} suffix={stat.suffix} label={stat.label} />
+              { value: '1984', label: 'TED Founded' },
+              { value: '3500+', label: 'TEDx Events Worldwide' },
+              { value: '100+', label: 'Countries Represented' },
+              { value: '2026', label: 'TEDxAIIMSKalyani' },
+            ].map((stat, i) => (
+              <div key={i} className={`p-8 ${i < 3 ? 'border-r border-white/5' : ''}`}>
+                <p className="text-3xl font-black tracking-tight text-white mb-1">{stat.value}</p>
+                <p className="text-white/35 text-[10px] tracking-[0.3em] uppercase">{stat.label}</p>
               </div>
             ))}
           </div>
         </ScrollReveal>
+
       </div>
     </section>
   );
-}
+};
+
+export default AboutSection;
