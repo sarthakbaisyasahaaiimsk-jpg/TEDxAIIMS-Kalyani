@@ -43,7 +43,7 @@ const Navbar = () => {
            <img
               src={logo}
               alt="TEDxAIIMSKalyani"
-              className="h-14 w-auto"
+              className="h-16 w-auto"
            />
          </Link>
 
