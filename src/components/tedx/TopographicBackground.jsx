@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef } from 'react';
 
 export default function TopographicBackground() {
   const canvasRef = useRef(null);
@@ -6,108 +6,68 @@ export default function TopographicBackground() {
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    let animationFrame;
+    const ctx = canvas.getContext('2d');
+    let animationId;
     let time = 0;
 
-    const resize = () => {
-      const dpr = window.devicePixelRatio || 1;
-      const width = window.innerWidth;
-      const height = window.innerHeight;
+   const resize = () => {
+      const parent = canvas.parentElement;
 
-      canvas.width = width * dpr;
-      canvas.height = height * dpr;
+      const width = parent ? parent.clientWidth : window.innerWidth;
+     const height = parent ? parent.clientHeight : window.innerHeight;
 
-      canvas.style.width = width + "px";
-      canvas.style.height = height + "px";
+      canvas.width = width;
+     canvas.height = height;
 
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+     canvas.style.width = `${width}px`;
+     canvas.style.height = `${height}px`;
     };
-
     resize();
-    window.addEventListener("resize", resize);
+    window.addEventListener('resize', resize);
 
-    function draw() {
-      const w = window.innerWidth;
-      const h = window.innerHeight;
+    const draw = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+       const w = canvas.width;
+       const h = canvas.height;
 
-      ctx.clearRect(0, 0, w, h);
-
-      // subtle red radial glow
-      const glow = ctx.createRadialGradient(
-        w / 2,
-        h * 0.75,
-        50,
-        w / 2,
-        h * 0.75,
-        500
-      );
-
-      glow.addColorStop(0, "rgba(235,0,40,0.08)");
-      glow.addColorStop(1, "rgba(235,0,40,0)");
-
-      ctx.fillStyle = glow;
-      ctx.fillRect(0, 0, w, h);
-
-      // animated contour lines
-      for (let row = 0; row < 14; row++) {
+      for (let i = 0; i < 12; i++) {
         ctx.beginPath();
+        ctx.strokeStyle = i % 4 === 0
+         ? 'rgba(235, 0, 40, 0.16)'
+          : 'rgba(255,255,255,0.07)';
 
-        ctx.lineWidth = row % 4 === 0 ? 1 : 0.6;
+       ctx.lineWidth = i % 4 === 0 ? 1.2 : 0.7;
 
-        ctx.strokeStyle =
-          row % 4 === 0
-            ? "rgba(235,0,40,0.18)"
-            : "rgba(255,255,255,0.07)";
-
-        for (let x = 0; x <= w; x += 3) {
-          const nx = x / w;
-
-          const y =
-            h * 0.18 +
-            row * (h / 12) +
-            Math.sin(nx * 8 + row + time) * (18 + row * 1.5) +
-            Math.cos(nx * 5 + row * 0.6 + time * 0.6) * 10;
-
+        for (let x = 0; x <= w; x += 4) {
+          const y = h * 0.3 + 
+            Math.sin((x * 0.002) + time * 0.3 + i * 0.8) * (40 + i * 15) +
+            Math.cos((x * 0.001) + time * 0.2 + i * 0.5) * (20 + i * 10) +
+            i * 45;
           if (x === 0) ctx.moveTo(x, y);
           else ctx.lineTo(x, y);
         }
-
         ctx.stroke();
       }
 
-      // floating particles
-      for (let i = 0; i < 35; i++) {
-        const a = time * 0.15 + i;
-
-        const x = (Math.sin(a * 0.7) * 0.45 + 0.5) * w;
-        const y = (Math.cos(a * 0.5) * 0.45 + 0.5) * h;
-
-        const r = 1 + Math.sin(a) * 0.6;
-
+      // Floating particles
+      for (let i = 0; i < 30; i++) {
+        const px = (Math.sin(time * 0.1 + i * 2.1) * 0.5 + 0.5) * w;
+        const py = (Math.cos(time * 0.08 + i * 1.7) * 0.5 + 0.5) * h;
+        const size = Math.sin(time * 0.5 + i) * 0.5 + 1;
         ctx.beginPath();
-        ctx.arc(x, y, r, 0, Math.PI * 2);
-
-        ctx.fillStyle =
-          i % 6 === 0
-            ? "rgba(235,0,40,0.35)"
-            : "rgba(255,255,255,0.12)";
-
+        ctx.arc(px, py, size, 0, Math.PI * 2);
+        ctx.fillStyle = i % 5 === 0 ? 'rgba(235, 0, 40, 0.3)' : 'rgba(255,255,255,0.08)';
         ctx.fill();
       }
 
       time += 0.01;
-      animationFrame = requestAnimationFrame(draw);
-    }
-
+      animationId = requestAnimationFrame(draw);
+    };
     draw();
 
     return () => {
-      cancelAnimationFrame(animationFrame);
-      window.removeEventListener("resize", resize);
+      cancelAnimationFrame(animationId);
+      window.removeEventListener('resize', resize);
     };
   }, []);
 
@@ -115,6 +75,7 @@ export default function TopographicBackground() {
     <canvas
       ref={canvasRef}
       className="absolute inset-0 w-full h-full pointer-events-none z-0"
+      style={{ opacity: 0.7 }}
     />
   );
 }
