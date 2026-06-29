@@ -21,7 +21,7 @@ export default function Home() {
   return (
     <div className="bg-black min-h-screen">
       <Navbar />
-      <GlobalBackground />
+      {/* <GlobalBackground /> */}
       <div className="relative bg-black overflow-hidden">
         <HeroSection />
         <AboutSection />
