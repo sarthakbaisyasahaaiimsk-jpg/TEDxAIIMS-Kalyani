@@ -5,6 +5,7 @@ import ScrollToTop from './components/ScrollToTop';
 import Home from './pages/Home';
 import Team from "./pages/Team";
 import PastTEDx from "./pages/PastTEDx";
+import Register from './pages/Register';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/team" element={<Team />} />
         <Route path="/past-tedx" element={<PastTEDx />} />
+       <Route path="/register" element={<Register />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
       <Toaster />

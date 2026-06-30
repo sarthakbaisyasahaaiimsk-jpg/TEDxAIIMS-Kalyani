@@ -2,6 +2,7 @@
 import { motion } from "framer-motion";
 import ScrollReveal from "./ScrollReveal";
 import { ArrowRight, Check } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const passTypes = [
   {
@@ -10,7 +11,7 @@ const passTypes = [
     tag: "For Students",
     features: ["Full-day access", "All TEDx talks", "Networking sessions", "Certificate of attendance"],
     highlight: false,
-    formUrl: import.meta.env.VITE_FORM_STUDENT,
+    key: "student",
   },
   {
     title: "Professional Pass",
@@ -18,7 +19,7 @@ const passTypes = [
     tag: "Most Popular",
     features: ["Everything in Student", "Priority seating", "Exclusive workshops", "Innovation exhibit access", "Networking dinner"],
     highlight: true,
-    formUrl: import.meta.env.VITE_FORM_PROFESSIONAL,
+    key: "professional",
   },
   {
     title: "Partner Inquiry",
@@ -26,7 +27,7 @@ const passTypes = [
     tag: "For Organizations",
     features: ["Sponsorship tiers", "Brand visibility", "Speaking opportunities", "VIP access", "Custom engagement"],
     highlight: false,
-    formUrl: import.meta.env.VITE_FORM_PARTNER,
+    key: "partner",
   },
 ];
 
@@ -79,15 +80,13 @@ export default function RegistrationSection() {
                   ))}
                 </ul>
 
-                <a
-                  href={pass.formUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <Link
+                  to={`/register?pass=${pass.key}`}
                   className={"mt-8 w-full text-[11px] tracking-[0.25em] uppercase px-8 py-4 flex items-center justify-center gap-3 font-semibold transition-all duration-300 " + (pass.highlight ? "bg-ted-red text-white hover:bg-white hover:text-black" : "bg-white/5 text-white/60 hover:bg-white/10 hover:text-white border border-white/8")}
                 >
                   Register Now
                   <ArrowRight size={13} />
-                </a>
+                </Link>
               </motion.div>
             </ScrollReveal>
           ))}
