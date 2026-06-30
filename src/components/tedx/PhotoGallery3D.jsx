@@ -15,6 +15,10 @@ const imagePaths = [
   "https://images.unsplash.com/photo-1536901766856-5d45744cd180?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
 ];
 
+// TEDx-inspired theme colors: very dark red/black background, crimson accents.
+const THEME_BG = "#1A0408";
+const THEME_ACCENT = "#EB0028";
+
 class Utilities {
   static randomInt(min, max) {
     return Math.floor(min + Math.random() * (max - min + 1));
@@ -292,7 +296,7 @@ export default function PhotoGallery3D() {
     canvas.style.width = "100%";
     canvas.style.height = "100%";
     canvas.style.display = "block";
-    canvas.style.background = "#01012A";
+    canvas.style.background = THEME_BG;
     canvas.style.cursor = "default";
     canvas.ariaLabel = "TEDx photo gallery";
     canvas.role = "img";
@@ -372,7 +376,7 @@ export default function PhotoGallery3D() {
         focus.x += (sketchState.touchInfos.mouse.x - focus.x) * 0.16;
         focus.y += (sketchState.touchInfos.mouse.y - focus.y) * 0.16;
         ctx.save();
-        ctx.strokeStyle = "#EB0028";
+        ctx.strokeStyle = THEME_ACCENT;
         ctx.lineWidth = 1;
         ctx.strokeRect(focus.x - focus.s / 2, focus.y - focus.s / 2, focus.s, focus.s);
         ctx.restore();
@@ -381,7 +385,7 @@ export default function PhotoGallery3D() {
         focus.x += (s.x - focus.x) * 0.16;
         focus.y += (s.y - focus.y) * 0.16;
         ctx.save();
-        ctx.strokeStyle = "#EB0028";
+        ctx.strokeStyle = THEME_ACCENT;
         ctx.lineWidth = 5 * s.ratio;
         ctx.strokeRect(focus.x - focus.s / 2, focus.y - focus.s / 2, focus.s, focus.s);
         ctx.restore();
@@ -520,6 +524,42 @@ export default function PhotoGallery3D() {
       init();
     }
 
+    // --- Mobile scroll-lock fix ---
+    // Stores the previous inline style values so we can restore them exactly
+    // (rather than blindly clearing them) when the touch interaction ends.
+    let prevBodyOverflow = "";
+    let prevHtmlOverflow = "";
+    let prevBodyTouchAction = "";
+
+    function lockPageScroll() {
+      prevBodyOverflow = document.body.style.overflow;
+      prevHtmlOverflow = document.documentElement.style.overflow;
+      prevBodyTouchAction = document.body.style.touchAction;
+
+      document.body.style.overflow = "hidden";
+      document.documentElement.style.overflow = "hidden";
+      document.body.style.touchAction = "none";
+    }
+
+    function unlockPageScroll() {
+      document.body.style.overflow = prevBodyOverflow;
+      document.documentElement.style.overflow = prevHtmlOverflow;
+      document.body.style.touchAction = prevBodyTouchAction;
+    }
+
+    function onTouchstartLock() {
+      lockPageScroll();
+    }
+
+    function onTouchendUnlock() {
+      unlockPageScroll();
+    }
+
+    function onTouchcancelUnlock() {
+      unlockPageScroll();
+    }
+    // --- end mobile scroll-lock fix ---
+
     const resizeObserver = new ResizeObserver(onResize);
     resizeObserver.observe(container);
 
@@ -528,6 +568,12 @@ export default function PhotoGallery3D() {
     canvas.addEventListener("click", onClick);
     canvas.addEventListener("touchstart", onTouchstart);
     canvas.addEventListener("touchmove", onTouchmove);
+
+    // Mobile scroll-lock listeners (added separately from existing touch logic
+    // above so the original rotation/interaction behavior is untouched).
+    canvas.addEventListener("touchstart", onTouchstartLock, { passive: true });
+    canvas.addEventListener("touchend", onTouchendUnlock, { passive: true });
+    canvas.addEventListener("touchcancel", onTouchcancelUnlock, { passive: true });
 
     init();
 
@@ -540,6 +586,14 @@ export default function PhotoGallery3D() {
       canvas.removeEventListener("click", onClick);
       canvas.removeEventListener("touchstart", onTouchstart);
       canvas.removeEventListener("touchmove", onTouchmove);
+
+      canvas.removeEventListener("touchstart", onTouchstartLock);
+      canvas.removeEventListener("touchend", onTouchendUnlock);
+      canvas.removeEventListener("touchcancel", onTouchcancelUnlock);
+      // Safety net: ensure scrolling is restored if the component unmounts
+      // mid-touch.
+      unlockPageScroll();
+
       if (container.contains(canvas)) {
         container.removeChild(canvas);
       }
@@ -549,16 +603,20 @@ export default function PhotoGallery3D() {
   return (
     <div
       ref={containerRef}
-      className="relative w-full aspect-video bg-[#01012A] overflow-hidden rounded-sm"
+      className="relative w-full aspect-video overflow-hidden rounded-sm"
+      style={{ backgroundColor: THEME_BG }}
     >
       {!loaded && (
-        <div className="absolute inset-0 flex items-center justify-center bg-[#01012A] z-10">
+        <div
+          className="absolute inset-0 flex items-center justify-center z-10"
+          style={{ backgroundColor: THEME_BG }}
+        >
           <div className="relative w-2/3 max-w-xs">
             <p className="text-ted-red text-center pb-3 text-sm tracking-widest">{progress}%</p>
             <div className="relative h-[2px] bg-white/10 w-full overflow-hidden">
               <div
-                className="absolute left-0 bottom-0 h-full bg-ted-red transition-all duration-300"
-                style={{ width: `${progress}%` }}
+                className="absolute left-0 bottom-0 h-full transition-all duration-300"
+                style={{ width: `${progress}%`, backgroundColor: THEME_ACCENT }}
               />
             </div>
           </div>
