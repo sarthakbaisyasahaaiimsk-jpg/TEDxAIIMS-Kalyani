@@ -2,31 +2,66 @@ import { motion } from 'framer-motion';
 import Navbar from '@/components/tedx/Navbar';
 import Footer from '@/components/tedx/Footer';
 import ScrollReveal from '@/components/tedx/ScrollReveal';
+import chiefCoordinator from "@/assets/team/chief-coordinator.jpg";
+import managementCoordinator from "@/assets/team/management-coordinator.jpg";
+import eventManagementHead from "@/assets/team/event-management-head.jpg";
+import stageLead from "@/assets/team/stage-lead.jpg";
+import decorationLead from "@/assets/team/decoration-lead.jpg";
+import ticketingRegistrationLead from "@/assets/team/ticketing-registration-lead.jpg";
+import auditoriumLead from "@/assets/team/auditorium-lead.jpg";
+import seatingLead from "@/assets/team/seating-lead.jpg";
+import programmeSchedulingLead from "@/assets/team/programme-scheduling-lead.jpg";
+import photographyVideographyHead from "@/assets/team/photography-videography-head.jpg";
+import speakerRelationsHead from "@/assets/team/speaker-relations-head.jpg";
+import speakerQueryCoordinationLead from "@/assets/team/speaker-query-coordination-lead.jpg";
+import contentCurationHead from "@/assets/team/content-curation-head.jpg";
+import proofreadingLead from "@/assets/team/proofreading-lead.jpg";
+import editorialLead from "@/assets/team/editorial-lead.jpg";
+import itPrHead from "@/assets/team/it-pr-head.jpg";
+import lightsSoundHead from "@/assets/team/lights-sound-head.jpg";
+import designHead from "@/assets/team/design-head.jpg";
+import socialMediaHead from "@/assets/team/social-media-head.jpg";
+import websiteHead from "@/assets/team/website-head.jpg";
+import digitalTicketingHead from "@/assets/team/digital-ticketing-head.jpg";
+import culturalHead from "@/assets/team/cultural-head.jpg";
+import hospitalityHead from "@/assets/team/hospitality-head.jpg";
+import logisticsHead from "@/assets/team/logistics-head.jpg";
+import transportationLead from "@/assets/team/transportation-lead.jpg";
+import accommodationLead from "@/assets/team/accommodation-lead.jpg";
+import volunteerHead from "@/assets/team/volunteer-head.jpg";
+import foodCateringLead from "@/assets/team/food-catering-lead.jpg";
+import securityHead from "@/assets/team/security-head.jpg";
 
 const teamMembers = [
-  { name: 'Team Member 1',  role: 'Licensee / Organizer' },
-  { name: 'Team Member 2',  role: 'Co-organizer' },
-  { name: 'Team Member 3',  role: 'Curator' },
-  { name: 'Team Member 4',  role: 'Speaker Coach' },
-  { name: 'Team Member 5',  role: 'Speaker Coach' },
-  { name: 'Team Member 6',  role: 'Head of Logistics' },
-  { name: 'Team Member 7',  role: 'Head of Marketing' },
-  { name: 'Team Member 8',  role: 'Head of Design' },
-  { name: 'Team Member 9',  role: 'Head of Sponsorship' },
-  { name: 'Team Member 10', role: 'Head of Content' },
-  { name: 'Team Member 11', role: 'Logistics Coordinator' },
-  { name: 'Team Member 12', role: 'Logistics Coordinator' },
-  { name: 'Team Member 13', role: 'Marketing Coordinator' },
-  { name: 'Team Member 14', role: 'Marketing Coordinator' },
-  { name: 'Team Member 15', role: 'Design Coordinator' },
-  { name: 'Team Member 16', role: 'Design Coordinator' },
-  { name: 'Team Member 17', role: 'Content Coordinator' },
-  { name: 'Team Member 18', role: 'Content Coordinator' },
-  { name: 'Team Member 19', role: 'Sponsorship Coordinator' },
-  { name: 'Team Member 20', role: 'Sponsorship Coordinator' },
-  { name: 'Team Member 21', role: 'Volunteer Lead' },
-  { name: 'Team Member 22', role: 'Volunteer Lead' },
-  { name: 'Team Member 23', role: 'Volunteer Lead' },
+  { name: "Name", role: "Chief Coordinator", photo: chiefCoordinator },
+  { name: "Name", role: "Management Coordinator", photo: managementCoordinator },
+  { name: "Name", role: "Event Management Head", photo: eventManagementHead },
+  { name: "Name", role: "Stage Lead", photo: stageLead },
+  { name: "Name", role: "Decoration Lead", photo: decorationLead },
+  { name: "Name", role: "Ticketing & Registration Lead", photo: ticketingRegistrationLead },
+  { name: "Name", role: "Auditorium Lead", photo: auditoriumLead },
+  { name: "Name", role: "Seating Lead", photo: seatingLead },
+  { name: "Name", role: "Programme Scheduling Lead", photo: programmeSchedulingLead },
+  { name: "Name", role: "Photography & Videography Head", photo: photographyVideographyHead },
+  { name: "Name", role: "Speaker Relations Head", photo: speakerRelationsHead },
+  { name: "Name", role: "Speaker Query & Coordination Lead", photo: speakerQueryCoordinationLead },
+  { name: "Name", role: "Content & Curation Head", photo: contentCurationHead },
+  { name: "Name", role: "Proofreading Lead", photo: proofreadingLead },
+  { name: "Name", role: "Editorial Lead", photo: editorialLead },
+  { name: "Name", role: "IT & PR Head", photo: itPrHead },
+  { name: "Name", role: "Lights & Sound Head", photo: lightsSoundHead },
+  { name: "Name", role: "Design Head", photo: designHead },
+  { name: "Name", role: "Social Media Head", photo: socialMediaHead },
+  { name: "Name", role: "Website Head", photo: websiteHead },
+  { name: "Name", role: "Digital Ticketing Head", photo: digitalTicketingHead },
+  { name: "Name", role: "Cultural Head", photo: culturalHead },
+  { name: "Name", role: "Hospitality Head", photo: hospitalityHead },
+  { name: "Name", role: "Logistics Head", photo: logisticsHead },
+  { name: "Name", role: "Transportation Lead", photo: transportationLead },
+  { name: "Name", role: "Accommodation Lead", photo: accommodationLead },
+  { name: "Name", role: "Volunteer Head", photo: volunteerHead },
+  { name: "Name", role: "Food & Catering Lead", photo: foodCateringLead },
+  { name: "Name", role: "Security Head", photo: securityHead },
 ];
 
 const TeamCard = ({ member, index }) => (
