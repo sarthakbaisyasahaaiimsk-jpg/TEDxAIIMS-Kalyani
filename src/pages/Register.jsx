@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { useSearchParams } from "react-router-dom";
 import ScrollReveal from "../components/tedx/ScrollReveal";
 import logo from "../assets/logo-white.png";
+import paymentQR from "./assets/payment-qr.png";
 
 const FORM_ACTION_URL =
   "https://docs.google.com/forms/u/0/d/e/1FAIpQLSecTSzVq2MVxyHdbQ_QPwxt8gHIYj8E4g9g8iV2yBkfTPBYZw/formResponse";
@@ -16,6 +17,7 @@ const ENTRY = {
   diet: "entry.610749920",
   passType: "entry.1088215050",
   numPasses: "entry.1128102951",
+  transactionId: "entry.1180537060",
 };
 
 const passTypeOptions = ["Student", "Professional", "Partner"];
@@ -30,6 +32,7 @@ const initialFormState = {
   diet: "",
   passType: "",
   numPasses: "1",
+  transactionId: "",
 };
 
 export default function Register() {
@@ -53,9 +56,15 @@ export default function Register() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!form.fullName || !form.email || !form.contact || !form.passType) {
-      setStatus("error");
-      return;
+    if (
+        !form.fullName ||
+        !form.email ||
+        !form.contact ||
+        !form.passType ||
+        !form.transactionId
+   ) {
+    setStatus("error");
+    return;
     }
 
     setStatus("submitting");
@@ -69,6 +78,7 @@ export default function Register() {
     data.append(ENTRY.diet, form.diet);
     data.append(ENTRY.passType, form.passType);
     data.append(ENTRY.numPasses, form.numPasses);
+    data.append(ENTRY.transactionId, form.transactionId);
 
     try {
       await fetch(FORM_ACTION_URL, {
@@ -253,10 +263,43 @@ export default function Register() {
                     className={inputClasses}
                   />
                 </div>
+                <div className="border border-white/10 rounded-lg bg-white/5 p-8">
+                 <h3 className="text-white text-2xl font-bold mb-6">
+                  Payment
+                 </h3>
+
+                <img
+                   src={paymentQR}
+                   alt="TEDxAIIMSKalyani UPI QR"
+                   className="w-64 mx-auto rounded-lg border border-white/10"
+                 />
+
+                 <p className="text-center text-white/70 mt-6">
+                  Scan the QR code using any UPI app and complete the payment.
+                 </p>
+
+                <p className="text-center text-white/50 mt-2 text-sm">
+                  Please enter the UPI Transaction ID exactly as shown in your payment app.
+                 </p>
+               </div>
+               <div>
+                <label className={labelClasses}>
+                   UPI Transaction ID *
+                 </label>
+
+                <input
+                   type="text"
+                   required
+                   value={form.transactionId}
+                    onChange={handleChange("transactionId")}
+                    className={inputClasses}
+                 placeholder="e.g. T240630143245891"
+                  />
+                </div>
 
                 {status === "error" && (
                   <p className="text-ted-red text-sm text-center">
-                    Please fill in all required fields marked with *.
+                    Please complete all required fields including the UPI Transaction ID.*
                   </p>
                 )}
 
