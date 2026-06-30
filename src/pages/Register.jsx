@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { useSearchParams } from "react-router-dom";
 import ScrollReveal from "../components/tedx/ScrollReveal";
 import logo from "../assets/logo-white.png";
-import paymentQR from "./assets/payment-qr.png";
+import paymentQR from "../assets/payment-qr.png";
 
 const FORM_ACTION_URL =
   "https://docs.google.com/forms/u/0/d/e/1FAIpQLSecTSzVq2MVxyHdbQ_QPwxt8gHIYj8E4g9g8iV2yBkfTPBYZw/formResponse";
