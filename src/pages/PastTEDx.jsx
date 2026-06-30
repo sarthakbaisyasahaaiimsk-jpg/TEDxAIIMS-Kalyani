@@ -1,87 +1,30 @@
-import { motion } from 'framer-motion';
-import { Play, ExternalLink } from 'lucide-react';
-import Navbar from '@/components/tedx/Navbar';
-import Footer from '@/components/tedx/Footer';
-import ScrollReveal from '@/components/tedx/ScrollReveal';
+import { motion } from "framer-motion";
+import { Play, ExternalLink } from "lucide-react";
+import Navbar from "@/components/tedx/Navbar";
+import Footer from "@/components/tedx/Footer";
+import ScrollReveal from "@/components/tedx/ScrollReveal";
+import PhotoGallery3D from "@/components/tedx/PhotoGallery3D";
 
 const pastEvent = {
-  year: '2024',
-  theme: 'Convergence',
-  tagline: 'Where disciplines dissolve and ideas collide.',
+  year: "2024",
+  theme: "Convergence",
+  tagline: "Where disciplines dissolve and ideas collide.",
   description:
-    'TEDxAIIMSKalyani 2024 brought together twelve remarkable minds across medicine, technology, art, and policy. Over six hours, they challenged the assumptions that keep disciplines apart, and showed what becomes possible when boundaries disappear.',
+    "TEDxAIIMSKalyani 2024 brought together twelve remarkable minds across medicine, technology, art, and policy. Over six hours, they challenged the assumptions that keep disciplines apart, and showed what becomes possible when boundaries disappear.",
   highlights: [
-    { label: 'Speakers', value: '12' },
-    { label: 'Attendees', value: '400+' },
-    { label: 'Watch Hours', value: '2.4K' },
-    { label: 'Theme', value: 'Convergence' },
+    { label: "Speakers", value: "12" },
+    { label: "Attendees", value: "400+" },
+    { label: "Watch Hours", value: "2.4K" },
+    { label: "Theme", value: "Convergence" },
   ],
-  photos: Array.from({ length: 9 }, (_, i) => ({ id: i + 1 })),
   speakers: [
-    {
-      name: 'Past Speaker 1',
-      title: 'Talk Title One - A subtitle about the idea',
-      talkUrl: 'https://youtube.com',
-    },
-    {
-      name: 'Past Speaker 2',
-      title: 'Talk Title Two - A subtitle about the idea',
-      talkUrl: 'https://youtube.com',
-    },
-    {
-      name: 'Past Speaker 3',
-      title: 'Talk Title Three - A subtitle about the idea',
-      talkUrl: 'https://youtube.com',
-    },
-    {
-      name: 'Past Speaker 4',
-      title: 'Talk Title Four - A subtitle about the idea',
-      talkUrl: 'https://youtube.com',
-    },
-    {
-      name: 'Past Speaker 5',
-      title: 'Talk Title Five - A subtitle about the idea',
-      talkUrl: 'https://youtube.com',
-    },
-    {
-      name: 'Past Speaker 6',
-      title: 'Talk Title Six - A subtitle about the idea',
-      talkUrl: 'https://youtube.com',
-    },
+    { name: "Past Speaker 1", title: "Talk Title One - A subtitle about the idea", talkUrl: "https://youtube.com" },
+    { name: "Past Speaker 2", title: "Talk Title Two - A subtitle about the idea", talkUrl: "https://youtube.com" },
+    { name: "Past Speaker 3", title: "Talk Title Three - A subtitle about the idea", talkUrl: "https://youtube.com" },
+    { name: "Past Speaker 4", title: "Talk Title Four - A subtitle about the idea", talkUrl: "https://youtube.com" },
+    { name: "Past Speaker 5", title: "Talk Title Five - A subtitle about the idea", talkUrl: "https://youtube.com" },
+    { name: "Past Speaker 6", title: "Talk Title Six - A subtitle about the idea", talkUrl: "https://youtube.com" },
   ],
-};
-
-const PhotoCollage = ({ photos }) => {
-  const layout = [
-    { span: 'col-span-2 row-span-2', aspect: 'aspect-[4/3]' },
-    { span: 'col-span-1 row-span-1', aspect: 'aspect-square' },
-    { span: 'col-span-1 row-span-1', aspect: 'aspect-square' },
-    { span: 'col-span-1 row-span-1', aspect: 'aspect-square' },
-    { span: 'col-span-1 row-span-1', aspect: 'aspect-square' },
-    { span: 'col-span-1 row-span-1', aspect: 'aspect-square' },
-    { span: 'col-span-2 row-span-1', aspect: 'aspect-[2/1]' },
-    { span: 'col-span-1 row-span-1', aspect: 'aspect-square' },
-  ];
-
-  return (
-    <div className="grid grid-cols-3 gap-2">
-      {photos.slice(0, 8).map((photo, i) => {
-        const cell = layout[i] || { span: '', aspect: 'aspect-square' };
-        return (
-          <motion.div
-            key={photo.id}
-            whileHover={{ scale: 1.01 }}
-            transition={{ duration: 0.4 }}
-            className={`${cell.span} overflow-hidden group`}
-          >
-            <div className={`${cell.aspect} w-full bg-[#1a1a1a] flex items-center justify-center`}>
-              <span className="text-white/10 text-xs uppercase tracking-widest">Photo</span>
-            </div>
-          </motion.div>
-        );
-      })}
-    </div>
-  );
 };
 
 const SpeakerCard = ({ speaker, index }) => (
@@ -134,7 +77,7 @@ const PastTEDx = () => {
 
           <ScrollReveal delay={0.15}>
             <p className="text-white/60 text-lg leading-relaxed max-w-2xl mb-20">
-              Every edition of TEDxAIIMSKalyani is built on the energy of the last. Here is what we've shared with the world.
+              Every edition of TEDxAIIMSKalyani is built on the energy of the last. Here is what we have shared with the world.
             </p>
           </ScrollReveal>
 
@@ -170,9 +113,13 @@ const PastTEDx = () => {
             </p>
           </ScrollReveal>
 
+          {/* 3D Photo gallery */}
           <ScrollReveal delay={0.26}>
             <div className="mb-20">
-              <PhotoCollage photos={pastEvent.photos} />
+              <p className="text-white/30 text-xs tracking-wide mb-3 text-center sm:hidden">
+                Drag to explore, tap a photo to zoom
+              </p>
+              <PhotoGallery3D />
             </div>
           </ScrollReveal>
 
