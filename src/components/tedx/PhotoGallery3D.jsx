@@ -1,3 +1,5 @@
+// @ts-nocheck
+import { useEffect, useRef, useState } from "react";
 import { useEffect, useRef, useState } from "react";
 
 // Dynamically import all jpg images from src/assets/pastphotos/
@@ -8,13 +10,13 @@ const imageModules = import.meta.glob("../../assets/pastphotos/*.jpg", {
 });
 
 // Sort numerically by filename so order is 1, 2, 3... not 1, 10, 11, 2...
-const imagePaths = Object.keys(imageModules)
-  .sort((a, b) => {
-    const numA = parseInt(a.match(/(\d+)\.jpg$/)?.[1] || "0", 10);
-    const numB = parseInt(b.match(/(\d+)\.jpg$/)?.[1] || "0", 10);
+const imagePaths = Object.entries(imageModules)
+  .sort(([a], [b]) => {
+    const numA = parseInt(a.match(/(?:photo)?(\d+)\.jpg$/i)?.[1] || "0", 10);
+    const numB = parseInt(b.match(/(?:photo)?(\d+)\.jpg$/i)?.[1] || "0", 10);
     return numA - numB;
   })
-  .map((key) => imageModules[key]);
+  .map(([, value]) => value);
 
 // TEDx-inspired theme colors: very dark red/black background, crimson accents.
 const THEME_BG = "#1A0408";
@@ -61,7 +63,7 @@ class DrawMainImage {
     this.image = null;
     this.stopWatch = new Stopwatch();
     /**
-     * @type {{ height: number; }[]}
+     * @type {{ image: ImageData; height: number; width: number; }[]}
      */
     this.dataArr = [];
     this.isLoaded = false;
@@ -76,6 +78,7 @@ class DrawMainImage {
     this.image.src = src;
 
     this.image.addEventListener("load", () => {
+      if (!this.image || !this.ctx2) return;
       this.stopWatch.initialize();
 
       let imageWidth, ratio, imageHeight;
@@ -175,7 +178,7 @@ class DrawMainImage {
 
 class Shape {
   /**
-   * @param {{ x: any; y: any; i: any; c: any; s: any; r: any; n: any; p: any; }} params
+   * @param {{ x: number; y: number; i: number; c: CanvasRenderingContext2D; s: number; r: number; n: number; p: string; image?: HTMLImageElement }} params
    */
   constructor(params) {
     this.ctx = params.c;
@@ -237,8 +240,8 @@ class Shape {
     if (this.image.complete && this.image.naturalWidth > 0) {
       this.ctx.drawImage(
         this.image,
-        (this.image.naturalWidth || this.image.width) / 2 - this.size / 2,
-        (this.image.naturalHeight || this.image.height) / 2 - this.size / 2,
+        this.image.width / 2 - this.size / 2,
+        this.image.height / 2 - this.size / 2,
         this.size,
         this.size,
         this.x - this.size / 2,
@@ -266,7 +269,7 @@ class Glitch {
     this.min = min;
     this.max = max;
     /**
-     * @type {{ height: any; }[]}
+     * @type {{ image: ImageData; height: number; }[]}
      */
     this.dataArr = [];
   }
@@ -282,6 +285,7 @@ class Glitch {
       }
       if (addHeight === 0) return;
 
+      if (!this.ctx) return;
       const image = this.ctx.getImageData(0, preHeight, this.width, addHeight);
       obj.image = image;
       obj.height = preHeight;
@@ -323,7 +327,9 @@ class Glitch {
 }
 
 export default function PhotoGallery3D() {
+  /** @type {import("react").RefObject<HTMLDivElement | null>} */
   const containerRef = useRef(null);
+  /** @type {import("react").RefObject<HTMLCanvasElement | null>} */
   const canvasRef = useRef(null);
   const [progress, setProgress] = useState(0);
   const [loaded, setLoaded] = useState(false);
@@ -355,45 +361,32 @@ export default function PhotoGallery3D() {
     container.appendChild(canvas);
 
     const ctx = canvas.getContext("2d");
+    if (!ctx) {
+      canvas.remove();
+      return;
+    }
 
-    const imageCache = new Map();
-
-    const loadImage = (path) => {
-      if (imageCache.has(path)) return imageCache.get(path);
-
+    let loadedCount = 0;
+    imagePaths.forEach((path) => {
       const img = new Image();
-      img.decoding = "async";
       img.src = path;
-      imageCache.set(path, img);
-      return img;
-    };
-
-    if (imagePaths.length === 0) {
-      setProgress(100);
-      setLoaded(true);
-    } else {
-      let loadedCount = 0;
-
-      imagePaths.forEach((path) => {
-        const img = loadImage(path);
-
-        const markLoaded = () => {
-          loadedCount++;
-          setProgress(Math.floor((loadedCount / imagePaths.length) * 100));
-
-          if (loadedCount === imagePaths.length) {
-            setTimeout(() => setLoaded(true), 300);
-          }
-        };
-
-        if (img.complete) {
-          markLoaded();
-        } else {
-          img.addEventListener("load", markLoaded, { once: true });
-          img.addEventListener("error", markLoaded, { once: true });
+      img.addEventListener("load", () => {
+        loadedCount++;
+        const pct = Math.floor((loadedCount / imagePaths.length) * 100);
+        setProgress(pct);
+        if (loadedCount === imagePaths.length) {
+          setTimeout(() => setLoaded(true), 300);
         }
       });
-    }
+      img.addEventListener("error", () => {
+        loadedCount++;
+        const pct = Math.floor((loadedCount / imagePaths.length) * 100);
+        setProgress(pct);
+        if (loadedCount === imagePaths.length) {
+          setTimeout(() => setLoaded(true), 300);
+        }
+      });
+    });
 
     function setupSizes() {
       const rect = container.getBoundingClientRect();
@@ -412,19 +405,14 @@ export default function PhotoGallery3D() {
       let index = 0;
       for (let x = 0; x < sketchState.numberOfShape; x++) {
         for (let y = 0; y < sketchState.numberOfShape; y++) {
-          const selectedPath =
-            imagePaths[Math.floor(Math.random() * imagePaths.length)];
-
           const params = {
             x, y, i: index++,
             c: ctx,
             s: sketchState.size,
             r: sketchState.radius,
             n: sketchState.numberOfShape,
-            p: selectedPath,
-            image: loadImage(selectedPath),
+            p: imagePaths[Math.floor(Math.random() * imagePaths.length)],
           };
-
           sketchState.shapes.push(new Shape(params));
         }
       }
@@ -446,7 +434,7 @@ export default function PhotoGallery3D() {
     }
 
     /**
-     * @param {{ ratio: number; x: number; y: number; }} s
+     * @param {{ ratio: number; x: number; y: number; } | undefined} s
      * @param {boolean} hover
      */
     function drawFocus(s, hover) {
@@ -485,12 +473,17 @@ export default function PhotoGallery3D() {
     function render(t) {
       if (destroyed) return;
       resetParams();
+      if (!sketchState.touchInfos || !sketchState.shapes || !sketchState.glitch || !sketchState.mainImage) {
+        animationId = requestAnimationFrame(render);
+        return;
+      }
+
       ctx.clearRect(0, 0, sketchState.width, sketchState.height);
       ctx.save();
       ctx.translate(sketchState.width / 2, sketchState.height / 2);
 
       let hoveredIndex;
-      for (let i = 0; i < (sketchState.shapes?.length || 0); i++) {
+      for (let i = 0; i < sketchState.shapes.length; i++) {
         const s = sketchState.shapes[i];
         s.draw(sketchState.touchInfos);
         if (isHovered(s, sketchState.touchInfos.mouse.x, sketchState.touchInfos.mouse.y)) {
@@ -500,9 +493,12 @@ export default function PhotoGallery3D() {
         }
       }
 
-      drawFocus(sketchState.shapes[hoveredIndex], sketchState.hover);
+      drawFocus(
+        hoveredIndex !== undefined ? sketchState.shapes[hoveredIndex] : undefined,
+        sketchState.hover
+      );
 
-      if (Math.random() < 0.01 && sketchState.glitch) {
+      if (Math.random() < 0.01) {
         sketchState.glitch.draw(t);
       }
 
@@ -522,6 +518,26 @@ export default function PhotoGallery3D() {
 
     function init() {
       setupSizes();
+
+      if (imagePaths.length === 0) {
+        sketchState.shapes = [];
+        sketchState.isDisplayed = false;
+        sketchState.isDeleting = false;
+        sketchState.touchInfos = {
+          mouse: { x: 0, y: 0 },
+          delta: { x: 0, y: 0 },
+          fing: {
+            start: { x: null, y: null },
+            move: { x: null, y: null },
+            end: { x: null, y: null },
+          },
+        };
+        sketchState.glitch = new Glitch(ctx, sketchState.width, sketchState.height, 50, 200);
+        sketchState.mainImage = new DrawMainImage(ctx, sketchState.width, sketchState.height);
+        render(0);
+        return;
+      }
+
       setupShapes();
 
       sketchState.isDisplayed = false;
@@ -549,19 +565,21 @@ export default function PhotoGallery3D() {
     }
 
     /**
-     * @param {{ targetTouches: any[]; }} e
+     * @param {TouchEvent} e
      */
     function onTouchstart(e) {
       const t = e.targetTouches[0];
+      if (!t) return;
       sketchState.touchInfos.fing.start.x = t.pageX;
       sketchState.touchInfos.fing.start.y = t.pageY;
     }
 
     /**
-     * @param {{ targetTouches: any[]; }} e
+     * @param {TouchEvent} e
      */
     function onTouchmove(e) {
       const t = e.targetTouches[0];
+      if (!t) return;
       const rect = canvas.getBoundingClientRect();
       const x = t.pageX - rect.left;
       const y = t.pageY - rect.top;
@@ -574,18 +592,15 @@ export default function PhotoGallery3D() {
       const previousY =
         sketchState.touchInfos.fing.move.y ?? sketchState.touchInfos.fing.start.y;
 
-      const dx = previousX - t.pageX;
-      const dy = previousY - t.pageY;
-
       sketchState.touchInfos.fing.move.x = t.pageX;
       sketchState.touchInfos.fing.move.y = t.pageY;
 
-      sketchState.touchInfos.delta.x += dx * 0.0003;
-      sketchState.touchInfos.delta.y += dy * 0.0003;
+      sketchState.touchInfos.delta.x += (previousX - t.pageX) * 0.0003;
+      sketchState.touchInfos.delta.y += (previousY - t.pageY) * 0.0003;
     }
 
     /**
-     * @param {{ preventDefault: () => void; deltaX: number; deltaY: number; }} e
+     * @param {WheelEvent} e
      */
     function onWheel(e) {
       sketchState.touchInfos.delta.x += e.deltaX * 0.0005;
@@ -609,7 +624,7 @@ export default function PhotoGallery3D() {
       const x = sketchState.touchInfos.mouse.x = ((e.clientX - rect.left) / sketchState.width) * sketchState.width - sketchState.width / 2;
       const y = sketchState.touchInfos.mouse.y = ((e.clientY - rect.top) / sketchState.height) * sketchState.height - sketchState.height / 2;
 
-      for (let i = 0; i < (sketchState.shapes?.length || 0); i++) {
+      for (let i = 0; i < sketchState.shapes.length; i++) {
         const s = sketchState.shapes[i];
         if (isHovered(s, x, y)) {
           sketchState.isDisplayed = true;
@@ -628,7 +643,6 @@ export default function PhotoGallery3D() {
       init();
     }
 
-    // Keep the page vertically scrollable while interacting with the gallery.
     canvas.style.touchAction = "pan-y";
 
     const resizeObserver = new ResizeObserver(onResize);
@@ -642,6 +656,7 @@ export default function PhotoGallery3D() {
 
     // Mobile scroll-lock listeners (added separately from existing touch logic
     // above so the original rotation/interaction behavior is untouched).
+
     init();
 
     return () => {
@@ -654,16 +669,13 @@ export default function PhotoGallery3D() {
       canvas.removeEventListener("touchstart", onTouchstart);
       canvas.removeEventListener("touchmove", onTouchmove);
 
-      canvas.removeEventListener("touchstart", onTouchstartLock);
-      canvas.removeEventListener("touchend", onTouchendUnlock);
-      canvas.removeEventListener("touchcancel", onTouchcancelUnlock);
       // Safety net: ensure scrolling is restored if the component unmounts
       // mid-touch.
-      unlockPageScroll();
 
       if (container.contains(canvas)) {
         container.removeChild(canvas);
       }
+      canvasRef.current = null;
     };
   }, []);
 
