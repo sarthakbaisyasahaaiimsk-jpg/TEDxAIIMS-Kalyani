@@ -185,8 +185,8 @@ class Shape {
     this.radius = params.r;
     this.numberOfShape = params.n;
     this.size = params.s;
-    this.image = new Image();
-    this.image.src = params.p;
+    this.image = params.image || new Image();
+    if (!params.image) this.image.src = params.p;
     this.ratio = 0;
     this.displayed = true;
     this.xRadian = (Math.PI * 2 / this.numberOfShape) * this.xIndex;
@@ -237,8 +237,8 @@ class Shape {
     if (this.image.complete && this.image.naturalWidth > 0) {
       this.ctx.drawImage(
         this.image,
-        this.image.width / 2 - this.size / 2,
-        this.image.height / 2 - this.size / 2,
+        (this.image.naturalWidth || this.image.width) / 2 - this.size / 2,
+        (this.image.naturalHeight || this.image.height) / 2 - this.size / 2,
         this.size,
         this.size,
         this.x - this.size / 2,
@@ -282,7 +282,7 @@ class Glitch {
       }
       if (addHeight === 0) return;
 
-      const image = this.ctx.getImageData(0, preHeight, this.width, preHeight + addHeight);
+      const image = this.ctx.getImageData(0, preHeight, this.width, addHeight);
       obj.image = image;
       obj.height = preHeight;
 
@@ -356,27 +356,44 @@ export default function PhotoGallery3D() {
 
     const ctx = canvas.getContext("2d");
 
-    let loadedCount = 0;
-    imagePaths.forEach((path) => {
+    const imageCache = new Map();
+
+    const loadImage = (path) => {
+      if (imageCache.has(path)) return imageCache.get(path);
+
       const img = new Image();
+      img.decoding = "async";
       img.src = path;
-      img.addEventListener("load", () => {
-        loadedCount++;
-        const pct = Math.floor((loadedCount / imagePaths.length) * 100);
-        setProgress(pct);
-        if (loadedCount === imagePaths.length) {
-          setTimeout(() => setLoaded(true), 300);
+      imageCache.set(path, img);
+      return img;
+    };
+
+    if (imagePaths.length === 0) {
+      setProgress(100);
+      setLoaded(true);
+    } else {
+      let loadedCount = 0;
+
+      imagePaths.forEach((path) => {
+        const img = loadImage(path);
+
+        const markLoaded = () => {
+          loadedCount++;
+          setProgress(Math.floor((loadedCount / imagePaths.length) * 100));
+
+          if (loadedCount === imagePaths.length) {
+            setTimeout(() => setLoaded(true), 300);
+          }
+        };
+
+        if (img.complete) {
+          markLoaded();
+        } else {
+          img.addEventListener("load", markLoaded, { once: true });
+          img.addEventListener("error", markLoaded, { once: true });
         }
       });
-      img.addEventListener("error", () => {
-        loadedCount++;
-        const pct = Math.floor((loadedCount / imagePaths.length) * 100);
-        setProgress(pct);
-        if (loadedCount === imagePaths.length) {
-          setTimeout(() => setLoaded(true), 300);
-        }
-      });
-    });
+    }
 
     function setupSizes() {
       const rect = container.getBoundingClientRect();
@@ -388,21 +405,26 @@ export default function PhotoGallery3D() {
     function setupShapes() {
       const edge = Math.max(sketchState.width, sketchState.height);
       sketchState.radius = edge / 2;
-      sketchState.numberOfShape = 16;
+      sketchState.numberOfShape = window.matchMedia("(max-width: 768px)").matches ? 10 : 16;
       sketchState.size = sketchState.radius / (sketchState.numberOfShape / 6);
       sketchState.shapes = [];
 
       let index = 0;
       for (let x = 0; x < sketchState.numberOfShape; x++) {
         for (let y = 0; y < sketchState.numberOfShape; y++) {
+          const selectedPath =
+            imagePaths[Math.floor(Math.random() * imagePaths.length)];
+
           const params = {
             x, y, i: index++,
             c: ctx,
             s: sketchState.size,
             r: sketchState.radius,
             n: sketchState.numberOfShape,
-            p: imagePaths[Math.floor(Math.random() * (imagePaths.length - 1))],
+            p: selectedPath,
+            image: loadImage(selectedPath),
           };
+
           sketchState.shapes.push(new Shape(params));
         }
       }
@@ -468,7 +490,7 @@ export default function PhotoGallery3D() {
       ctx.translate(sketchState.width / 2, sketchState.height / 2);
 
       let hoveredIndex;
-      for (let i = 0; i < sketchState.shapes.length; i++) {
+      for (let i = 0; i < (sketchState.shapes?.length || 0); i++) {
         const s = sketchState.shapes[i];
         s.draw(sketchState.touchInfos);
         if (isHovered(s, sketchState.touchInfos.mouse.x, sketchState.touchInfos.mouse.y)) {
@@ -480,7 +502,7 @@ export default function PhotoGallery3D() {
 
       drawFocus(sketchState.shapes[hoveredIndex], sketchState.hover);
 
-      if (Math.random() < 0.01) {
+      if (Math.random() < 0.01 && sketchState.glitch) {
         sketchState.glitch.draw(t);
       }
 
@@ -547,21 +569,25 @@ export default function PhotoGallery3D() {
       sketchState.touchInfos.mouse.x = (x / sketchState.width) * sketchState.width - sketchState.width / 2;
       sketchState.touchInfos.mouse.y = (y / sketchState.height) * sketchState.height - sketchState.height / 2;
 
+      const previousX =
+        sketchState.touchInfos.fing.move.x ?? sketchState.touchInfos.fing.start.x;
+      const previousY =
+        sketchState.touchInfos.fing.move.y ?? sketchState.touchInfos.fing.start.y;
+
+      const dx = previousX - t.pageX;
+      const dy = previousY - t.pageY;
+
       sketchState.touchInfos.fing.move.x = t.pageX;
       sketchState.touchInfos.fing.move.y = t.pageY;
 
-      sketchState.touchInfos.fing.end.x = sketchState.touchInfos.fing.start.x - sketchState.touchInfos.fing.move.x;
-      sketchState.touchInfos.fing.end.y = sketchState.touchInfos.fing.start.y - sketchState.touchInfos.fing.move.y;
-
-      sketchState.touchInfos.delta.x += sketchState.touchInfos.fing.end.x * 0.0003;
-      sketchState.touchInfos.delta.y += sketchState.touchInfos.fing.end.y * 0.0003;
+      sketchState.touchInfos.delta.x += dx * 0.0003;
+      sketchState.touchInfos.delta.y += dy * 0.0003;
     }
 
     /**
      * @param {{ preventDefault: () => void; deltaX: number; deltaY: number; }} e
      */
     function onWheel(e) {
-      e.preventDefault();
       sketchState.touchInfos.delta.x += e.deltaX * 0.0005;
       sketchState.touchInfos.delta.y += e.deltaY * 0.0005;
     }
@@ -583,7 +609,7 @@ export default function PhotoGallery3D() {
       const x = sketchState.touchInfos.mouse.x = ((e.clientX - rect.left) / sketchState.width) * sketchState.width - sketchState.width / 2;
       const y = sketchState.touchInfos.mouse.y = ((e.clientY - rect.top) / sketchState.height) * sketchState.height - sketchState.height / 2;
 
-      for (let i = 0; i < sketchState.shapes.length; i++) {
+      for (let i = 0; i < (sketchState.shapes?.length || 0); i++) {
         const s = sketchState.shapes[i];
         if (isHovered(s, x, y)) {
           sketchState.isDisplayed = true;
@@ -602,57 +628,20 @@ export default function PhotoGallery3D() {
       init();
     }
 
-    // --- Mobile scroll-lock fix ---
-    // Stores the previous inline style values so we can restore them exactly
-    // (rather than blindly clearing them) when the touch interaction ends.
-    let prevBodyOverflow = "";
-    let prevHtmlOverflow = "";
-    let prevBodyTouchAction = "";
-
-    function lockPageScroll() {
-      prevBodyOverflow = document.body.style.overflow;
-      prevHtmlOverflow = document.documentElement.style.overflow;
-      prevBodyTouchAction = document.body.style.touchAction;
-
-      document.body.style.overflow = "hidden";
-      document.documentElement.style.overflow = "hidden";
-      document.body.style.touchAction = "none";
-    }
-
-    function unlockPageScroll() {
-      document.body.style.overflow = prevBodyOverflow;
-      document.documentElement.style.overflow = prevHtmlOverflow;
-      document.body.style.touchAction = prevBodyTouchAction;
-    }
-
-    function onTouchstartLock() {
-      lockPageScroll();
-    }
-
-    function onTouchendUnlock() {
-      unlockPageScroll();
-    }
-
-    function onTouchcancelUnlock() {
-      unlockPageScroll();
-    }
-    // --- end mobile scroll-lock fix ---
+    // Keep the page vertically scrollable while interacting with the gallery.
+    canvas.style.touchAction = "pan-y";
 
     const resizeObserver = new ResizeObserver(onResize);
     resizeObserver.observe(container);
 
     canvas.addEventListener("mousemove", onMousemove);
-    canvas.addEventListener("wheel", onWheel, { passive: false });
+    canvas.addEventListener("wheel", onWheel, { passive: true });
     canvas.addEventListener("click", onClick);
     canvas.addEventListener("touchstart", onTouchstart);
     canvas.addEventListener("touchmove", onTouchmove);
 
     // Mobile scroll-lock listeners (added separately from existing touch logic
     // above so the original rotation/interaction behavior is untouched).
-    canvas.addEventListener("touchstart", onTouchstartLock, { passive: true });
-    canvas.addEventListener("touchend", onTouchendUnlock, { passive: true });
-    canvas.addEventListener("touchcancel", onTouchcancelUnlock, { passive: true });
-
     init();
 
     return () => {
