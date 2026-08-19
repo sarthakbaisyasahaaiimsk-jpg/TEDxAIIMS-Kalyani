@@ -4,24 +4,32 @@ import ScrollReveal from './ScrollReveal';
 
 const themeCards = [
   {
-    title: 'Uncharted\nHealthcare',
-    description: 'From AI-powered diagnostics to regenerative medicine, the frontiers of healing are being redrawn by those who refuse to accept limitations.',
+    title: 'Medicine\nBeyond\nBoundaries',
+    description: 'Healing, Humanity & Innovation',
   },
   {
-    title: 'Uncharted\nTechnologies',
-    description: 'Quantum computing, brain-computer interfaces, and synthetic biology — technologies once confined to science fiction become the tools of tomorrow.',
+    title: 'Science\n&\nDiscovery',
+    description: 'Questioning What we Know',
   },
   {
-    title: 'Uncharted\nScience',
-    description: 'The next Nobel Prize may come from a question nobody has thought to ask. Breakthroughs begin at the edge of what we know.',
+    title: 'Leadership',
+    description: 'Leading Through Uncertainty',
   },
   {
-    title: 'Uncharted\nJourneys',
-    description: 'Behind every innovation is a human story of risk, resilience, and the audacity to pursue an idea when the path forward was invisible.',
+    title: 'Innovation',
+    description: 'Ideas that Change Lives',
   },
   {
-    title: 'Uncharted\nPotential',
-    description: 'The greatest frontier is within. We explore the untapped capacity of human will, empathy, and creativity to reshape the world.',
+    title: 'Entrepreneurship',
+    description: 'Building the Impossible',
+  },
+  {
+    title: 'Arts & Storytelling',
+    description: 'Narratives that Trasnform',
+  },
+  {
+    title: 'Human\nPotential',
+    description: 'The Courage to Become',
   },
 ];
 
@@ -50,10 +58,9 @@ export default function ThemeSection() {
           </ScrollReveal>
           <ScrollReveal delay={0.1}>
             <p className="text-white/45 text-lg leading-relaxed font-light">
-              Because the most transformative ideas are born where maps end and courage
-              begins. "Uncharted" is an invitation to step beyond the familiar and explore
-              the territories that define what comes next — in medicine, science, and the
-              human story.
+              Uncharted is often imagined as a place beyond the map; untouched, unseen, and unexplored. We believe it is something greater. It is not a destination but a mindset: a willingness to step into uncertainty, challenge convention, and discover possibilities where others see only the unknown.
+              Guided by our motto,
+             "Unbound. Unmarked. Unravelling.", TEDxAIIMS Kalyani celebrates individuals who have chosen paths without precedent, refused to be defined by expectations, and transformed bold ideas into lasting impact. Their journeys remind us that the greatest frontiers are not geographical, but intellectual, personal, and profoundly human. 
             </p>
           </ScrollReveal>
         </div>
