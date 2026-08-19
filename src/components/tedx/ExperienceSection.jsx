@@ -7,34 +7,20 @@ const experiences = [
   {
     icon: Handshake,
     title: 'Networking',
-    description: 'Curated spaces for meaningful connections between researchers, clinicians, entrepreneurs, and changemakers. Every conversation is a potential collaboration.',
+    description: 'Meet clinicians, researchers, innovators, entrepreneurs, artists, and students who believe ideas can change the world',
     image: 'https://media.base44.com/images/public/6a3a5e7dc678c621c4d8d234/b42851de8_generated_899df7dc.png',
     span: 'lg:col-span-2',
   },
   {
-    icon: Lightbulb,
-    title: 'Workshops',
-    description: 'Hands-on sessions led by domain experts diving deep into AI, biotech, design thinking, and health innovation.',
-    image: 'https://media.base44.com/images/public/6a3a5e7dc678c621c4d8d234/c67a3bdc7_generated_9fefdaea.png',
-    span: 'lg:col-span-1',
-  },
-  {
-    icon: Layers,
-    title: 'Innovation Exhibits',
-    description: 'Live demonstrations from startups, research labs, and institutions showcasing cutting-edge technologies in healthcare and beyond.',
-    image: 'https://media.base44.com/images/public/6a3a5e7dc678c621c4d8d234/b3db54516_generated_521bd486.png',
-    span: 'lg:col-span-1',
-  },
-  {
     icon: MessageSquare,
     title: 'Interactive Discussions',
-    description: 'Moderated Q&A sessions and breakout discussions where ideas are challenged, refined, and amplified by a room full of brilliant minds.',
+    description: 'Thought-provoking conversations with speakers and fellow attendees beyond the stage.',
     span: 'lg:col-span-1',
   },
   {
     icon: Users,
     title: 'Community Building',
-    description: 'Join a growing network of innovators committed to pushing the boundaries of healthcare and human potential.',
+    description: 'Join a growing network of curious minds united by a passion for learning, collaboration, and meaningful impact',
     span: 'lg:col-span-1',
   },
 ];
