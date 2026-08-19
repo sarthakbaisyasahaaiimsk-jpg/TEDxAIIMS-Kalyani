@@ -17,7 +17,7 @@ const AboutSection = () => {
 
         <ScrollReveal delay={0.15}>
           <p className="text-white/60 text-lg leading-relaxed max-w-2xl mb-24">
-            TEDxAIIMSKalyani is where medicine meets curiosity — a stage for the ideas that define the frontier of human knowledge, care, and possibility.
+            Returning for its second edition, TEDxAIIMS Kalyani is a one-day independently organised event held under an official TEDx license at AIIMS Kalyani, inspired by TED's global mission of Ideas Worth Spreading. Bringing together visionaries, researchers, healthcare professionals, entrepreneurs, artists, innovators, and changemakers, TEDxAIIMS Kalyani creates a platform where curiosity meets creativity, diverse perspectives converge, and bold ideas find a voice.
           </p>
         </ScrollReveal>
 
@@ -90,10 +90,10 @@ const AboutSection = () => {
                 Our Event
               </h3>
               <p className="text-white/60 text-sm leading-relaxed mb-6">
-                TEDxAIIMSKalyani is hosted at AIIMS Kalyani — the All India Institute of Medical Sciences, Kalyani — one of India's premier institutions at the intersection of medical education, research, and public health.
+                Returning for its second edition, TEDxAIIMS Kalyani extends AIIMS Kalyani's vision of excellence in healthcare, education, research, and innovation. Every meaningful discovery begins with curiosity, and every lasting advancement begins with the courage to venture beyond what is known. 
               </p>
               <p className="text-white/60 text-sm leading-relaxed">
-                In 2026, we bring together clinicians, researchers, engineers, artists, and innovators under one roof to explore ideas that bridge <span className="text-white/80 font-medium">healthcare and human progress</span>. Because the most vital ideas of our time live at the boundary between disciplines.
+                This year, remarkable voices from diverse fields come together to inspire us to think differently, embrace uncertainty, and create meaningful change.
               </p>
             </motion.div>
           </ScrollReveal>
