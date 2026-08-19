@@ -1,25 +1,30 @@
 import { useEffect, useRef, useState } from "react";
 
-const imagePaths = [
-  "https://images.unsplash.com/photo-1608687087357-845abfade367?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
-  "https://images.unsplash.com/photo-1604818640599-71bda0165d53?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
-  "https://images.unsplash.com/photo-1574357278720-2809ce8065db?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
-  "https://images.unsplash.com/photo-1602136773736-34d445b989cb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
-  "https://images.unsplash.com/photo-1501769752-a59efa2298ce?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
-  "https://images.unsplash.com/photo-1558961166-9c584702dcb0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
-  "https://images.unsplash.com/photo-1571182160015-2169f6e1aa5f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
-  "https://images.unsplash.com/photo-1555852224-2a3e675fc47e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
-  "https://images.unsplash.com/photo-1620215175664-cb9a6f5b6103?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
-  "https://images.unsplash.com/photo-1539606328118-80c679838702?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
-  "https://images.unsplash.com/photo-1574357265250-10c88f63ebfd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
-  "https://images.unsplash.com/photo-1536901766856-5d45744cd180?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=400",
-];
+// Dynamically import all jpg images from src/assets/pastphotos/
+// Adjust "../assets/pastphotos/" if this file isn't one level below src/
+const imageModules = import.meta.glob("../../assets/pastphotos/*.jpg", {
+  eager: true,
+  import: "default",
+});
+
+// Sort numerically by filename so order is 1, 2, 3... not 1, 10, 11, 2...
+const imagePaths = Object.keys(imageModules)
+  .sort((a, b) => {
+    const numA = parseInt(a.match(/(\d+)\.jpg$/)?.[1] || "0", 10);
+    const numB = parseInt(b.match(/(\d+)\.jpg$/)?.[1] || "0", 10);
+    return numA - numB;
+  })
+  .map((key) => imageModules[key]);
 
 // TEDx-inspired theme colors: very dark red/black background, crimson accents.
 const THEME_BG = "#1A0408";
 const THEME_ACCENT = "#EB0028";
 
 class Utilities {
+  /**
+   * @param {number} min
+   * @param {number} max
+   */
   static randomInt(min, max) {
     return Math.floor(min + Math.random() * (max - min + 1));
   }
@@ -42,6 +47,11 @@ class Stopwatch {
 }
 
 class DrawMainImage {
+  /**
+   * @param {CanvasRenderingContext2D | null} ctx
+   * @param {any} width
+   * @param {any} height
+   */
   constructor(ctx, width, height) {
     this.ctx = ctx;
     this.width = width;
@@ -50,15 +60,20 @@ class DrawMainImage {
     this.ctx2 = this.canvas.getContext("2d");
     this.image = null;
     this.stopWatch = new Stopwatch();
+    /**
+     * @type {{ height: number; }[]}
+     */
     this.dataArr = [];
     this.isLoaded = false;
   }
 
+  /**
+   * @param {string} src
+   */
   drawImage(src) {
     this.isLoaded = false;
     this.image = new Image();
     this.image.src = src;
-    this.image.crossOrigin = "anonymous";
 
     this.image.addEventListener("load", () => {
       this.stopWatch.initialize();
@@ -136,6 +151,9 @@ class DrawMainImage {
     }
   }
 
+  /**
+   * @param {number} t
+   */
   deleteImage(t) {
     if (!this.isLoaded) return;
     for (let i = 0; i < this.dataArr.length; i++) {
@@ -147,12 +165,18 @@ class DrawMainImage {
     }
   }
 
+  /**
+   * @param {number} x
+   */
   ease(x) {
     return 1 - Math.sqrt(1 - Math.pow(x, 2));
   }
 }
 
 class Shape {
+  /**
+   * @param {{ x: any; y: any; i: any; c: any; s: any; r: any; n: any; p: any; }} params
+   */
   constructor(params) {
     this.ctx = params.c;
     this.xIndex = params.x;
@@ -162,7 +186,6 @@ class Shape {
     this.numberOfShape = params.n;
     this.size = params.s;
     this.image = new Image();
-    this.image.crossOrigin = "anonymous";
     this.image.src = params.p;
     this.ratio = 0;
     this.displayed = true;
@@ -170,6 +193,9 @@ class Shape {
     this.yRadian = (Math.PI * 2 / this.numberOfShape) * this.yIndex;
   }
 
+  /**
+   * @param {{ delta: { x: number; y: number; }; }} infos
+   */
   updateParams(infos) {
     this.x = Math.sin(this.xRadian + infos.delta.x) * this.radius;
     this.y = Math.cos(this.yRadian + infos.delta.y) * this.radius;
@@ -183,10 +209,16 @@ class Shape {
     return tmp;
   }
 
+  /**
+   * @param {number} t
+   */
   ease(t) {
     return t * t * t;
   }
 
+  /**
+   * @param {{ delta: { y: number; x: number; }; }} infos
+   */
   draw(infos) {
     this.updateParams(infos);
 
@@ -220,12 +252,22 @@ class Shape {
 }
 
 class Glitch {
+  /**
+   * @param {CanvasRenderingContext2D | null} ctx
+   * @param {any} width
+   * @param {any} height
+   * @param {number} min
+   * @param {number} max
+   */
   constructor(ctx, width, height, min, max) {
     this.ctx = ctx;
     this.width = width;
     this.height = height;
     this.min = min;
     this.max = max;
+    /**
+     * @type {{ height: any; }[]}
+     */
     this.dataArr = [];
   }
 
@@ -249,6 +291,9 @@ class Glitch {
     }
   }
 
+  /**
+   * @param {number} t
+   */
   addImage(t) {
     for (let i = 0; i < this.dataArr.length; i++) {
       if (Math.random() > 0.01) {
@@ -267,6 +312,9 @@ class Glitch {
     }
   }
 
+  /**
+   * @param {any} t
+   */
   draw(t) {
     this.dataArr = [];
     this.getImageData();
@@ -284,7 +332,11 @@ export default function PhotoGallery3D() {
     const container = containerRef.current;
     if (!container) return;
 
+    /**
+     * @type {number}
+     */
     let animationId;
+    /** @type {any} */
     let sketchState = {};
     let destroyed = false;
 
@@ -307,7 +359,6 @@ export default function PhotoGallery3D() {
     let loadedCount = 0;
     imagePaths.forEach((path) => {
       const img = new Image();
-      img.crossOrigin = "anonymous";
       img.src = path;
       img.addEventListener("load", () => {
         loadedCount++;
@@ -357,6 +408,11 @@ export default function PhotoGallery3D() {
       }
     }
 
+    /**
+     * @param {{ displayed: boolean; x: number; ratio: number; y: number; }} shape
+     * @param {number} x
+     * @param {number} y
+     */
     function isHovered(shape, x, y) {
       return (
         shape.displayed === true &&
@@ -367,6 +423,10 @@ export default function PhotoGallery3D() {
       );
     }
 
+    /**
+     * @param {{ ratio: number; x: number; y: number; }} s
+     * @param {boolean} hover
+     */
     function drawFocus(s, hover) {
       if (!sketchState.focus) sketchState.focus = { x: 0, y: 0, s: sketchState.size };
       const focus = sketchState.focus;
@@ -397,6 +457,9 @@ export default function PhotoGallery3D() {
       canvas.style.cursor = "default";
     }
 
+    /**
+     * @param {number} t
+     */
     function render(t) {
       if (destroyed) return;
       resetParams();
@@ -452,6 +515,9 @@ export default function PhotoGallery3D() {
       render(0);
     }
 
+    /**
+     * @param {{ clientX: number; clientY: number; }} e
+     */
     function onMousemove(e) {
       const rect = canvas.getBoundingClientRect();
       const x = e.clientX - rect.left;
@@ -460,12 +526,18 @@ export default function PhotoGallery3D() {
       sketchState.touchInfos.mouse.y = (y / sketchState.height) * sketchState.height - sketchState.height / 2;
     }
 
+    /**
+     * @param {{ targetTouches: any[]; }} e
+     */
     function onTouchstart(e) {
       const t = e.targetTouches[0];
       sketchState.touchInfos.fing.start.x = t.pageX;
       sketchState.touchInfos.fing.start.y = t.pageY;
     }
 
+    /**
+     * @param {{ targetTouches: any[]; }} e
+     */
     function onTouchmove(e) {
       const t = e.targetTouches[0];
       const rect = canvas.getBoundingClientRect();
@@ -485,12 +557,18 @@ export default function PhotoGallery3D() {
       sketchState.touchInfos.delta.y += sketchState.touchInfos.fing.end.y * 0.0003;
     }
 
+    /**
+     * @param {{ preventDefault: () => void; deltaX: number; deltaY: number; }} e
+     */
     function onWheel(e) {
       e.preventDefault();
       sketchState.touchInfos.delta.x += e.deltaX * 0.0005;
       sketchState.touchInfos.delta.y += e.deltaY * 0.0005;
     }
 
+    /**
+     * @param {{ clientX: number; clientY: number; }} e
+     */
     function onClick(e) {
       if (sketchState.isDisplayed) {
         sketchState.isDeleting = true;
