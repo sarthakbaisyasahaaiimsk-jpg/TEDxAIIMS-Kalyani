@@ -39,7 +39,7 @@ const Navbar = () => {
         <div className="max-w-7xl mx-auto px-6 lg:px-12 flex items-center justify-between h-16 lg:h-20">
 
           <Link to="/" className="flex items-center">
-            <img src={logo} alt="TEDxAIIMSKalyani" className="h-16 w-auto" />
+            <img src={logo} alt="TEDxAIIMS Kalyani" className="h-16 w-auto" />
           </Link>
 
           <div className="hidden lg:flex flex-1 justify-end items-center gap-8 lg:gap-12">

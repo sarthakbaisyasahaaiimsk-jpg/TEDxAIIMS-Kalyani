@@ -13,8 +13,8 @@ const faqs = [
     answer: 'TEDx is a program of locally organized events that bring people together to share a TED-like experience. At a TEDx event, TEDTalks video and live speakers combine to spark deep discussion and connection. These local, self-organized events are branded TEDx, where x = independently organized TED event.',
   },
   {
-    question: 'Who can attend TEDxAIIMSKalyani?',
-    answer: 'TEDxAIIMSKalyani is open to students, medical professionals, researchers, entrepreneurs, technologists, and anyone passionate about ideas and innovation. Registration is required and seats are limited to ensure an intimate, high-quality experience.',
+    question: 'Who can attend TEDxAIIMS Kalyani?',
+    answer: 'TEDxAIIMS Kalyani is open to students, medical professionals, researchers, entrepreneurs, technologists, and anyone passionate about ideas and innovation. Registration is required and seats are limited to ensure an intimate, high-quality experience.',
   },
   {
     question: 'How are speakers selected?',

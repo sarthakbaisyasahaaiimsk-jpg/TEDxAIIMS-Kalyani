@@ -48,7 +48,7 @@ export default function RegistrationSection() {
           </ScrollReveal>
           <ScrollReveal delay={0.1}>
             <p className="text-white/40 text-lg leading-relaxed font-light">
-              Join a community of explorers shaping tomorrow. Secure your place at TEDxAIIMSKalyani 2026.
+              Join a community of explorers shaping tomorrow. Secure your place at TEDxAIIMS Kalyani 2026.
             </p>
           </ScrollReveal>
         </div>

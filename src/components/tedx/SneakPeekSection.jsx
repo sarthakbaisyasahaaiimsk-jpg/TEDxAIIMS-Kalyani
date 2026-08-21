@@ -18,7 +18,7 @@ const SneakPeekSection = () => {
           </ScrollReveal>
           <ScrollReveal delay={0.15}>
             <p className="text-white/60 text-lg leading-relaxed">
-              A glimpse into the world we're building — the energy, the ideas, and the moments that make TEDxAIIMSKalyani unlike anything else. Our official trailer drops soon.
+              A glimpse into the world we're building — the energy, the ideas, and the moments that make TEDxAIIMS Kalyani unlike anything else. Our official trailer drops soon.
             </p>
           </ScrollReveal>
         </div>

@@ -40,7 +40,7 @@ export default function ExperienceSection() {
           </ScrollReveal>
           <ScrollReveal delay={0.1}>
             <p className="text-white/40 text-base leading-relaxed font-light">
-              TEDxAIIMSKalyani is more than talks. It's a full-day immersion into ideas,
+              TEDxAIIMS Kalyani is more than talks. It's a full-day immersion into ideas,
               connections, and experiences designed to transform how you think.
             </p>
           </ScrollReveal>
