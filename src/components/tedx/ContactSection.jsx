@@ -12,13 +12,13 @@ const socials = [
   {
     icon: Linkedin,
     label: 'LinkedIn',
-    handle: 'TEDxAIIMSKalyani',
+    handle: 'TEDxAIIMS Kalyani',
     href: 'https://linkedin.com/company/tedxaiimskalyani',
   },
   {
     icon: Youtube,
     label: 'YouTube',
-    handle: 'TEDxAIIMSKalyani',
+    handle: 'TEDxAIIMS Kalyani',
     href: 'https://youtube.com/@tedxaiimskalyani',
   },
   {
