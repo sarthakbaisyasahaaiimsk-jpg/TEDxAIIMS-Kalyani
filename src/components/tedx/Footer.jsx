@@ -147,7 +147,7 @@ export default function Footer() {
             </p>
           </ScrollReveal>
           <p className="text-white/10 text-xs">
-            © {new Date().getFullYear()} TEDxAIIMSKalyani. All rights reserved.
+            © {new Date().getFullYear()} TEDxAIIMS Kalyani. All rights reserved.
           </p>
         </div>
       </div>
