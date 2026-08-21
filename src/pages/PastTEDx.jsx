@@ -5,6 +5,12 @@ import Footer from "@/components/tedx/Footer";
 import ScrollReveal from "@/components/tedx/ScrollReveal";
 import PhotoGallery3D from "@/components/tedx/PhotoGallery3D";
 import tara from "@/assets/IMG_3743.PNG";
+import ajay from "@/assets/IMG_3747.PNG";
+import sumer from "@/assets/IMG_3749.PNG";
+import priyanka from "@/assets/IMG_3746.PNG";
+import dheeraj from "@/assets/IMG_3745.PNG";
+import ankita from "@/assets/IMG_3748.PNG";
+import sasi from "@/assets/IMG_3744.PNG";
 
 const pastEvent = {
   year: "2025",
@@ -19,13 +25,13 @@ const pastEvent = {
     { label: "Theme", value: "Faultlines" },
   ],
   speakers: [
-    { name: "Col. Prof. (Dr.) Ajay Mallick", title: "Paradox In Paradise", talkUrl: "https://youtu.be/o3Q4uG_W8Do?si=uIegVmTnRca2D5SB" },
+    { name: "Col. Prof. (Dr.) Ajay Mallick", title: "Paradox In Paradise", talkUrl: "https://youtu.be/o3Q4uG_W8Do?si=uIegVmTnRca2D5SB", image: ajay },
     { name: "Dr. Tara Rajendran", title: "Grow Without A map: Start From Nothing, Build What Matters", talkUrl: "https://youtu.be/vIbydZZGCJo?si=Dgeci1euvToeYsmK", image: tara },
-    { name: "Dr. Sumer Sethi", title: "The Blackboard; Hidden Journey of a Teacher", talkUrl: "https://youtu.be/2oSD69mtdME?si=CCer6VNMgP1TofvW" },
-    { name: "Dr. Ankita Pandey", title: "Beyond the Cage", talkUrl: "https://youtu.be/17Vo4pbLsEI?si=Eg4kjnjpDOlTvexJ" },
-    { name: "Dr. Sasi Kanta Dash", title: "Barren to Bloom: The Power of a Sapling", talkUrl: "https://youtu.be/xjr2Ri-Yh90?si=bw3kM3lLyizc4EX4" },
-    { name: "Dr. Priyanka Chatterjee", title: "Burnt Blueprint", talkUrl: "https://youtu.be/_w-zMP95oJY?si=FEj7lZxrNmvDq9Qh" },
-    { name: "Mr. Dheeraj Rathi", title: "From Fractures to Foundation", talkUrl: "https://youtu.be/UGjMpW3E4D8?si=NAYVFQVUyU_cTnib" },
+    { name: "Dr. Sumer Sethi", title: "The Blackboard; Hidden Journey of a Teacher", talkUrl: "https://youtu.be/2oSD69mtdME?si=CCer6VNMgP1TofvW", image: sumera },
+    { name: "Dr. Ankita Pandey", title: "Beyond the Cage", talkUrl: "https://youtu.be/17Vo4pbLsEI?si=Eg4kjnjpDOlTvexJ", image: ankita },
+    { name: "Dr. Sasi Kanta Dash", title: "Barren to Bloom: The Power of a Sapling", talkUrl: "https://youtu.be/xjr2Ri-Yh90?si=bw3kM3lLyizc4EX4", image: sasi },
+    { name: "Dr. Priyanka Chatterjee", title: "Burnt Blueprint", talkUrl: "https://youtu.be/_w-zMP95oJY?si=FEj7lZxrNmvDq9Qh", image: priyanka },
+    { name: "Mr. Dheeraj Rathi", title: "From Fractures to Foundation", talkUrl: "https://youtu.be/UGjMpW3E4D8?si=NAYVFQVUyU_cTnib", image: dheeraj },
   ],
 };
 
