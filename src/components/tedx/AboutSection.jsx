@@ -84,7 +84,7 @@ const AboutSection = () => {
             >
               <div className="flex items-center gap-3 mb-8">
                 <span className="w-5 h-px bg-ted-red" />
-                <p className="text-ted-red text-[10px] tracking-[0.35em] uppercase font-medium">TEDxAIIMSKalyani</p>
+                <p className="text-ted-red text-[10px] tracking-[0.35em] uppercase font-medium">TEDxAIIMS Kalyani</p>
               </div>
               <h3 className="text-2xl font-black tracking-tight text-white mb-5">
                 Our Event
@@ -107,7 +107,7 @@ const AboutSection = () => {
               { value: '1984', label: 'TED Founded' },
               { value: '3500+', label: 'TEDx Events Worldwide' },
               { value: '100+', label: 'Countries Represented' },
-              { value: '2026', label: 'TEDxAIIMSKalyani' },
+              { value: '2026', label: 'TEDxAIIMS Kalyani' },
             ].map((stat, i) => (
               <div key={i} className={`p-8 ${i < 3 ? 'border-r border-white/5' : ''}`}>
                 <p className="text-3xl font-black tracking-tight text-white mb-1">{stat.value}</p>
