@@ -20,11 +20,6 @@ const THEME_BG = "#1A0408";
 const THEME_ACCENT = "#EB0028";
 
 class Utilities {
-  /**
-   * @param {number} min
-   * @param {number} max
-   * @returns {number}
-   */
   static randomInt(min, max) {
     return Math.floor(min + Math.random() * (max - min + 1));
   }
@@ -49,11 +44,6 @@ class Stopwatch {
 }
 
 class DrawMainImage {
-  /**
-   * @param {CanvasRenderingContext2D} ctx
-   * @param {number} width
-   * @param {number} height
-   */
   constructor(ctx, width, height) {
     this.ctx = ctx;
     this.width = width;
@@ -66,7 +56,6 @@ class DrawMainImage {
     this.isLoaded = false;
   }
 
-  /** @param {string} src */
   drawImage(src) {
     this.isLoaded = false;
     this.image = new Image();
@@ -172,7 +161,6 @@ class DrawMainImage {
     }
   }
 
-  /** @param {number} t */
   deleteImage(t) {
     if (!this.isLoaded) return;
 
@@ -193,26 +181,12 @@ class DrawMainImage {
     }
   }
 
-  /** @param {number} x */
   ease(x) {
     return 1 - Math.sqrt(1 - Math.pow(x, 2));
   }
 }
 
 class Shape {
-  /**
-   * @param {{
-   *   c: CanvasRenderingContext2D,
-   *   x: number,
-   *   y: number,
-   *   i: number,
-   *   r: number,
-   *   n: number,
-   *   s: number,
-   *   image?: HTMLImageElement,
-   *   p?: string
-   * }} params
-   */
   constructor(params) {
     this.ctx = params.c;
     this.xIndex = params.x;
@@ -236,7 +210,6 @@ class Shape {
       (Math.PI * 2 / this.numberOfShape) * this.yIndex;
   }
 
-  /** @param {{ delta: { x: number, y: number } }} infos */
   updateParams(infos) {
     this.x =
       Math.sin(this.xRadian + infos.delta.x) * this.radius;
@@ -257,12 +230,10 @@ class Shape {
     return tmp;
   }
 
-  /** @param {number} t */
   ease(t) {
     return t * t * t;
   }
 
-  /** @param {{ delta: { x: number, y: number } }} infos */
   draw(infos) {
     this.updateParams(infos);
 
@@ -328,13 +299,6 @@ class Shape {
 }
 
 class Glitch {
-  /**
-   * @param {CanvasRenderingContext2D} ctx
-   * @param {number} width
-   * @param {number} height
-   * @param {number} min
-   * @param {number} max
-   */
   constructor(ctx, width, height, min, max) {
     this.ctx = ctx;
     this.width = width;
@@ -375,7 +339,6 @@ class Glitch {
     }
   }
 
-  /** @param {number} t */
   addImage(t) {
     for (let i = 0; i < this.dataArr.length; i++) {
       if (Math.random() > 0.01) {
@@ -402,7 +365,6 @@ class Glitch {
     }
   }
 
-  /** @param {number} t */
   draw(t) {
     this.dataArr = [];
     this.getImageData();
