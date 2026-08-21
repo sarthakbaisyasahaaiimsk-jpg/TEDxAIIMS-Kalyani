@@ -23,6 +23,37 @@ class Utilities {
   static randomInt(min, max) {
     return Math.floor(min + Math.random() * (max - min + 1));
   }
+
+  // Fisher-Yates shuffle. Used so photos are spread evenly across the
+  // tile grid instead of being picked independently per-tile, which
+  // caused clumping/repeats when the photo count was much smaller
+  // than the number of tiles.
+  static shuffle(arr) {
+    const a = [...arr];
+
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+
+    return a;
+  }
+
+  // Picks a grid size (numberOfShape) proportional to how many photos
+  // we actually have, instead of a hardcoded 10/16. This keeps roughly
+  // ~3 tiles per photo so the array doesn't look sparse or over-clumped
+  // regardless of whether the library has 15 photos or 100.
+  static getNumberOfShapes(imageCount, isMobile) {
+    const maxShapes = isMobile ? 10 : 16;
+    const minShapes = 6;
+
+    if (imageCount === 0) return minShapes;
+
+    const target = Math.round(Math.sqrt(imageCount * 3));
+
+    return Math.min(maxShapes, Math.max(minShapes, target));
+  }
 }
 
 class Stopwatch {
@@ -66,6 +97,9 @@ class DrawMainImage {
 
       this.stopWatch.initialize();
 
+      // Full popup view: fit the whole photo without cropping,
+      // regardless of its native dimensions (portrait/landscape/square
+      // are all handled here).
       let imageWidth;
       let ratio;
       let imageHeight;
@@ -254,43 +288,50 @@ class Shape {
     this.ctx.globalAlpha = this.ratio;
 
     /*
-     * IMPORTANT:
-     * The old implementation used:
+     * Tiles are square, but source photos come in mixed dimensions
+     * (portrait, landscape, varying aspect ratios). Fitting the whole
+     * photo inside the square (old behavior) made some tiles look
+     * mostly-empty or inconsistently sized next to each other.
      *
-     *   image.width / 2 - size / 2
-     *
-     * as the source crop. `size` is a canvas/tile size, not an
-     * image-pixel size, so high-resolution photos were being
-     * cropped to a tiny central portion and appeared extremely
-     * zoomed in.
-     *
-     * We now use the complete source image and scale it
-     * proportionally so the actual photograph is visible.
+     * Instead we center-crop each photo to a square before drawing,
+     * same idea as CSS `object-fit: cover`. Every tile ends up the
+     * same visual weight in the array regardless of the original
+     * photo's dimensions; nothing is stretched, only cropped.
      */
     if (this.image.complete && this.image.naturalWidth > 0) {
-      const imageWidth = this.image.naturalWidth;
-      const imageHeight = this.image.naturalHeight;
-      const imageRatio = imageWidth / imageHeight;
+      const iw = this.image.naturalWidth;
+      const ih = this.image.naturalHeight;
+      const imgRatio = iw / ih;
 
-      let drawWidth;
-      let drawHeight;
+      let sx;
+      let sy;
+      let sw;
+      let sh;
 
-      if (imageRatio > 1) {
-        // Landscape: fit width
-        drawWidth = this.size;
-        drawHeight = this.size / imageRatio;
+      if (imgRatio > 1) {
+        // Wider than tall: crop the left/right edges.
+        sh = ih;
+        sw = ih;
+        sy = 0;
+        sx = (iw - sw) / 2;
       } else {
-        // Portrait or square: fit height
-        drawHeight = this.size;
-        drawWidth = this.size * imageRatio;
+        // Taller than wide (or square): crop the top/bottom edges.
+        sw = iw;
+        sh = iw;
+        sx = 0;
+        sy = (ih - sh) / 2;
       }
 
       this.ctx.drawImage(
         this.image,
-        -drawWidth / 2,
-        -drawHeight / 2,
-        drawWidth,
-        drawHeight
+        sx,
+        sy,
+        sw,
+        sh,
+        -this.size / 2,
+        -this.size / 2,
+        this.size,
+        this.size
       );
     }
 
@@ -440,6 +481,9 @@ export default function PhotoGallery3D() {
       imagePaths.forEach((path) => {
         const img = new Image();
 
+        // Let the browser decode off the main thread instead of
+        // blocking on each image in sequence.
+        img.decoding = "async";
         img.src = path;
 
         img.addEventListener(
@@ -470,17 +514,29 @@ export default function PhotoGallery3D() {
 
       sketchState.radius = edge / 2;
 
-      sketchState.numberOfShape = window.matchMedia(
+      const isMobile = window.matchMedia(
         "(max-width: 768px)"
-      ).matches
-        ? 10
-        : 16;
+      ).matches;
+
+      // Grid size now scales with how many photos we have, instead of
+      // always being 10 (mobile) / 16 (desktop). Keeps roughly ~3
+      // tiles per photo so the array looks full but not clumped.
+      sketchState.numberOfShape = Utilities.getNumberOfShapes(
+        imagePaths.length,
+        isMobile
+      );
 
       sketchState.size =
         sketchState.radius /
         (sketchState.numberOfShape / 6);
 
       sketchState.shapes = [];
+
+      // Shuffle once per setup and cycle through it, instead of
+      // picking Math.random() per tile. This spreads every photo
+      // roughly evenly across the grid instead of some photos
+      // clumping together and others barely appearing.
+      const shuffledImages = Utilities.shuffle(imagePaths);
 
       let index = 0;
 
@@ -497,18 +553,15 @@ export default function PhotoGallery3D() {
           const params = {
             x,
             y,
-            i: index++,
+            i: index,
             c: ctx,
             s: sketchState.size,
             r: sketchState.radius,
             n: sketchState.numberOfShape,
             p:
-              imagePaths.length > 0
-                ? imagePaths[
-                    Math.floor(
-                      Math.random() *
-                        imagePaths.length
-                    )
+              shuffledImages.length > 0
+                ? shuffledImages[
+                    index % shuffledImages.length
                   ]
                 : "",
           };
@@ -516,6 +569,8 @@ export default function PhotoGallery3D() {
           sketchState.shapes.push(
             new Shape(params)
           );
+
+          index++;
         }
       }
     }
