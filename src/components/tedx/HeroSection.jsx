@@ -77,7 +77,7 @@ export default function HeroSection() {
           transition={{ duration: 0.9, delay: 0.72 }}
           className="text-white/35 text-sm lg:text-base max-w-xl leading-relaxed mb-14 font-light"
         >
-          TEDxAIIMSKalyani brings together thinkers, innovators, researchers, clinicians,
+          TEDxAIIMS Kalyani brings together thinkers, innovators, researchers, clinicians,
           entrepreneurs, and changemakers who dare to venture into unexplored territories.
         </motion.p>
 
@@ -88,12 +88,12 @@ export default function HeroSection() {
           className="flex flex-col sm:flex-row gap-4"
         >
           <a href="#register" className="group inline-flex items-center justify-center gap-3 bg-ted-red text-white text-[11px] tracking-[0.25em] uppercase px-10 py-4 hover:bg-white hover:text-black transition-all duration-400 font-semibold">
-            Apply to Attend
+            Buy Ticket
             <span className="w-0 group-hover:w-4 overflow-hidden transition-all duration-300 inline-block">-&gt;</span>
           </a>
-          <a href="#sponsors" className="group inline-flex items-center justify-center gap-3 border border-white/20 text-white text-[11px] tracking-[0.25em] uppercase px-10 py-4 hover:border-white/60 hover:bg-white/5 transition-all duration-400 font-medium">
-            Partner With Us
-          </a>
+          //<a href="#sponsors" className="group inline-flex items-center justify-center gap-3 border border-white/20 text-white text-[11px] tracking-[0.25em] uppercase px-10 py-4 hover:border-white/60 hover:bg-white/5 transition-all duration-400 font-medium">
+            //Partner With Us
+          //</a>
         </motion.div>
 
         <motion.div
