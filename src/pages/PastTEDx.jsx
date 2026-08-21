@@ -6,24 +6,25 @@ import ScrollReveal from "@/components/tedx/ScrollReveal";
 import PhotoGallery3D from "@/components/tedx/PhotoGallery3D";
 
 const pastEvent = {
-  year: "2024",
-  theme: "Convergence",
-  tagline: "Where disciplines dissolve and ideas collide.",
+  year: "2025",
+  theme: "Faultlines",
+  tagline: "Fractures that shape us",
   description:
-    "TEDxAIIMSKalyani 2024 brought together twelve remarkable minds across medicine, technology, art, and policy. Over six hours, they challenged the assumptions that keep disciplines apart, and showed what becomes possible when boundaries disappear.",
+    "TEDxAIIMS Kalyani 2025 brought together seven remarkable minds across medicine, technology, art, and policy. Over six hours, they challenged the assumptions that keep disciplines apart, and showed what becomes possible when boundaries disappear.",
   highlights: [
-    { label: "Speakers", value: "12" },
-    { label: "Attendees", value: "400+" },
+    { label: "Speakers", value: "7" },
+    { label: "Attendees", value: "100+" },
     { label: "Watch Hours", value: "2.4K" },
-    { label: "Theme", value: "Convergence" },
+    { label: "Theme", value: "Faultlines" },
   ],
   speakers: [
-    { name: "Past Speaker 1", title: "Talk Title One - A subtitle about the idea", talkUrl: "https://youtube.com" },
-    { name: "Past Speaker 2", title: "Talk Title Two - A subtitle about the idea", talkUrl: "https://youtube.com" },
-    { name: "Past Speaker 3", title: "Talk Title Three - A subtitle about the idea", talkUrl: "https://youtube.com" },
-    { name: "Past Speaker 4", title: "Talk Title Four - A subtitle about the idea", talkUrl: "https://youtube.com" },
-    { name: "Past Speaker 5", title: "Talk Title Five - A subtitle about the idea", talkUrl: "https://youtube.com" },
-    { name: "Past Speaker 6", title: "Talk Title Six - A subtitle about the idea", talkUrl: "https://youtube.com" },
+    { name: "Col. Prof. (Dr.) Ajay Mallick", title: "Paradox In Paradise", talkUrl: "https://youtu.be/o3Q4uG_W8Do?si=uIegVmTnRca2D5SB" },
+    { name: "Dr. Tara Rajendran", title: "Grow Without A map: Start From Nothing, Build What Matters", talkUrl: "https://youtu.be/vIbydZZGCJo?si=Dgeci1euvToeYsmK" },
+    { name: "Dr. Sumer Sethi", title: "The Blackboard; Hidden Journey of a Teacher", talkUrl: "https://youtu.be/2oSD69mtdME?si=CCer6VNMgP1TofvW" },
+    { name: "Dr. Ankita Pandey", title: "Beyond the Cage", talkUrl: "https://youtu.be/17Vo4pbLsEI?si=Eg4kjnjpDOlTvexJ" },
+    { name: "Dr. Sasi Kanta Dash", title: "Barren to Bloom: The Power of a Sapling", talkUrl: "https://youtu.be/xjr2Ri-Yh90?si=bw3kM3lLyizc4EX4" },
+    { name: "Dr. Priyanka Chatterjee", title: "Burnt Blueprint", talkUrl: "https://youtu.be/_w-zMP95oJY?si=FEj7lZxrNmvDq9Qh" },
+    { name: "Mr. Dheeraj Rathi", title: "From Fractures to Foundation", talkUrl: "https://youtu.be/UGjMpW3E4D8?si=NAYVFQVUyU_cTnib" },
   ],
 };
 
@@ -77,7 +78,7 @@ const PastTEDx = () => {
 
           <ScrollReveal delay={0.15}>
             <p className="text-white/60 text-lg leading-relaxed max-w-2xl mb-20">
-              Every edition of TEDxAIIMSKalyani is built on the energy of the last. Here is what we have shared with the world.
+              Every edition of TEDxAIIMS Kalyani is built on the energy of the last. Here is what we have shared with the world.
             </p>
           </ScrollReveal>
 
@@ -89,7 +90,7 @@ const PastTEDx = () => {
             <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-12">
               <div>
                 <p className="text-white/25 text-[10px] tracking-[0.35em] uppercase mb-3">
-                  TEDxAIIMSKalyani {pastEvent.year}
+                  TEDxAIIMS Kalyani {pastEvent.year}
                 </p>
                 <h2 className="text-4xl lg:text-5xl font-black tracking-tight text-white mb-3">
                   "{pastEvent.theme}"
@@ -151,7 +152,7 @@ const PastTEDx = () => {
           <ScrollReveal delay={0.2}>
             <div className="mt-20 border-t border-white/5 pt-10">
               <p className="text-white/25 text-[10px] tracking-[0.35em] uppercase">
-                TEDxAIIMSKalyani - AIIMS Kalyani, West Bengal
+                TEDxAIIMS Kalyani - AIIMS Kalyani, West Bengal
               </p>
             </div>
           </ScrollReveal>
