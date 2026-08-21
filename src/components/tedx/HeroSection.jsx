@@ -91,9 +91,6 @@ export default function HeroSection() {
             Buy Ticket
             <span className="w-0 group-hover:w-4 overflow-hidden transition-all duration-300 inline-block">-&gt;</span>
           </a>
-          //<a href="#sponsors" className="group inline-flex items-center justify-center gap-3 border border-white/20 text-white text-[11px] tracking-[0.25em] uppercase px-10 py-4 hover:border-white/60 hover:bg-white/5 transition-all duration-400 font-medium">
-            //Partner With Us
-          //</a>
         </motion.div>
 
         <motion.div
