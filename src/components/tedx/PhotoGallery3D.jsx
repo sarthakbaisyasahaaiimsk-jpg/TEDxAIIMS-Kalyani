@@ -1,6 +1,6 @@
 // @ts-nocheck
 import { useEffect, useRef, useState } from "react";
-import { useEffect, useRef, useState } from "react";
+//import { useEffect, useRef, useState } from "react";
 
 // Dynamically import all jpg images from src/assets/pastphotos/
 // Adjust "../assets/pastphotos/" if this file isn't one level below src/
