@@ -100,8 +100,8 @@ export default function HeroSection() {
           className="flex flex-wrap items-center gap-6 mt-16 pt-8 border-t border-white/5"
         >
           {[
-            { label: "Date", value: "2026 . TBD" },
-            { label: "Venue", value: "AIIMS Kalyani" },
+            { label: "Date", value: "6th September, 2026" },
+            { label: "Venue", value: "B.C. Roy Auditorium, AIIMS Kalyani" },
             { label: "Format", value: "In Person" },
           ].map((meta) => (
             <div key={meta.label} className="flex items-center gap-2">
