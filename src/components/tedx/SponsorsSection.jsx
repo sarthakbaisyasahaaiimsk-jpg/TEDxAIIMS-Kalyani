@@ -4,14 +4,6 @@ import ScrollReveal from './ScrollReveal';
 
 const sponsorTiers = [
   {
-    tier: 'Title Partner',
-    description: 'Presenting sponsors with maximum visibility',
-    sponsors: ['Innovate Health Corp', 'TechVision India'],
-    size: 'text-lg',
-    cols: 'grid-cols-2',
-    minH: 'min-h-[100px]',
-  },
-  {
     tier: 'Innovation Partner',
     description: 'Driving the frontiers of technology',
     sponsors: ['NeuroLab AI', 'BioGenesis', 'DataMed Solutions'],
@@ -45,19 +37,19 @@ export default function SponsorsSection() {
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-16 gap-6">
           <ScrollReveal>
             <h2 className="text-5xl lg:text-7xl font-black text-white tracking-tight leading-none">
-              Our Partners
+              Past Partners
             </h2>
           </ScrollReveal>
           <ScrollReveal delay={0.1}>
             <div className="flex flex-col gap-2">
               <p className="text-white/30 text-sm max-w-xs font-light">
-                Interested in partnering with TEDxAIIMSKalyani?
+                Interested in partnering with TEDxAIIMS Kalyani?
               </p>
               <a
-                href="#register"
+                href="mailto:tedxaiimskalyani@gmail.com"
                 className="text-ted-red text-[10px] tracking-[0.25em] uppercase border border-ted-red/30 px-6 py-3 hover:bg-ted-red hover:text-white transition-all duration-300 inline-block text-center font-medium"
               >
-                Become a Partner →
+                Email Us →
               </a>
             </div>
           </ScrollReveal>
