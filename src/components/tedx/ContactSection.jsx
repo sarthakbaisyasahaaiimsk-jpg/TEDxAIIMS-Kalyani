@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Mail, Instagram, Linkedin, Youtube, Twitter } from 'lucide-react';
+import { Mail, Instagram, Linkedin, Youtube } from 'lucide-react';
 import ScrollReveal from './ScrollReveal';
 
 const socials = [
@@ -21,12 +21,6 @@ const socials = [
     handle: 'TEDxAIIMS Kalyani',
     href: 'https://youtube.com/@tedxaiimskalyani',
   },
-  {
-    icon: Twitter,
-    label: 'X (Twitter)',
-    handle: '@tedxaiimskalyani',
-    href: 'https://x.com/tedxaiimskalyani',
-  },
 ];
 
 const ContactSection = () => {
@@ -41,7 +35,7 @@ const ContactSection = () => {
           <div>
             <ScrollReveal delay={0.1}>
               <h2 className="text-4xl lg:text-6xl font-black tracking-tight text-white mb-8">
-                Let's talk.
+                Contact Us.
               </h2>
             </ScrollReveal>
 
@@ -53,7 +47,7 @@ const ContactSection = () => {
 
             <ScrollReveal delay={0.2}>
               <motion.a
-                href="mailto:contact@tedxaiimskalyani.in"
+                href="mailto:tedxaiimskalyani@gmail.com"
                 whileHover={{ x: 4 }}
                 transition={{ duration: 0.2 }}
                 className="group flex items-center gap-4 p-6 bg-[#0f0f0f] border border-white/5 hover:border-ted-red/25 transition-colors duration-500"
@@ -63,7 +57,7 @@ const ContactSection = () => {
                 </div>
                 <div>
                   <p className="text-white/35 text-[10px] tracking-[0.3em] uppercase mb-1">Email Us</p>
-                  <p className="text-white font-medium text-sm">contact@tedxaiimskalyani.in</p>
+                  <p className="text-white font-medium text-sm">tedxaiimskalyani@gmail.com</p>
                 </div>
               </motion.a>
             </ScrollReveal>
