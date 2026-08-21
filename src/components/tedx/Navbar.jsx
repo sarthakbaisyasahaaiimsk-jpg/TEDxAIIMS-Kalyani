@@ -10,7 +10,8 @@ const navLinks = [
   { label: "Speakers",     href: "/#speakers",      type: "anchor" },
   { label: "Schedule",     href: "/#schedule",      type: "anchor" },
   { label: "Team",         href: "/team",           type: "route"  },
-  { label: "Past TEDx",    href: "/past-tedx",      type: "route"  },
+  { label: "Previous Editions",    href: "/past-tedx",      type: "route"  },
+  { label: "Contact",      href: "/#contact",       type: "anchor" },
 ];
 
 const Navbar = () => {
