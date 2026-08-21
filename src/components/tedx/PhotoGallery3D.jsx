@@ -1,6 +1,9 @@
+// @ts-nocheck
 import { useEffect, useRef, useState } from "react";
+//import { useEffect, useRef, useState } from "react";
 
 // Dynamically import all jpg images from src/assets/pastphotos/
+// Adjust "../assets/pastphotos/" if this file isn't one level below src/
 const imageModules = import.meta.glob("../../assets/pastphotos/*.jpg", {
   eager: true,
   import: "default",
@@ -15,44 +18,13 @@ const imagePaths = Object.entries(imageModules)
   })
   .map(([, value]) => value);
 
-// TEDx-inspired theme colors
+// TEDx-inspired theme colors: very dark red/black background, crimson accents.
 const THEME_BG = "#1A0408";
 const THEME_ACCENT = "#EB0028";
 
 class Utilities {
   static randomInt(min, max) {
     return Math.floor(min + Math.random() * (max - min + 1));
-  }
-
-  // Fisher-Yates shuffle. Used so photos are spread evenly across the
-  // tile grid instead of being picked independently per-tile, which
-  // caused clumping/repeats when the photo count was much smaller
-  // than the number of tiles.
-  static shuffle(arr) {
-    const a = [...arr];
-
-    for (let i = a.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-
-      [a[i], a[j]] = [a[j], a[i]];
-    }
-
-    return a;
-  }
-
-  // Picks a grid size (numberOfShape) proportional to how many photos
-  // we actually have, instead of a hardcoded 10/16. This keeps roughly
-  // ~3 tiles per photo so the array doesn't look sparse or over-clumped
-  // regardless of whether the library has 15 photos or 100.
-  static getNumberOfShapes(imageCount, isMobile) {
-    const maxShapes = isMobile ? 10 : 16;
-    const minShapes = 6;
-
-    if (imageCount === 0) return minShapes;
-
-    const target = Math.round(Math.sqrt(imageCount * 3));
-
-    return Math.min(maxShapes, Math.max(minShapes, target));
   }
 }
 
@@ -97,9 +69,6 @@ class DrawMainImage {
 
       this.stopWatch.initialize();
 
-      // Full popup view: fit the whole photo without cropping,
-      // regardless of its native dimensions (portrait/landscape/square
-      // are all handled here).
       let imageWidth;
       let ratio;
       let imageHeight;
@@ -124,7 +93,13 @@ class DrawMainImage {
       this.canvas.height = imageHeight;
 
       this.ctx2.clearRect(0, 0, imageWidth, imageHeight);
-      this.ctx2.drawImage(this.image, 0, 0, imageWidth, imageHeight);
+      this.ctx2.drawImage(
+        this.image,
+        0,
+        0,
+        imageWidth,
+        imageHeight
+      );
 
       this.getImageData();
       this.isLoaded = true;
@@ -139,6 +114,7 @@ class DrawMainImage {
 
     for (let i = 0; i < this.canvas.height; i += addHeight) {
       const obj = {};
+
       addHeight = Utilities.randomInt(5, 20);
 
       if (preHeight + addHeight > this.canvas.height) {
@@ -185,7 +161,8 @@ class DrawMainImage {
   moveImage() {
     this.stopWatch.calculateTime();
 
-    const t = 1.0 -
+    const t =
+      1.0 -
       Math.min(this.stopWatch.getElapsedTime() * 0.0002, 1.0);
 
     this.e = this.ease(t);
@@ -205,7 +182,8 @@ class DrawMainImage {
           this.canvas.width / 2 +
           this.dataArr[i].width +
           Math.tan(
-            t * 0.01 + this.dataArr[i].height / Math.PI
+            t * 0.01 +
+              this.dataArr[i].height / Math.PI
           ) *
             100,
         this.height / 2 -
@@ -229,6 +207,7 @@ class Shape {
     this.radius = params.r;
     this.numberOfShape = params.n;
     this.size = params.s;
+
     this.image = params.image || new Image();
 
     if (!params.image) {
@@ -239,24 +218,34 @@ class Shape {
     this.displayed = true;
 
     this.xRadian =
-      (Math.PI * 2 / this.numberOfShape) * this.xIndex;
+      (Math.PI * 2 / this.numberOfShape) *
+      this.xIndex;
+
     this.yRadian =
-      (Math.PI * 2 / this.numberOfShape) * this.yIndex;
+      (Math.PI * 2 / this.numberOfShape) *
+      this.yIndex;
   }
 
   updateParams(infos) {
     this.x =
-      Math.sin(this.xRadian + infos.delta.x) * this.radius;
+      Math.sin(
+        this.xRadian + infos.delta.x
+      ) * this.radius;
+
     this.y =
-      Math.cos(this.yRadian + infos.delta.y) * this.radius;
+      Math.cos(
+        this.yRadian + infos.delta.y
+      ) * this.radius;
 
     this.ratio = this.getNormalizedDist();
   }
 
   getNormalizedDist() {
     let tmp =
-      Math.sqrt(this.x * this.x + this.y * this.y) /
-      this.radius;
+      Math.sqrt(
+        this.x * this.x +
+          this.y * this.y
+      ) / this.radius;
 
     tmp = this.ease(tmp);
     tmp = 1 - Math.min(tmp, 1);
@@ -272,8 +261,12 @@ class Shape {
     this.updateParams(infos);
 
     if (
-      Math.sin(this.yRadian + infos.delta.y) > 0 ||
-      Math.cos(this.xRadian + infos.delta.x) > 0
+      Math.sin(
+        this.yRadian + infos.delta.y
+      ) > 0 ||
+      Math.cos(
+        this.xRadian + infos.delta.x
+      ) > 0
     ) {
       this.displayed = false;
       return;
@@ -285,53 +278,38 @@ class Shape {
 
     this.ctx.translate(this.x, this.y);
     this.ctx.scale(this.ratio, this.ratio);
+    this.ctx.translate(-this.x, -this.y);
+
     this.ctx.globalAlpha = this.ratio;
 
     /*
-     * Tiles are square, but source photos come in mixed dimensions
-     * (portrait, landscape, varying aspect ratios). Fitting the whole
-     * photo inside the square (old behavior) made some tiles look
-     * mostly-empty or inconsistently sized next to each other.
-     *
-     * Instead we center-crop each photo to a square before drawing,
-     * same idea as CSS `object-fit: cover`. Every tile ends up the
-     * same visual weight in the array regardless of the original
-     * photo's dimensions; nothing is stretched, only cropped.
+     * IMPORTANT:
+     * Draw the entire image instead of taking a square
+     * crop from its center. This prevents portrait/landscape
+     * photos from appearing extremely zoomed in.
      */
-    if (this.image.complete && this.image.naturalWidth > 0) {
-      const iw = this.image.naturalWidth;
-      const ih = this.image.naturalHeight;
-      const imgRatio = iw / ih;
+    if (
+      this.image.complete &&
+      this.image.naturalWidth > 0
+    ) {
+      const imageAspect =
+        this.image.width / this.image.height;
 
-      let sx;
-      let sy;
-      let sw;
-      let sh;
+      let drawWidth = this.size;
+      let drawHeight = this.size;
 
-      if (imgRatio > 1) {
-        // Wider than tall: crop the left/right edges.
-        sh = ih;
-        sw = ih;
-        sy = 0;
-        sx = (iw - sw) / 2;
+      if (imageAspect > 1) {
+        drawHeight = this.size / imageAspect;
       } else {
-        // Taller than wide (or square): crop the top/bottom edges.
-        sw = iw;
-        sh = iw;
-        sx = 0;
-        sy = (ih - sh) / 2;
+        drawWidth = this.size * imageAspect;
       }
 
       this.ctx.drawImage(
         this.image,
-        sx,
-        sy,
-        sw,
-        sh,
-        -this.size / 2,
-        -this.size / 2,
-        this.size,
-        this.size
+        this.x - drawWidth / 2,
+        this.y - drawHeight / 2,
+        drawWidth,
+        drawHeight
       );
     }
 
@@ -356,13 +334,19 @@ class Glitch {
     for (let i = 0; i < this.height; i += addHeight) {
       const obj = {};
 
-      addHeight = Utilities.randomInt(this.min, this.max);
+      addHeight = Utilities.randomInt(
+        this.min,
+        this.max
+      );
 
       if (preHeight + addHeight > this.height) {
-        addHeight = Math.floor(this.height - preHeight);
+        addHeight = Math.floor(
+          this.height - preHeight
+        );
       }
 
       if (addHeight === 0) return;
+
       if (!this.ctx) return;
 
       const image = this.ctx.getImageData(
@@ -381,6 +365,8 @@ class Glitch {
   }
 
   addImage(t) {
+    if (!this.ctx) return;
+
     for (let i = 0; i < this.dataArr.length; i++) {
       if (Math.random() > 0.01) {
         this.ctx.putImageData(
@@ -399,7 +385,8 @@ class Glitch {
 
         this.ctx.putImageData(
           this.dataArr[randomIndex].image,
-          this.width * Math.random() - this.width / 2,
+          this.width * Math.random() -
+            this.width / 2,
           this.dataArr[i].height
         );
       }
@@ -441,7 +428,6 @@ export default function PhotoGallery3D() {
     canvas.style.display = "block";
     canvas.style.background = THEME_BG;
     canvas.style.cursor = "default";
-    canvas.style.touchAction = "pan-y";
 
     canvas.ariaLabel = "TEDx photo gallery";
     canvas.role = "img";
@@ -457,52 +443,60 @@ export default function PhotoGallery3D() {
 
     let loadedCount = 0;
 
-    const handleLoadingProgress = () => {
-      loadedCount++;
+    imagePaths.forEach((path) => {
+      const img = new Image();
 
-      const pct =
-        imagePaths.length > 0
-          ? Math.floor(
-              (loadedCount / imagePaths.length) * 100
-            )
-          : 100;
+      img.src = path;
 
-      setProgress(pct);
+      img.addEventListener("load", () => {
+        loadedCount++;
 
-      if (loadedCount === imagePaths.length) {
-        setTimeout(() => setLoaded(true), 300);
-      }
-    };
-
-    if (imagePaths.length === 0) {
-      setProgress(100);
-      setLoaded(true);
-    } else {
-      imagePaths.forEach((path) => {
-        const img = new Image();
-
-        // Let the browser decode off the main thread instead of
-        // blocking on each image in sequence.
-        img.decoding = "async";
-        img.src = path;
-
-        img.addEventListener(
-          "load",
-          handleLoadingProgress
+        const pct = Math.floor(
+          (loadedCount / imagePaths.length) * 100
         );
 
-        img.addEventListener(
-          "error",
-          handleLoadingProgress
-        );
+        setProgress(pct);
+
+        if (
+          loadedCount === imagePaths.length
+        ) {
+          setTimeout(
+            () => setLoaded(true),
+            300
+          );
+        }
       });
-    }
+
+      img.addEventListener("error", () => {
+        loadedCount++;
+
+        const pct = Math.floor(
+          (loadedCount / imagePaths.length) * 100
+        );
+
+        setProgress(pct);
+
+        if (
+          loadedCount === imagePaths.length
+        ) {
+          setTimeout(
+            () => setLoaded(true),
+            300
+          );
+        }
+      });
+    });
 
     function setupSizes() {
-      const rect = container.getBoundingClientRect();
+      const rect =
+        container.getBoundingClientRect();
 
-      sketchState.width = canvas.width = rect.width;
-      sketchState.height = canvas.height = rect.height;
+      sketchState.width =
+        canvas.width = rect.width;
+
+      sketchState.height =
+        canvas.height = rect.height;
+
       sketchState.preWidth = rect.width;
     }
 
@@ -514,29 +508,18 @@ export default function PhotoGallery3D() {
 
       sketchState.radius = edge / 2;
 
-      const isMobile = window.matchMedia(
-        "(max-width: 768px)"
-      ).matches;
-
-      // Grid size now scales with how many photos we have, instead of
-      // always being 10 (mobile) / 16 (desktop). Keeps roughly ~3
-      // tiles per photo so the array looks full but not clumped.
-      sketchState.numberOfShape = Utilities.getNumberOfShapes(
-        imagePaths.length,
-        isMobile
-      );
+      sketchState.numberOfShape =
+        window.matchMedia(
+          "(max-width: 768px)"
+        ).matches
+          ? 10
+          : 16;
 
       sketchState.size =
         sketchState.radius /
         (sketchState.numberOfShape / 6);
 
       sketchState.shapes = [];
-
-      // Shuffle once per setup and cycle through it, instead of
-      // picking Math.random() per tile. This spreads every photo
-      // roughly evenly across the grid instead of some photos
-      // clumping together and others barely appearing.
-      const shuffledImages = Utilities.shuffle(imagePaths);
 
       let index = 0;
 
@@ -553,24 +536,23 @@ export default function PhotoGallery3D() {
           const params = {
             x,
             y,
-            i: index,
+            i: index++,
             c: ctx,
             s: sketchState.size,
             r: sketchState.radius,
             n: sketchState.numberOfShape,
             p:
-              shuffledImages.length > 0
-                ? shuffledImages[
-                    index % shuffledImages.length
-                  ]
-                : "",
+              imagePaths[
+                Math.floor(
+                  Math.random() *
+                    imagePaths.length
+                )
+              ],
           };
 
           sketchState.shapes.push(
             new Shape(params)
           );
-
-          index++;
         }
       }
     }
@@ -623,6 +605,7 @@ export default function PhotoGallery3D() {
           0.16;
 
         ctx.save();
+
         ctx.strokeStyle = THEME_ACCENT;
         ctx.lineWidth = 1;
 
@@ -636,17 +619,21 @@ export default function PhotoGallery3D() {
         ctx.restore();
       } else if (s) {
         focus.s +=
-          (sketchState.size * s.ratio -
+          (sketchState.size *
+            s.ratio -
             focus.s) *
           0.16;
 
         focus.x +=
-          (s.x - focus.x) * 0.16;
+          (s.x - focus.x) *
+          0.16;
 
         focus.y +=
-          (s.y - focus.y) * 0.16;
+          (s.y - focus.y) *
+          0.16;
 
         ctx.save();
+
         ctx.strokeStyle = THEME_ACCENT;
         ctx.lineWidth = 5 * s.ratio;
 
@@ -704,9 +691,12 @@ export default function PhotoGallery3D() {
         i < sketchState.shapes.length;
         i++
       ) {
-        const s = sketchState.shapes[i];
+        const s =
+          sketchState.shapes[i];
 
-        s.draw(sketchState.touchInfos);
+        s.draw(
+          sketchState.touchInfos
+        );
 
         if (
           isHovered(
@@ -715,7 +705,9 @@ export default function PhotoGallery3D() {
             sketchState.touchInfos.mouse.y
           )
         ) {
-          canvas.style.cursor = "zoom-in";
+          canvas.style.cursor =
+            "zoom-in";
+
           sketchState.hover = true;
           hoveredIndex = i;
         }
@@ -723,7 +715,9 @@ export default function PhotoGallery3D() {
 
       drawFocus(
         hoveredIndex !== undefined
-          ? sketchState.shapes[hoveredIndex]
+          ? sketchState.shapes[
+              hoveredIndex
+            ]
           : undefined,
         sketchState.hover
       );
@@ -745,11 +739,15 @@ export default function PhotoGallery3D() {
           sketchState.height
         );
 
-        sketchState.mainImage.addImage(t);
+        sketchState.mainImage.addImage(
+          t
+        );
       }
 
       if (sketchState.isDeleting) {
-        sketchState.mainImage.deleteImage(t);
+        sketchState.mainImage.deleteImage(
+          t
+        );
       }
 
       ctx.restore();
@@ -768,11 +766,27 @@ export default function PhotoGallery3D() {
 
         sketchState.touchInfos = {
           mouse: { x: 0, y: 0 },
-          delta: { x: 0, y: 0 },
+
+          delta: {
+            x: 0,
+            y: 0,
+          },
+
           fing: {
-            start: { x: null, y: null },
-            move: { x: null, y: null },
-            end: { x: null, y: null },
+            start: {
+              x: null,
+              y: null,
+            },
+
+            move: {
+              x: null,
+              y: null,
+            },
+
+            end: {
+              x: null,
+              y: null,
+            },
           },
         };
 
@@ -793,7 +807,6 @@ export default function PhotoGallery3D() {
           );
 
         render(0);
-
         return;
       }
 
@@ -803,12 +816,31 @@ export default function PhotoGallery3D() {
       sketchState.isDeleting = false;
 
       sketchState.touchInfos = {
-        mouse: { x: 0, y: 0 },
-        delta: { x: 0, y: 0 },
+        mouse: {
+          x: 0,
+          y: 0,
+        },
+
+        delta: {
+          x: 0,
+          y: 0,
+        },
+
         fing: {
-          start: { x: null, y: null },
-          move: { x: null, y: null },
-          end: { x: null, y: null },
+          start: {
+            x: null,
+            y: null,
+          },
+
+          move: {
+            x: null,
+            y: null,
+          },
+
+          end: {
+            x: null,
+            y: null,
+          },
         },
       };
 
@@ -835,8 +867,11 @@ export default function PhotoGallery3D() {
       const rect =
         canvas.getBoundingClientRect();
 
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
+      const x =
+        e.clientX - rect.left;
+
+      const y =
+        e.clientY - rect.top;
 
       sketchState.touchInfos.mouse.x =
         (x / sketchState.width) *
@@ -849,8 +884,16 @@ export default function PhotoGallery3D() {
         sketchState.height / 2;
     }
 
+    /*
+     * Touch movement is intentionally NOT used
+     * for rotation anymore.
+     *
+     * This allows normal single-finger scrolling
+     * on mobile.
+     */
     function onTouchstart(e) {
-      const t = e.targetTouches[0];
+      const t =
+        e.targetTouches[0];
 
       if (!t) return;
 
@@ -859,18 +902,28 @@ export default function PhotoGallery3D() {
 
       sketchState.touchInfos.fing.start.y =
         t.pageY;
+
+      sketchState.touchInfos.fing.move.x =
+        t.pageX;
+
+      sketchState.touchInfos.fing.move.y =
+        t.pageY;
     }
 
     function onTouchmove(e) {
-      const t = e.targetTouches[0];
+      const t =
+        e.targetTouches[0];
 
       if (!t) return;
 
       const rect =
         canvas.getBoundingClientRect();
 
-      const x = t.pageX - rect.left;
-      const y = t.pageY - rect.top;
+      const x =
+        t.pageX - rect.left;
+
+      const y =
+        t.pageY - rect.top;
 
       sketchState.touchInfos.mouse.x =
         (x / sketchState.width) *
@@ -882,35 +935,21 @@ export default function PhotoGallery3D() {
           sketchState.height -
         sketchState.height / 2;
 
-      const previousX =
-        sketchState.touchInfos.fing.move.x ??
-        sketchState.touchInfos.fing.start.x ??
-        t.pageX;
-
-      const previousY =
-        sketchState.touchInfos.fing.move.y ??
-        sketchState.touchInfos.fing.start.y ??
-        t.pageY;
-
-      sketchState.touchInfos.fing.move.x =
-        t.pageX;
-
-      sketchState.touchInfos.fing.move.y =
-        t.pageY;
-
-      sketchState.touchInfos.delta.x +=
-        (previousX - t.pageX) * 0.0003;
-
-      sketchState.touchInfos.delta.y +=
-        (previousY - t.pageY) * 0.0003;
+      /*
+       * Do NOT modify sketchState.touchInfos.delta here.
+       * Touch scrolling should remain native.
+       */
     }
 
-    function onWheel(e) {
-      sketchState.touchInfos.delta.x +=
-        e.deltaX * 0.0005;
-
-      sketchState.touchInfos.delta.y +=
-        e.deltaY * 0.0005;
+    /*
+     * Wheel/trackpad input is intentionally ignored.
+     *
+     * This allows the page to scroll normally when
+     * the pointer is over the gallery.
+     */
+    function onWheel() {
+      // Intentionally empty.
+      // Do not rotate the gallery from wheel input.
     }
 
     function onClick(e) {
@@ -947,10 +986,12 @@ export default function PhotoGallery3D() {
         i < sketchState.shapes.length;
         i++
       ) {
-        const s = sketchState.shapes[i];
+        const s =
+          sketchState.shapes[i];
 
         if (isHovered(s, x, y)) {
           sketchState.isDisplayed = true;
+
           sketchState.mainImage.drawImage(
             s.image.src
           );
@@ -964,15 +1005,26 @@ export default function PhotoGallery3D() {
       const rect =
         container.getBoundingClientRect();
 
-      if (sketchState.preWidth === rect.width) {
+      if (
+        sketchState.preWidth ===
+        rect.width
+      ) {
         sketchState.height =
-          canvas.height = rect.height;
+          canvas.height =
+          rect.height;
 
         return;
       }
 
       init();
     }
+
+    /*
+     * Keep native vertical page scrolling enabled
+     * on touch devices.
+     */
+    canvas.style.touchAction =
+      "pan-y";
 
     const resizeObserver =
       new ResizeObserver(onResize);
@@ -997,12 +1049,14 @@ export default function PhotoGallery3D() {
 
     canvas.addEventListener(
       "touchstart",
-      onTouchstart
+      onTouchstart,
+      { passive: true }
     );
 
     canvas.addEventListener(
       "touchmove",
-      onTouchmove
+      onTouchmove,
+      { passive: true }
     );
 
     init();
@@ -1010,7 +1064,9 @@ export default function PhotoGallery3D() {
     return () => {
       destroyed = true;
 
-      cancelAnimationFrame(animationId);
+      cancelAnimationFrame(
+        animationId
+      );
 
       resizeObserver.disconnect();
 
@@ -1039,7 +1095,9 @@ export default function PhotoGallery3D() {
         onTouchmove
       );
 
-      if (container.contains(canvas)) {
+      if (
+        container.contains(canvas)
+      ) {
         container.removeChild(canvas);
       }
 
