@@ -64,7 +64,7 @@ export default function SpeakersSection() {
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-14 gap-8">
           <ScrollReveal>
             <h2 className="text-5xl lg:text-7xl font-black text-white tracking-tight leading-none">
-              The Explorers
+              The Speakers
             </h2>
           </ScrollReveal>
 
