@@ -4,6 +4,7 @@ import Navbar from "@/components/tedx/Navbar";
 import Footer from "@/components/tedx/Footer";
 import ScrollReveal from "@/components/tedx/ScrollReveal";
 import PhotoGallery3D from "@/components/tedx/PhotoGallery3D";
+import tara from "@/assets/IMG_3743.PNG";
 
 const pastEvent = {
   year: "2025",
@@ -19,7 +20,7 @@ const pastEvent = {
   ],
   speakers: [
     { name: "Col. Prof. (Dr.) Ajay Mallick", title: "Paradox In Paradise", talkUrl: "https://youtu.be/o3Q4uG_W8Do?si=uIegVmTnRca2D5SB" },
-    { name: "Dr. Tara Rajendran", title: "Grow Without A map: Start From Nothing, Build What Matters", talkUrl: "https://youtu.be/vIbydZZGCJo?si=Dgeci1euvToeYsmK" },
+    { name: "Dr. Tara Rajendran", title: "Grow Without A map: Start From Nothing, Build What Matters", talkUrl: "https://youtu.be/vIbydZZGCJo?si=Dgeci1euvToeYsmK", image: tara },
     { name: "Dr. Sumer Sethi", title: "The Blackboard; Hidden Journey of a Teacher", talkUrl: "https://youtu.be/2oSD69mtdME?si=CCer6VNMgP1TofvW" },
     { name: "Dr. Ankita Pandey", title: "Beyond the Cage", talkUrl: "https://youtu.be/17Vo4pbLsEI?si=Eg4kjnjpDOlTvexJ" },
     { name: "Dr. Sasi Kanta Dash", title: "Barren to Bloom: The Power of a Sapling", talkUrl: "https://youtu.be/xjr2Ri-Yh90?si=bw3kM3lLyizc4EX4" },
@@ -38,9 +39,11 @@ const SpeakerCard = ({ speaker, index }) => (
       className="group relative overflow-hidden bg-[#0f0f0f] border border-white/5 hover:border-ted-red/25 transition-colors duration-500 flex flex-col"
     >
       <div className="aspect-[3/4] overflow-hidden relative">
-        <div className="w-full h-full bg-[#1a1a1a] flex items-center justify-center grayscale group-hover:grayscale-0 transition-all duration-700">
-          <span className="text-white/10 text-xs uppercase tracking-widest">Photo</span>
-        </div>
+        <img
+          src={speaker.image}
+          alt={speaker.name}
+          className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+        />
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
 
         <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
