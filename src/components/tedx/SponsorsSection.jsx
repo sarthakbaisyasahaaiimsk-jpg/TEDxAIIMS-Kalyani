@@ -1,7 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import ScrollReveal from './ScrollReveal';
-
 // Drop your logo files into src/assets/partners/ and import them here.
 // Example:
 import petalogo from '@/assets/petalogo.png';
@@ -10,45 +9,42 @@ import tiramisulogo from '@/assets/letstiramisu.png';
 import reflecto from '@/assets/reflecto.png';
 import horizon from '@/assets/horizon.png';
 import ramen from '@/assets/ramen.png';
-
 const partners = [
   {
     name: 'Peta',
     role: 'Associate Partner',
-    logo: petalogo, // replace with imported logo, e.g. petaLogo
+    logo: petalogo,
   },
   {
     name: 'EduFabrica',
     role: 'Education Partner',
-    logo: edufabricalogo, // replace with imported logo, e.g. edufabricaLogo
+    logo: edufabricalogo,
   },
   {
     name: "Let's Tiramisu",
     role: 'Dessert Partner',
-    logo: letstiramisu, // replace with imported logo, e.g. tiramisuLogo
+    logo: tiramisulogo,
   },
   {
     name: 'Reflecto Productions',
     role: 'Media Partner',
-    logo: reflecto, // replace with imported logo, e.g. reflectoLogo
+    logo: reflecto,
   },
   {
     name: 'Horizon Sponsorship Group',
     role: 'Supporting Partner',
-    logo: horizon, // replace with imported logo, e.g. reflectoLogo
+    logo: horizon,
   },
   {
     name: 'Hoshi Ramen',
     role: 'Food Partner',
-    logo: ramen, // replace with imported logo, e.g. reflectoLogo
+    logo: ramen,
   },
 ];
-
 export default function SponsorsSection() {
   return (
     <section id="sponsors" className="relative bg-[#060606] py-28 lg:py-40">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
-
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-16 gap-6">
           <ScrollReveal>
             <h2 className="text-5xl lg:text-7xl font-black text-white tracking-tight leading-none">
@@ -69,7 +65,6 @@ export default function SponsorsSection() {
             </div>
           </ScrollReveal>
         </div>
-
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
           {partners.map((partner, i) => (
             <ScrollReveal key={partner.name} delay={i * 0.08}>
