@@ -56,7 +56,7 @@ export default function SponsorsSection() {
               <p className="text-white/30 text-sm max-w-xs font-light">
                 Interested in partnering with TEDxAIIMS Kalyani?
               </p>
-              
+              <a
                 href="mailto:tedxaiimskalyani@gmail.com"
                 className="text-ted-red text-[10px] tracking-[0.25em] uppercase border border-ted-red/30 px-6 py-3 hover:bg-ted-red hover:text-white transition-all duration-300 inline-block text-center font-medium"
               >
