@@ -16,15 +16,6 @@ const footerLinks = [
   { label: 'Contact Us', href: 'mailto:tedx@aiimskalyani.edu.in' },
 ];
 
-const navLinks = [
-  { label: 'About', href: '#about' },
-  { label: 'Theme', href: '#theme' },
-  { label: 'Speakers', href: '#speakers' },
-  { label: 'Schedule', href: '#schedule' },
-  { label: 'Venue', href: '#venue' },
-  { label: 'Register', href: '#register' },
-];
-
 export default function Footer() {
   const [email, setEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
@@ -36,28 +27,6 @@ export default function Footer() {
 
   return (
     <footer className="relative bg-black border-t border-white/5">
-      {/* Top band */}
-      <div className="border-b border-white/5 py-5">
-        <div className="max-w-7xl mx-auto px-6 lg:px-12 flex flex-wrap items-center justify-between gap-4">
-          <div className="flex items-center gap-2">
-            <span className="text-ted-red font-black text-base tracking-tight">TEDx</span>
-            <span className="text-white/60 font-light text-xs tracking-widest uppercase">AIIMSKalyani</span>
-          </div>
-          <nav className="hidden lg:flex items-center gap-8">
-            {navLinks.map(link => (
-              <a key={link.label} href={link.href}
-                className="text-white/25 hover:text-white/70 text-[10px] tracking-[0.25em] uppercase transition-colors duration-300">
-                {link.label}
-              </a>
-            ))}
-          </nav>
-          <a href="#register"
-            className="bg-ted-red text-white text-[10px] tracking-[0.25em] uppercase px-6 py-2.5 hover:bg-white hover:text-black transition-all duration-300 font-semibold">
-            Register Now
-          </a>
-        </div>
-      </div>
-
       <div className="max-w-7xl mx-auto px-6 lg:px-12 py-16 lg:py-20">
         <div className="grid lg:grid-cols-4 gap-12 lg:gap-8 mb-16">
           {/* Branding */}
