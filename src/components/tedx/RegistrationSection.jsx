@@ -1,15 +1,15 @@
 import React from "react";
 import { motion } from "framer-motion";
 import ScrollReveal from "./ScrollReveal";
-import { ArrowRight, Check, Armchair, Ticket } from "lucide-react";
+import { ArrowRight, Check, Armchair } from "lucide-react";
 import { Link } from "react-router-dom";
 
-// To use the official BookMyShow logo instead of the text wordmark below:
-// 1. Save the logo file into src/assets/ (e.g. src/assets/bookmyshow-logo.png)
-// 2. Uncomment the import line below
-// 3. In the JSX further down, replace the <span className="bms-wordmark">...</span> block
-//    with <img src={bookMyShowLogo} alt="BookMyShow" className="h-6 w-auto" />
+// Make sure your BookMyShow logo file is saved at src/assets/bookmyshow-logo.png
+// (rename the import path below if your actual filename is different)
 import bookMyShowLogo from '@/assets/bookmyshow.png';
+
+
+//import bookMyShowLogo from '@/assets/bookmyshow.png';
 
 const BOOKMYSHOW_URL = "https://in.bookmyshow.com/events/tedxaiims-kalyani/ET00461573";
 
@@ -181,16 +181,12 @@ export default function RegistrationSection() {
             <div className="relative bg-[#0c0505] p-8 lg:p-12">
               <div className="flex flex-col lg:flex-row lg:items-center gap-8 lg:gap-12">
                 <div className="flex-1">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div
-                      className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0"
-                      style={{ backgroundColor: "rgba(248,68,100,0.12)", border: "1px solid rgba(248,68,100,0.35)" }}
-                    >
-                      <Ticket size={22} style={{ color: "#F84464" }} />
-                    </div>
-                    <span className="bms-wordmark text-2xl lg:text-3xl font-black tracking-tight" style={{ color: "#D2373C" }}>
-                      book<span style={{ color: "#F84464" }}>my</span>show
-                    </span>
+                  <div className="flex items-center mb-4">
+                    <img
+                      src={bookMyShowLogo}
+                      alt="BookMyShow"
+                      className="h-9 lg:h-11 w-auto object-contain"
+                    />
                   </div>
 
                   <h3 className="text-white text-2xl lg:text-3xl font-black tracking-tight mb-3 leading-tight">
