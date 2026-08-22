@@ -185,7 +185,7 @@ export default function RegistrationSection() {
                     <img
                       src={bookMyShowLogo}
                       alt="BookMyShow"
-                      className="h-9 lg:h-11 w-auto object-contain"
+                      className="h-16 lg:h-20 w-auto object-contain"
                     />
                   </div>
 
