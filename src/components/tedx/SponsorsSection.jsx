@@ -6,8 +6,10 @@ import ScrollReveal from './ScrollReveal';
 // Example:
 import petalogo from '@/assets/petalogo.png';
 import edufabricalogo from '@/assets/edufabricalogo.png';
-//import tiramisulogo from '@/assets/letstiramisu.png';
+import tiramisulogo from '@/assets/letstiramisu.png';
 import reflecto from '@/assets/reflecto.png';
+import horizon from '@/assets/horizon.png';
+import ramen from '@/assets/ramen.png;
 
 const partners = [
   {
@@ -29,6 +31,16 @@ const partners = [
     name: 'Reflecto Productions',
     role: 'Media Partner',
     logo: reflecto, // replace with imported logo, e.g. reflectoLogo
+  },
+  {
+    name: 'Horizon Sponsorship Group',
+    role: 'Supporting Partner',
+    logo: horizon, // replace with imported logo, e.g. reflectoLogo
+  },
+  {
+    name: 'Hoshi Ramen',
+    role: 'Food Partner',
+    logo: ramen, // replace with imported logo, e.g. reflectoLogo
   },
 ];
 
