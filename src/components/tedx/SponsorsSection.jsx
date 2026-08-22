@@ -7,7 +7,7 @@ import ScrollReveal from './ScrollReveal';
 import petalogo from '@/assets/petalogo.png';
 import edufabricalogo from '@/assets/edufabricalogo.png';
 //import tiramisulogo from '@/assets/letstiramisu.png';
-//import reflecto from '@/assets/reflecto.png';
+import reflecto from '@/assets/reflecto.png';
 
 const partners = [
   {
