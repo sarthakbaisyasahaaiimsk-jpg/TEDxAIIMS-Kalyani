@@ -74,7 +74,7 @@ const ContactSection = () => {
                   Licensee Detail
                 </p>
                 <div className="flex items-start gap-4">
-                  <img src={licenseeProfilePic} alt="Ajinkya Budle" className="w-14 h-14 rounded-full object-cover flex-shrink-0" />
+                  <img src={licenseeProfilePic} alt="Ajinkya Budle" className="w-20 h-20 rounded-full object-cover flex-shrink-0" />
                   <div className="space-y-3 pt-1">
                     <div className="flex items-baseline gap-3">
                       <span className="text-white/35 text-sm w-24 flex-shrink-0">Name</span>
