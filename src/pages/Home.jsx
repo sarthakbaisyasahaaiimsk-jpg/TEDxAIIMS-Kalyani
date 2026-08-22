@@ -10,6 +10,7 @@ import ExperienceSection from '@/components/tedx/ExperienceSection';
 import VenueSection from '@/components/tedx/VenueSection';
 import SponsorsSection from '@/components/tedx/SponsorsSection';
 import RegistrationSection from '@/components/tedx/RegistrationSection';
+import MerchSection from '@/components/tedx/MerchSection';
 import FAQSection from '@/components/tedx/FAQSection';
 import Footer from '@/components/tedx/Footer';
 import SneakPeekSection from "@/components/tedx/SneakPeekSection";
@@ -35,6 +36,7 @@ export default function Home() {
         <SponsorsSection />
         <PastSponsorsSection />
         <RegistrationSection />
+        <MerchSection />
         <FAQSection />
         <ContactSection />
         <Footer />
