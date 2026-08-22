@@ -4,7 +4,7 @@ import ScrollReveal from './ScrollReveal';
 // Drop your logo files into src/assets/partners/ and import them here.
 // Example:
 import petalogo from '@/assets/petalogo.png';
-import edufabricalogo from '@/assets/edufabricalogo.png';
+import edufabricalogo from '@/assets/edufabricalogo.jpg';
 import tiramisulogo from '@/assets/letstiramisu.png';
 import reflecto from '@/assets/reflecto.png';
 import horizon from '@/assets/horizon.png';
