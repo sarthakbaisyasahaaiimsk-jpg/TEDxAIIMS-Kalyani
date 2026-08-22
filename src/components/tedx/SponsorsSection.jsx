@@ -2,30 +2,33 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import ScrollReveal from './ScrollReveal';
 
-const sponsorTiers = [
+// Drop your logo files into src/assets/partners/ and import them here.
+// Example:
+// import petaLogo from '@/assets/partners/peta.png';
+// import edufabricaLogo from '@/assets/partners/edufabrica.png';
+// import tiramisuLogo from '@/assets/partners/lets-tiramisu.png';
+// import reflectoLogo from '@/assets/partners/reflecto-productions.png';
+
+const partners = [
   {
-    tier: 'Innovation Partner',
-    description: 'Driving the frontiers of technology',
-    sponsors: ['NeuroLab AI', 'BioGenesis', 'DataMed Solutions'],
-    size: 'text-sm',
-    cols: 'grid-cols-3',
-    minH: 'min-h-[80px]',
+    name: 'Peta',
+    role: 'Associate Partner',
+    logo: null, // replace with imported logo, e.g. petaLogo
   },
   {
-    tier: 'Healthcare Partner',
-    description: 'Champions of medical advancement',
-    sponsors: ['MedEquip Global', 'PharmaStar', 'HealthBridge Foundation'],
-    size: 'text-sm',
-    cols: 'grid-cols-3',
-    minH: 'min-h-[72px]',
+    name: 'EduFabrica',
+    role: 'Education Partner',
+    logo: null, // replace with imported logo, e.g. edufabricaLogo
   },
   {
-    tier: 'Community Partner',
-    description: 'Building the ecosystem together',
-    sponsors: ['AIIMS Alumni Network', 'Startup Bengal', 'Research India', 'Open Science Collective'],
-    size: 'text-xs',
-    cols: 'grid-cols-2 md:grid-cols-4',
-    minH: 'min-h-[64px]',
+    name: "Let's Tiramisu",
+    role: 'Dessert Partner',
+    logo: null, // replace with imported logo, e.g. tiramisuLogo
+  },
+  {
+    name: 'Reflecto Productions',
+    role: 'Media Partner',
+    logo: null, // replace with imported logo, e.g. reflectoLogo
   },
 ];
 
@@ -33,11 +36,11 @@ export default function SponsorsSection() {
   return (
     <section id="sponsors" className="relative bg-[#060606] py-28 lg:py-40">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
-        
+
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-16 gap-6">
           <ScrollReveal>
             <h2 className="text-5xl lg:text-7xl font-black text-white tracking-tight leading-none">
-              Past Partners
+              Our Partners
             </h2>
           </ScrollReveal>
           <ScrollReveal delay={0.1}>
@@ -45,7 +48,7 @@ export default function SponsorsSection() {
               <p className="text-white/30 text-sm max-w-xs font-light">
                 Interested in partnering with TEDxAIIMS Kalyani?
               </p>
-              <a
+              
                 href="mailto:tedxaiimskalyani@gmail.com"
                 className="text-ted-red text-[10px] tracking-[0.25em] uppercase border border-ted-red/30 px-6 py-3 hover:bg-ted-red hover:text-white transition-all duration-300 inline-block text-center font-medium"
               >
@@ -55,29 +58,28 @@ export default function SponsorsSection() {
           </ScrollReveal>
         </div>
 
-        <div className="space-y-10">
-          {sponsorTiers.map((tier, tierIndex) => (
-            <ScrollReveal key={tier.tier} delay={tierIndex * 0.08}>
-              <div>
-                <div className="flex items-center gap-4 mb-5">
-                  <p className="text-white/20 text-[10px] tracking-[0.35em] uppercase font-medium">{tier.tier}</p>
-                  <div className="flex-1 h-px bg-white/5" />
-                  <p className="text-white/10 text-[9px] tracking-widest uppercase hidden lg:block">{tier.description}</p>
-                </div>
-                <div className={`grid ${tier.cols} gap-2`}>
-                  {tier.sponsors.map((sponsor) => (
-                    <motion.div
-                      key={sponsor}
-                      whileHover={{ borderColor: 'rgba(235,0,40,0.3)', scale: 1.01 }}
-                      className={`group bg-[#0a0a0a] border border-white/5 flex items-center justify-center ${tier.minH} px-6 transition-all duration-400 cursor-default`}
-                    >
-                      <span className={`text-white/20 group-hover:text-white/70 ${tier.size} font-semibold tracking-wider uppercase text-center transition-colors duration-300`}>
-                        {sponsor}
-                      </span>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+          {partners.map((partner, i) => (
+            <ScrollReveal key={partner.name} delay={i * 0.08}>
+              <motion.div
+                whileHover={{ borderColor: 'rgba(235,0,40,0.3)', scale: 1.01 }}
+                className="group bg-[#0a0a0a] border border-white/5 flex flex-col items-center justify-center min-h-[140px] px-6 py-8 transition-all duration-400 cursor-default"
+              >
+                {partner.logo ? (
+                  <img
+                    src={partner.logo}
+                    alt={partner.name}
+                    className="max-h-14 w-auto object-contain grayscale group-hover:grayscale-0 opacity-70 group-hover:opacity-100 transition-all duration-300 mb-3"
+                  />
+                ) : (
+                  <span className="text-white/20 group-hover:text-white/70 text-base font-semibold tracking-wider uppercase text-center transition-colors duration-300 mb-3">
+                    {partner.name}
+                  </span>
+                )}
+                <span className="text-white/25 text-[9px] tracking-[0.25em] uppercase font-medium">
+                  {partner.role}
+                </span>
+              </motion.div>
             </ScrollReveal>
           ))}
         </div>
