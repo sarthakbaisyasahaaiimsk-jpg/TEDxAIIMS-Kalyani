@@ -1,5 +1,11 @@
 import { motion } from 'framer-motion';
-import { Mail, Instagram, Linkedin, Youtube } from 'lucide-react';
+import { Mail, Instagram, Linkedin, Youtube, User } from 'lucide-react';
+// To add a real photo instead of the placeholder icon below:
+// 1. Save the photo into src/assets/ (e.g. src/assets/ajinkya-budle.jpg)
+// 2. Uncomment the import line below
+// 3. Replace the placeholder <div>...<User /></div> block with
+//    <img src={licenseeProfilePic} alt="Ajinkya Budle" className="w-14 h-14 rounded-full object-cover flex-shrink-0" />
+import licenseeProfilePic from '@/assets/ajinkya.jpg';
 import ScrollReveal from './ScrollReveal';
 
 const socials = [
@@ -67,14 +73,17 @@ const ContactSection = () => {
                 <p className="text-white/30 text-[10px] tracking-[0.35em] uppercase font-semibold mb-4">
                   Licensee Detail
                 </p>
-                <div className="space-y-3">
-                  <div className="flex items-baseline gap-3">
-                    <span className="text-white/35 text-sm w-24 flex-shrink-0">Name</span>
-                    <span className="text-white text-lg font-semibold tracking-tight">Ajinkya Budle</span>
-                  </div>
-                  <div className="flex items-baseline gap-3">
-                    <span className="text-white/35 text-sm w-24 flex-shrink-0">License</span>
-                    <span className="text-white text-lg font-semibold tracking-tight">University</span>
+                <div className="flex items-start gap-4">
+                  <img src={licenseeProfilePic} alt="Ajinkya Budle" className="w-14 h-14 rounded-full object-cover flex-shrink-0" />
+                  <div className="space-y-3 pt-1">
+                    <div className="flex items-baseline gap-3">
+                      <span className="text-white/35 text-sm w-24 flex-shrink-0">Name</span>
+                      <span className="text-white text-lg font-semibold tracking-tight">Ajinkya Budle</span>
+                    </div>
+                    <div className="flex items-baseline gap-3">
+                      <span className="text-white/35 text-sm w-24 flex-shrink-0">License Type</span>
+                      <span className="text-white text-lg font-semibold tracking-tight">University</span>
+                    </div>
                   </div>
                 </div>
               </div>
