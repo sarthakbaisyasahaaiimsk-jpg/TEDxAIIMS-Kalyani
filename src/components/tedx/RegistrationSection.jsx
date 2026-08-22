@@ -156,32 +156,68 @@ export default function RegistrationSection() {
           })}
         </div>
 
-        {/* BookMyShow alternative booking strip */}
+        {/* BookMyShow promotional card */}
         <ScrollReveal delay={0.2}>
-          <div className="mt-6 flex flex-col sm:flex-row items-center justify-between gap-5 p-6 lg:p-7 border border-white/8 bg-[#0f0f0f]">
-            <div className="flex items-center gap-4">
-              <div className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0">
-                <Ticket size={18} className="text-ted-red" />
-              </div>
-              <p className="text-white/50 text-sm leading-relaxed">
-                Prefer to book elsewhere? Tickets are also available on{" "}
-                <img src={bookMyShowLogo} alt="BookMyShow" className="inline-block h-4 w-auto align-middle" />{" "}
-                — avail exclusive offers and bank benefits, including a{" "}
-                <span className="text-white/80 font-semibold">Buy 1 Get 1</span> deal.
-              </p>
-            </div>
-            <a
-              href={BOOKMYSHOW_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex-shrink-0 inline-flex items-center gap-2 text-[11px] tracking-[0.2em] uppercase font-semibold px-6 py-3 border border-white/15 text-white/80 hover:text-black transition-all duration-300"
-              style={{ backgroundColor: "transparent" }}
-              onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = "#D2373C")}
-              onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "transparent")}
+          <div className="relative mt-8 overflow-hidden border-2" style={{ borderColor: "#D2373C" }}>
+            <div
+              className="absolute inset-0 opacity-[0.07]"
+              style={{ background: "radial-gradient(circle at 20% 20%, #F84464, transparent 60%), radial-gradient(circle at 80% 80%, #D2373C, transparent 60%)" }}
+            />
+
+            {/* Offer sticker */}
+            <div
+              className="absolute -top-1 -right-1 sm:top-6 sm:right-6 z-10 rotate-[8deg] sm:rotate-[10deg]"
             >
-              Book on BookMyShow
-              <ArrowRight size={13} />
-            </a>
+              <div
+                className="px-5 py-2.5 shadow-lg"
+                style={{ backgroundColor: "#F84464", boxShadow: "0 8px 24px rgba(248,68,100,0.4)" }}
+              >
+                <span className="text-white text-xs sm:text-sm font-black tracking-wide uppercase">
+                  Offer!
+                </span>
+              </div>
+            </div>
+
+            <div className="relative bg-[#0c0505] p-8 lg:p-12">
+              <div className="flex flex-col lg:flex-row lg:items-center gap-8 lg:gap-12">
+                <div className="flex-1">
+                  <div className="flex items-center gap-3 mb-4">
+                    <div
+                      className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0"
+                      style={{ backgroundColor: "rgba(248,68,100,0.12)", border: "1px solid rgba(248,68,100,0.35)" }}
+                    >
+                      <Ticket size={22} style={{ color: "#F84464" }} />
+                    </div>
+                    <span className="bms-wordmark text-2xl lg:text-3xl font-black tracking-tight" style={{ color: "#D2373C" }}>
+                      book<span style={{ color: "#F84464" }}>my</span>show
+                    </span>
+                  </div>
+
+                  <h3 className="text-white text-2xl lg:text-3xl font-black tracking-tight mb-3 leading-tight">
+                    Get Buy 1 Get 1 Free
+                  </h3>
+                  <p className="text-white/55 text-base leading-relaxed max-w-xl">
+                    Through select credit/debit cards. T&C apply. Book your TEDxAIIMS Kalyani pass on BookMyShow and unlock this offer plus other exclusive bank discounts.
+                  </p>
+                </div>
+
+                <div className="flex-shrink-0 w-full lg:w-auto">
+                  <a
+                    href={BOOKMYSHOW_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full lg:w-auto inline-flex items-center justify-center gap-3 text-sm tracking-[0.15em] uppercase font-bold px-10 py-5 text-white transition-transform duration-300 hover:scale-[1.03]"
+                    style={{ backgroundColor: "#D2373C", boxShadow: "0 10px 30px rgba(210,55,60,0.35)" }}
+                  >
+                    Book on BookMyShow
+                    <ArrowRight size={16} />
+                  </a>
+                  <p className="text-white/25 text-[10px] tracking-[0.2em] uppercase text-center lg:text-right mt-3">
+                    T&C apply · Offers vary by bank
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </ScrollReveal>
       </div>
