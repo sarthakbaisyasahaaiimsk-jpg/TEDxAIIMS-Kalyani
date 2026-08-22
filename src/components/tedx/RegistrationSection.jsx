@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 // 2. Uncomment the import line below
 // 3. In the JSX further down, replace the <span className="bms-wordmark">...</span> block
 //    with <img src={bookMyShowLogo} alt="BookMyShow" className="h-6 w-auto" />
-// import bookMyShowLogo from '@/assets/bookmyshow-logo.png';
+import bookMyShowLogo from '@/assets/bookmyshow.png';
 
 const BOOKMYSHOW_URL = "https://in.bookmyshow.com/events/tedxaiims-kalyani/ET00461573";
 
@@ -165,9 +165,7 @@ export default function RegistrationSection() {
               </div>
               <p className="text-white/50 text-sm leading-relaxed">
                 Prefer to book elsewhere? Tickets are also available on{" "}
-                <span className="bms-wordmark font-black tracking-tight" style={{ color: "#D2373C" }}>
-                  book<span style={{ color: "#F84464" }}>my</span>show
-                </span>{" "}
+                <img src={bookMyShowLogo} alt="BookMyShow" className="inline-block h-4 w-auto align-middle" />{" "}
                 — avail exclusive offers and bank benefits, including a{" "}
                 <span className="text-white/80 font-semibold">Buy 1 Get 1</span> deal.
               </p>
