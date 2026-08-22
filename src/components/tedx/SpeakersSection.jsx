@@ -127,15 +127,6 @@ export default function SpeakersSection() {
             ))}
           </AnimatePresence>
         </motion.div>
-
-        <ScrollReveal>
-          <div className="mt-14 pt-10 border-t border-white/5 flex items-center justify-between">
-            <p className="text-white/25 text-sm tracking-wide">
-              More speakers to be announced.
-            </p>
-            <span className="text-ted-red text-xs tracking-[0.25em] uppercase font-medium">Stay tuned →</span>
-          </div>
-        </ScrollReveal>
       </div>
     </section>
   );
