@@ -170,7 +170,7 @@ export default function RegistrationSection() {
                 <span className="text-white/80 font-semibold">Buy 1 Get 1</span> deal.
               </p>
             </div>
-            
+            <a
               href={BOOKMYSHOW_URL}
               target="_blank"
               rel="noopener noreferrer"
