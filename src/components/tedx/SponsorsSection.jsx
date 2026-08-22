@@ -4,31 +4,31 @@ import ScrollReveal from './ScrollReveal';
 
 // Drop your logo files into src/assets/partners/ and import them here.
 // Example:
-// import petaLogo from '@/assets/partners/peta.png';
-// import edufabricaLogo from '@/assets/partners/edufabrica.png';
-// import tiramisuLogo from '@/assets/partners/lets-tiramisu.png';
-// import reflectoLogo from '@/assets/partners/reflecto-productions.png';
+import petalogo from '@/assets/petalogo.png';
+import edufabricalogo from '@/assets/edufabricalogo.png';
+//import tiramisulogo from '@/assets/letstiramisu.png';
+//import reflecto from '@/assets/reflecto.png';
 
 const partners = [
   {
     name: 'Peta',
     role: 'Associate Partner',
-    logo: null, // replace with imported logo, e.g. petaLogo
+    logo: petalogo, // replace with imported logo, e.g. petaLogo
   },
   {
     name: 'EduFabrica',
     role: 'Education Partner',
-    logo: null, // replace with imported logo, e.g. edufabricaLogo
+    logo: edufabricalogo, // replace with imported logo, e.g. edufabricaLogo
   },
   {
     name: "Let's Tiramisu",
     role: 'Dessert Partner',
-    logo: null, // replace with imported logo, e.g. tiramisuLogo
+    logo: letstiramisu, // replace with imported logo, e.g. tiramisuLogo
   },
   {
     name: 'Reflecto Productions',
     role: 'Media Partner',
-    logo: null, // replace with imported logo, e.g. reflectoLogo
+    logo: reflecto, // replace with imported logo, e.g. reflectoLogo
   },
 ];
 
