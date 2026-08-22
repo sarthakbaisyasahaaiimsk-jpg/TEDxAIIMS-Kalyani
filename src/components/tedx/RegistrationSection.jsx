@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 // Make sure your BookMyShow logo file is saved at src/assets/bookmyshow-logo.png
 // (rename the import path below if your actual filename is different)
-import bookMyShowLogo from '@/assets/bookmyshow.png';
+import bookMyShowLogo from '@/assets/bookmyshow.jpg';
 
 
 //import bookMyShowLogo from '@/assets/bookmyshow.png';
