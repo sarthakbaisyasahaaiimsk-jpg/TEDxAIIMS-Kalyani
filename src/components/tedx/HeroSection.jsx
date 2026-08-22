@@ -91,6 +91,10 @@ export default function HeroSection() {
             Buy Ticket
             <span className="w-0 group-hover:w-4 overflow-hidden transition-all duration-300 inline-block">-&gt;</span>
           </a>
+          <a href="#merch" className="group inline-flex items-center justify-center gap-3 bg-transparent border border-white/25 text-white text-[11px] tracking-[0.25em] uppercase px-10 py-4 hover:border-ted-red hover:text-ted-red transition-all duration-400 font-semibold">
+            Buy Merch
+            <span className="w-0 group-hover:w-4 overflow-hidden transition-all duration-300 inline-block">-&gt;</span>
+          </a>
         </motion.div>
 
         <motion.div
