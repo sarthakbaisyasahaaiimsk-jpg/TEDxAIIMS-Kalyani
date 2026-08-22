@@ -1,43 +1,27 @@
-import React, { useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import ScrollReveal from "./ScrollReveal";
-import { ArrowRight, Check, Minus, Plus } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
-const sizes = ["S", "M", "L", "XL", "XXL"];
+// TODO: Replace with your actual Google Form link for merch orders.
+const MERCH_FORM_URL = "https://forms.gle/TEaguApUVh4PanF46";
 
 const products = [
   {
     key: "tshirt",
     title: "TEDxAIIMS Kalyani T-Shirt",
-    price: 499,
+    price: "TBA",
     tag: "Apparel",
-    hasSize: true,
-    features: ["Premium cotton fabric", "Unisex regular fit", "Official 2026 event print", "Ships within 7 business days"],
   },
   {
     key: "totebag",
     title: "TEDxAIIMS Kalyani Tote Bag",
-    price: 299,
+    price: "TBA",
     tag: "Accessory",
-    hasSize: false,
-    features: ["Durable canvas fabric", "Reinforced handles", "Official 2026 event print", "Ships within 7 business days"],
   },
 ];
 
 function ProductCard({ product, delay }) {
-  const [size, setSize] = useState("M");
-  const [quantity, setQuantity] = useState(1);
-
-  const handleBuy = () => {
-    // TODO: hook this up to your checkout / registration flow
-    console.log("Buy merch:", {
-      item: product.key,
-      size: product.hasSize ? size : null,
-      quantity,
-      total: product.price * quantity,
-    });
-  };
-
   return (
     <ScrollReveal delay={delay}>
       <div className="bg-[#0f0f0f] border border-white/5 p-8 lg:p-10 h-full flex flex-col">
@@ -54,76 +38,20 @@ function ProductCard({ product, delay }) {
         <h3 className="text-white font-bold text-2xl tracking-tight mb-1">
           {product.title}
         </h3>
-        <p className="text-4xl font-black mb-6 text-ted-red">
+        <p className="text-4xl font-black mb-8 text-ted-red">
           &#8377;{product.price}
         </p>
 
-        <div className="w-full h-px bg-white/5 mb-6" />
-
-        <ul className="space-y-3 mb-8">
-          {product.features.map((feature) => (
-            <li key={feature} className="flex items-center gap-3">
-              <Check size={12} className="flex-shrink-0 text-ted-red" />
-              <span className="text-white/45 text-sm">{feature}</span>
-            </li>
-          ))}
-        </ul>
-
-        {product.hasSize && (
-          <div className="mb-6">
-            <span className="text-white/25 text-[10px] tracking-[0.3em] uppercase block mb-3">Size</span>
-            <div className="flex flex-wrap gap-2">
-              {sizes.map((s) => (
-                <button
-                  key={s}
-                  type="button"
-                  onClick={() => setSize(s)}
-                  className={
-                    "w-11 h-11 text-xs font-semibold tracking-wide transition-all duration-200 border " +
-                    (size === s
-                      ? "bg-ted-red border-ted-red text-white"
-                      : "bg-white/5 border-white/10 text-white/50 hover:border-white/25 hover:text-white")
-                  }
-                >
-                  {s}
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
-
-        <div className="mb-8">
-          <span className="text-white/25 text-[10px] tracking-[0.3em] uppercase block mb-3">Quantity</span>
-          <div className="flex items-center gap-4">
-            <button
-              type="button"
-              onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-              className="w-10 h-10 flex items-center justify-center bg-white/5 border border-white/10 text-white/60 hover:text-white hover:border-white/25 transition-colors"
-              aria-label="Decrease quantity"
-            >
-              <Minus size={14} />
-            </button>
-            <span className="text-white font-semibold text-lg w-6 text-center">{quantity}</span>
-            <button
-              type="button"
-              onClick={() => setQuantity((q) => q + 1)}
-              className="w-10 h-10 flex items-center justify-center bg-white/5 border border-white/10 text-white/60 hover:text-white hover:border-white/25 transition-colors"
-              aria-label="Increase quantity"
-            >
-              <Plus size={14} />
-            </button>
-          </div>
-        </div>
-
-        <motion.button
+        <motion.a
+          href={MERCH_FORM_URL}
+          target="_blank"
+          rel="noopener noreferrer"
           whileHover={{ y: -2 }}
-          type="button"
-          onClick={handleBuy}
           className="mt-auto w-full bg-ted-red text-white text-[11px] tracking-[0.25em] uppercase px-8 py-4 flex items-center justify-center gap-3 font-semibold hover:bg-white hover:text-black transition-all duration-300"
         >
-          Buy Now &#8226; &#8377;{product.price * quantity}
+          Buy Now
           <ArrowRight size={13} />
-        </motion.button>
+        </motion.a>
       </div>
     </ScrollReveal>
   );
