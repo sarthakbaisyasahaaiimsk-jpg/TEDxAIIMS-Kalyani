@@ -63,6 +63,10 @@ const Navbar = () => {
               )
             )}
 
+            <a href="/#merch" className="text-[11px] tracking-[0.25em] uppercase font-medium text-white/50 hover:text-white transition-colors duration-200">
+              Buy Merch
+            </a>
+
             <a href="/#register" className="ml-2 bg-ted-red text-white px-5 py-2 text-[10px] tracking-[0.25em] uppercase font-medium hover:bg-white hover:text-black transition-colors duration-300">
               Register
             </a>
@@ -109,6 +113,9 @@ const Navbar = () => {
                   </a>
                 )
               )}
+              <a href="/#merch" className="py-4 text-[11px] tracking-[0.25em] uppercase font-medium text-white/50 hover:text-white transition-colors border-b border-white/5">
+                Buy Merch
+              </a>
               <a href="/#register" className="mt-6 bg-ted-red text-white text-center py-3 text-[10px] tracking-[0.25em] uppercase font-medium hover:bg-white hover:text-black transition-colors duration-300">
                 Register
               </a>
