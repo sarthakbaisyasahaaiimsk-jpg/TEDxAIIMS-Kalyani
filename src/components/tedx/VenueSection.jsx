@@ -2,6 +2,9 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import ScrollReveal from './ScrollReveal';
 import { MapPin, Train, Plane, Car } from 'lucide-react';
+// To use your own campus photo: drop the file into src/assets/ (e.g. src/assets/aiims-campus.jpg)
+// then uncomment the line below and use {aiimsCampusImage} as the img src instead of the URL.
+import aiimsCampusImage from '@/assets/aiimsfront.png';
 
 const travelInfo = [
   {
@@ -73,7 +76,7 @@ export default function VenueSection() {
               <span className="text-white/40 text-[9px] tracking-[0.3em] uppercase font-mono">AIIMS Kalyani</span>
             </div>
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3674.123!2d88.434!3d23.4!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f8a0!2sAIIMS%20Kalyani!5e0!3m2!1sen!2sin!4v1700000000"
+              src="https://www.google.com/maps?q=AIIMS+Kalyani,+NH-34+Connector,+Basantapur,+Saguna,+Kalyani,+West+Bengal+741245&output=embed"
               width="100%"
               height="320"
               style={{ border: 0, filter: 'grayscale(100%) invert(90%) contrast(80%) brightness(40%)' }}
