@@ -54,7 +54,7 @@ export default function VenueSection() {
         <ScrollReveal>
           <div className="relative overflow-hidden mb-12 border border-white/5 group">
             <img
-              src="https://media.base44.com/images/public/6a3a5e7dc678c621c4d8d234/ea8e6afad_generated_cc71bf36.png"
+              src= {aiimsCampusImage}
               alt="AIIMS Kalyani campus"
               className="w-full aspect-[21/9] object-cover opacity-60 group-hover:opacity-75 group-hover:scale-[1.02] transition-all duration-700"
             />
