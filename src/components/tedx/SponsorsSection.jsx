@@ -9,7 +9,7 @@ import edufabricalogo from '@/assets/edufabricalogo.png';
 import tiramisulogo from '@/assets/letstiramisu.png';
 import reflecto from '@/assets/reflecto.png';
 import horizon from '@/assets/horizon.png';
-import ramen from '@/assets/ramen.png;
+import ramen from '@/assets/ramen.png';
 
 const partners = [
   {
