@@ -105,9 +105,9 @@ export default function HeroSection() {
             { label: "Format", value: "In Person" },
           ].map((meta) => (
             <div key={meta.label} className="flex items-center gap-2">
-              <span className="text-white/20 text-[10px] tracking-[0.3em] uppercase">{meta.label}</span>
+              <span className="text-[10px] tracking-[0.3em] uppercase" style={{ color: "#FF765C" }}>{meta.label}</span>
               <span className="text-white/10">.</span>
-              <span className="text-ted-red text-[11px] tracking-wider">{meta.value}</span>
+              <span className="text-white/50 text-[11px] tracking-wider">{meta.value}</span>
             </div>
           ))}
         </motion.div>
