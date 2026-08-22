@@ -11,12 +11,12 @@ import horizon from '@/assets/horizon.png';
 import ramen from '@/assets/ramen.png';
 const partners = [
   {
-    name: 'Peta',
+    name: 'PETA INDIA',
     role: 'Associate Partner',
     logo: petalogo,
   },
   {
-    name: 'EduFabrica',
+    name: 'Ethical EduFabrica',
     role: 'Education Partner',
     logo: edufabricalogo,
   },
@@ -36,7 +36,7 @@ const partners = [
     logo: horizon,
   },
   {
-    name: 'Hoshi Ramen',
+    name: 'Hosshi Ramen',
     role: 'Food Partner',
     logo: ramen,
   },
