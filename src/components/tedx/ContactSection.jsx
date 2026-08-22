@@ -47,7 +47,7 @@ const ContactSection = () => {
 
             <ScrollReveal delay={0.2}>
               <motion.a
-                href="mailto:tedxaiimskalyani@gmail.com"
+                href="mailto:tedxaiimskalyani2026@gmail.com"
                 whileHover={{ x: 4 }}
                 transition={{ duration: 0.2 }}
                 className="group flex items-center gap-4 p-6 bg-[#0f0f0f] border border-white/5 hover:border-ted-red/25 transition-colors duration-500"
@@ -57,9 +57,27 @@ const ContactSection = () => {
                 </div>
                 <div>
                   <p className="text-white/35 text-[10px] tracking-[0.3em] uppercase mb-1">Email Us</p>
-                  <p className="text-white font-medium text-sm">tedxaiimskalyani@gmail.com</p>
+                  <p className="text-white font-medium text-sm">tedxaiimskalyani2026@gmail.com</p>
                 </div>
               </motion.a>
+            </ScrollReveal>
+
+            <ScrollReveal delay={0.22}>
+              <div className="mt-6 p-7 bg-[#0f0f0f] border border-white/8">
+                <p className="text-white/30 text-[10px] tracking-[0.35em] uppercase font-semibold mb-4">
+                  Licensee Detail
+                </p>
+                <div className="space-y-3">
+                  <div className="flex items-baseline gap-3">
+                    <span className="text-white/35 text-sm w-24 flex-shrink-0">Name</span>
+                    <span className="text-white text-lg font-semibold tracking-tight">Ajinkya Budle</span>
+                  </div>
+                  <div className="flex items-baseline gap-3">
+                    <span className="text-white/35 text-sm w-24 flex-shrink-0">License</span>
+                    <span className="text-white text-lg font-semibold tracking-tight">University</span>
+                  </div>
+                </div>
+              </div>
             </ScrollReveal>
           </div>
 
