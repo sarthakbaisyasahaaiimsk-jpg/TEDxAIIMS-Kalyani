@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import Navbar from '@/components/tedx/Navbar';
 import Footer from '@/components/tedx/Footer';
 import ScrollReveal from '@/components/tedx/ScrollReveal';
-import chiefCoordinator from "@/assets/team/aritra.png";
+import chiefCoordinator from "@/assets/team/aritra.PNG";
 import managementCoordinator from "@/assets/team/shazeb.png";
 import eventManagementHead from "@/assets/team/sarthak.png";
 import eventManagementHead2 from "@/assets/team/sandesh.png";
