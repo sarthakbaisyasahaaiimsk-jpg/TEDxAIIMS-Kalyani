@@ -13,7 +13,7 @@ const footerLinks = [
   { label: 'TEDx Rules', href: 'https://www.ted.com/participate/organize-a-local-tedx-event/tedx-organizer-guide' },
   { label: 'Privacy Policy', href: '#' },
   { label: 'Terms of Use', href: '#' },
-  { label: 'Contact Us', href: 'mailto:tedx@aiimskalyani.edu.in' },
+  { label: 'Contact Us', href: 'mailto:tedxaiimskalyani2026@gmail.com' },
 ];
 
 export default function Footer() {
