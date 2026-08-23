@@ -55,7 +55,7 @@ export default function Footer() {
               <ul className="space-y-3">
                 {footerLinks.map(link => (
                   <li key={link.label}>
-                    
+                    <a
                       href={link.href}
                       target={link.href.startsWith('http') ? '_blank' : undefined}
                       rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
