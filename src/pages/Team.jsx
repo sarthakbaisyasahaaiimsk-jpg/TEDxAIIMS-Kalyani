@@ -18,7 +18,7 @@ import speakerRelationsHead from "@/assets/team/charan.PNG";
 //import speakerQueryCoordinationLead from "@/assets/team/speaker-query-coordination-lead.PNG";
 import contentCurationHead from "@/assets/team/arham.PNG";
 //import proofreadingLead from "@/assets/team/proofreading-lead.PNG";
-import editorialLead from "@/assets/team/moumita.PNG";
+//import editorialLead from "@/assets/team/moumita.PNG";
 import curator1 from "@/assets/team/shreyas.PNG";
 import curator2 from "@/assets/team/agam.PNG";
 import curator3 from "@/assets/team/arnav.PNG";
@@ -66,7 +66,7 @@ const teamMembers = [
   { name: "Arham Jain", role: "Chief Curator", photo: contentCurationHead },
   { name: "Charan Teja", role: "Speaker Relations Lead", photo: speakerRelationsHead },
  // { name: "Name", role: "Proofreading Lead", photo: proofreadingLead },
-  { name: "Moumita De", role: "Editorial Lead", photo: editorialLead },
+ // { name: "Moumita De", role: "Editorial Lead", photo: editorialLead },
   { name: "Shreyas Ray", role: "Curator", photo: curator1 },
   { name: "Agam Gao", role: "Curator", photo: curator2 },
   { name: "Arnav Priyadarshi", role: "Curator", photo: curator3 },
