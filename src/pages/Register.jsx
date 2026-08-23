@@ -14,8 +14,8 @@ const FORM_ACTION_URL =
 // Replace these two with your own Cloudinary cloud name and unsigned
 // upload preset (Settings -> Upload -> Upload presets -> Add upload preset
 // -> Signing Mode: Unsigned).
-const CLOUDINARY_CLOUD_NAME = "lx9hrj0l";
-const CLOUDINARY_UPLOAD_PRESET = "liowffo2";
+const CLOUDINARY_CLOUD_NAME = "YOUR_CLOUD_NAME";
+const CLOUDINARY_UPLOAD_PRESET = "YOUR_UNSIGNED_UPLOAD_PRESET";
 const CLOUDINARY_UPLOAD_URL = `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`;
 // --------------------------------------------------------------------------
 
@@ -60,6 +60,12 @@ const QR_BY_PASS = {
 
 const MAX_FILE_SIZE_MB = 5;
 
+// Basic RFC-5322-ish email check — good enough for form validation
+// without being overly strict about edge cases.
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+// Exactly 10 digits, no spaces/dashes/country code.
+const PHONE_REGEX = /^[0-9]{10}$/;
+
 export default function Register() {
   const [searchParams] = useSearchParams();
   const preselectedPass = (searchParams.get("pass") || "").toLowerCase();
@@ -71,11 +77,38 @@ export default function Register() {
   });
   const [status, setStatus] = useState("idle"); // idle | uploading | submitting | success | error
   const [errorMsg, setErrorMsg] = useState("");
+  const [fieldErrors, setFieldErrors] = useState({});
   const [screenshotFile, setScreenshotFile] = useState(null);
   const [screenshotPreview, setScreenshotPreview] = useState(null);
 
   const handleChange = (field) => (e) => {
-    setForm((prev) => ({ ...prev, [field]: e.target.value }));
+    let value = e.target.value;
+
+    if (field === "contact") {
+      // Keep only digits, cap at 10.
+      value = value.replace(/\D/g, "").slice(0, 10);
+    }
+
+    setForm((prev) => ({ ...prev, [field]: value }));
+
+    if (fieldErrors[field]) {
+      setFieldErrors((prev) => ({ ...prev, [field]: undefined }));
+    }
+  };
+
+  const validateField = (field) => {
+    if (field === "email" && form.email && !EMAIL_REGEX.test(form.email)) {
+      return "Enter a valid email address.";
+    }
+    if (field === "contact" && form.contact && !PHONE_REGEX.test(form.contact)) {
+      return "Enter a valid 10-digit phone number.";
+    }
+    return undefined;
+  };
+
+  const handleBlur = (field) => () => {
+    const message = validateField(field);
+    setFieldErrors((prev) => ({ ...prev, [field]: message }));
   };
 
   const handleFileChange = (e) => {
@@ -133,6 +166,15 @@ export default function Register() {
       !screenshotFile
     ) {
       setErrorMsg("Please complete all required fields, including the payment screenshot.");
+      setStatus("error");
+      return;
+    }
+
+    const emailError = validateField("email");
+    const contactError = validateField("contact");
+    if (emailError || contactError) {
+      setFieldErrors({ email: emailError, contact: contactError });
+      setErrorMsg("Please fix the highlighted fields before submitting.");
       setStatus("error");
       return;
     }
@@ -256,20 +298,30 @@ export default function Register() {
                       required
                       value={form.email}
                       onChange={handleChange("email")}
+                      onBlur={handleBlur("email")}
                       className={inputClasses}
                       placeholder="jane@example.com"
                     />
+                    {fieldErrors.email && (
+                      <p className="text-ted-red text-xs mt-2">{fieldErrors.email}</p>
+                    )}
                   </div>
                   <div>
                     <label className={labelClasses}>Contact Number *</label>
                     <input
                       type="tel"
                       required
+                      inputMode="numeric"
+                      maxLength={10}
                       value={form.contact}
                       onChange={handleChange("contact")}
+                      onBlur={handleBlur("contact")}
                       className={inputClasses}
-                      placeholder="98765 43210"
+                      placeholder="9876543210"
                     />
+                    {fieldErrors.contact && (
+                      <p className="text-ted-red text-xs mt-2">{fieldErrors.contact}</p>
+                    )}
                   </div>
                 </div>
 
@@ -377,7 +429,7 @@ export default function Register() {
 
                 <button
                   type="submit"
-                  disabled={isBusy || !form.passType}
+                  disabled={isBusy || !form.passType || !screenshotFile}
                   className="w-full mt-4 text-[11px] tracking-[0.25em] uppercase px-8 py-5 bg-ted-red text-white hover:bg-white hover:text-black font-semibold transition-all duration-300 disabled:opacity-50"
                 >
                   {status === "uploading"
