@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ScrollReveal from './ScrollReveal';
 
 const socialLinks = [
@@ -17,18 +17,10 @@ const footerLinks = [
 ];
 
 export default function Footer() {
-  const [email, setEmail] = useState('');
-  const [subscribed, setSubscribed] = useState(false);
-
-  const handleSubscribe = (e) => {
-    e.preventDefault();
-    if (email) setSubscribed(true);
-  };
-
   return (
     <footer className="relative bg-black border-t border-white/5">
       <div className="max-w-7xl mx-auto px-6 lg:px-12 py-16 lg:py-20">
-        <div className="grid lg:grid-cols-4 gap-12 lg:gap-8 mb-16">
+        <div className="grid lg:grid-cols-3 gap-12 lg:gap-8 mb-16">
           {/* Branding */}
           <div className="lg:col-span-2">
             <ScrollReveal>
@@ -42,7 +34,7 @@ export default function Footer() {
               </p>
               <div className="flex flex-wrap gap-5">
                 {socialLinks.map(link => (
-                  <a
+                  
                     key={link.label}
                     href={link.href}
                     target="_blank"
@@ -63,7 +55,7 @@ export default function Footer() {
               <ul className="space-y-3">
                 {footerLinks.map(link => (
                   <li key={link.label}>
-                    <a
+                    
                       href={link.href}
                       target={link.href.startsWith('http') ? '_blank' : undefined}
                       rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
@@ -74,36 +66,6 @@ export default function Footer() {
                   </li>
                 ))}
               </ul>
-            </ScrollReveal>
-          </div>
-
-          {/* Newsletter */}
-          <div>
-            <ScrollReveal delay={0.15}>
-              <p className="text-white/50 text-[10px] tracking-[0.3em] uppercase font-medium mb-5">Stay Updated</p>
-              {subscribed ? (
-                <div>
-                  <p className="text-ted-red text-sm mb-1">You're subscribed.</p>
-                  <p className="text-white/25 text-xs">Welcome to the Uncharted.</p>
-                </div>
-              ) : (
-                <form onSubmit={handleSubscribe} className="flex flex-col gap-2">
-                  <input
-                    type="email"
-                    placeholder="your@email.com"
-                    required
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="bg-[#0f0f0f] border border-white/8 text-white px-4 py-3 text-sm placeholder:text-white/18 focus:border-ted-red focus:outline-none transition-colors"
-                  />
-                  <button
-                    type="submit"
-                    className="bg-ted-red text-white text-[10px] tracking-[0.2em] uppercase px-4 py-3 hover:bg-white hover:text-black transition-all duration-300 font-semibold"
-                  >
-                    Subscribe
-                  </button>
-                </form>
-              )}
             </ScrollReveal>
           </div>
         </div>
