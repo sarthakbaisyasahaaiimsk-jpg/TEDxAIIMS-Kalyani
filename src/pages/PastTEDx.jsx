@@ -8,9 +8,9 @@ import tara from "@/assets/IMG_3910.png";
 import ajay from "@/assets/IMG_3915.png";
 import sumer from "@/assets/IMG_3911.png";
 import priyanka from "@/assets/IMG_3913.png";
-import dheeraj from "@/assets/IMG_3745.png";
+import dheeraj from "@/assets/IMG_3909.png";
 import ankita from "@/assets/IMG_3912.png";
-import sasi from "@/assets/IMG_3909.png";
+import sasi from "@/assets/IMG_3914.png";
 
 const pastEvent = {
   year: "2025",
