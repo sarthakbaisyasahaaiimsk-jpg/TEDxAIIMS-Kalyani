@@ -73,9 +73,14 @@ export default function Footer() {
         {/* Legal */}
         <div className="border-t border-white/5 pt-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
           <ScrollReveal>
-            <p className="text-white/15 text-xs">
-              This independent TEDx event is operated under license from TED.
-            </p>
+            <div>
+              <p className="text-white/15 text-xs">
+                This independent TEDx event is operated under license from TED.
+              </p>
+              <p className="text-white/10 text-[11px] mt-1.5">
+                Website crafted by Sarthak &amp; Aritra
+              </p>
+            </div>
           </ScrollReveal>
           <p className="text-white/10 text-xs">
             © {new Date().getFullYear()} TEDxAIIMS Kalyani. All rights reserved.
