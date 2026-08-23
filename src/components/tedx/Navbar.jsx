@@ -6,7 +6,7 @@ import logo from "@/assets/logo-white.png";
 
 const navLinks = [
   { label: "About",        href: "/#about",        type: "anchor" },
-  { label: "Theme",        href: "/#theme",         type: "anchor" },
+//  { label: "Theme",        href: "/#theme",         type: "anchor" },
   { label: "Speakers",     href: "/#speakers",      type: "anchor" },
   { label: "Schedule",     href: "/#schedule",      type: "anchor" },
   { label: "Team",         href: "/team",           type: "route"  },
