@@ -34,7 +34,7 @@ export default function Footer() {
               </p>
               <div className="flex flex-wrap gap-5">
                 {socialLinks.map(link => (
-                  
+                  <a
                     key={link.label}
                     href={link.href}
                     target="_blank"
