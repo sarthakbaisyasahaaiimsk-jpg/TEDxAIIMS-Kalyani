@@ -2,6 +2,8 @@ import React from "react";
 import { motion } from "framer-motion";
 import ScrollReveal from "./ScrollReveal";
 import { ArrowRight } from "lucide-react";
+import tshirtImage from "@/assets/tshirt.PNG";
+import totebagImage from "@/assets/bag.jpeg";
 
 // TODO: Replace with your actual Google Form link for merch orders.
 const MERCH_FORM_URL = "https://forms.gle/TEaguApUVh4PanF46";
@@ -12,23 +14,27 @@ const products = [
     title: "TEDxAIIMS Kalyani T-Shirt",
     price: "TBA",
     tag: "Apparel",
+    image: tshirtImage,
   },
   {
     key: "totebag",
     title: "TEDxAIIMS Kalyani Tote Bag",
     price: "TBA",
     tag: "Accessory",
+    image: totebagImage,
   },
 ];
 
 function ProductCard({ product, delay }) {
   return (
     <ScrollReveal delay={delay}>
-      <div className="bg-[#0f0f0f] border border-white/5 p-8 lg:p-10 h-full flex flex-col">
-        <div className="aspect-square bg-white/5 border border-white/8 flex items-center justify-center overflow-hidden mb-8">
-          <span className="text-white/15 text-[11px] tracking-[0.3em] uppercase text-center px-4">
-            {product.title} — Preview
-          </span>
+      <div className="aspect-square bg-white/5 border border-white/8 overflow-hidden mb-8">
+          <img
+            src={product.image}
+            alt={product.title}
+            loading="lazy"
+            className="w-full h-full object-cover"
+          />
         </div>
 
         <span className="text-[9px] tracking-[0.3em] uppercase font-medium block mb-3 text-ted-red">
