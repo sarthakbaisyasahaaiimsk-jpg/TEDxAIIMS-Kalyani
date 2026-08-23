@@ -3,7 +3,9 @@ import { motion } from "framer-motion";
 import { useSearchParams } from "react-router-dom";
 import ScrollReveal from "../components/tedx/ScrollReveal";
 import logo from "../assets/logo-white.png";
-import paymentQR from "../assets/payment-qr.png";
+import paymentQR1 from "../assets/qrgeneral.jpeg";
+import paymentQR2 from "../assets/qrpremium.jpeg";
+import paymentQR3 from "../assets/qrvip.jpeg";
 
 const FORM_ACTION_URL =
   "https://docs.google.com/forms/u/0/d/e/1FAIpQLSecTSzVq2MVxyHdbQ_QPwxt8gHIYj8E4g9g8iV2yBkfTPBYZw/formResponse";
@@ -13,14 +15,11 @@ const ENTRY = {
   email: "entry.952837880",
   contact: "entry.1594828258",
   college: "entry.1914126563",
-  yearOrDesignation: "entry.1494341847",
   diet: "entry.610749920",
   passType: "entry.1088215050",
-  numPasses: "entry.1128102951",
   transactionId: "entry.1180537060",
 };
 
-const passTypeOptions = ["Student", "Professional", "Partner"];
 const dietOptions = ["Veg", "Non-Veg"];
 
 const initialFormState = {
@@ -28,24 +27,27 @@ const initialFormState = {
   email: "",
   contact: "",
   college: "",
-  yearOrDesignation: "",
   diet: "",
   passType: "",
-  numPasses: "1",
   transactionId: "",
+};
+
+// Maps the pass key in the homepage link (?pass=general|premium|vip)
+// to the display label shown/submitted on the registration form.
+const PASS_LABELS = {
+  general: "General",
+  premium: "Premium",
+  vip: "VIP",
 };
 
 export default function Register() {
   const [searchParams] = useSearchParams();
-  const preselectedPass = searchParams.get("pass");
-
-  const normalizedPreselect = passTypeOptions.find(
-    (p) => p.toLowerCase() === (preselectedPass || "").toLowerCase()
-  );
+  const preselectedPass = (searchParams.get("pass") || "").toLowerCase();
+  const lockedPassType = PASS_LABELS[preselectedPass] || "";
 
   const [form, setForm] = useState({
     ...initialFormState,
-    passType: normalizedPreselect || "",
+    passType: lockedPassType,
   });
   const [status, setStatus] = useState("idle"); // idle | submitting | success | error
 
@@ -74,10 +76,8 @@ export default function Register() {
     data.append(ENTRY.email, form.email);
     data.append(ENTRY.contact, form.contact);
     data.append(ENTRY.college, form.college);
-    data.append(ENTRY.yearOrDesignation, form.yearOrDesignation);
     data.append(ENTRY.diet, form.diet);
     data.append(ENTRY.passType, form.passType);
-    data.append(ENTRY.numPasses, form.numPasses);
     data.append(ENTRY.transactionId, form.transactionId);
 
     try {
@@ -187,27 +187,15 @@ export default function Register() {
                   </div>
                 </div>
 
-                <div className="grid sm:grid-cols-2 gap-6">
-                  <div>
-                    <label className={labelClasses}>College / Organization</label>
-                    <input
-                      type="text"
-                      value={form.college}
-                      onChange={handleChange("college")}
-                      className={inputClasses}
-                      placeholder="AIIMS Kalyani"
-                    />
-                  </div>
-                  <div>
-                    <label className={labelClasses}>Year of Study / Designation</label>
-                    <input
-                      type="text"
-                      value={form.yearOrDesignation}
-                      onChange={handleChange("yearOrDesignation")}
-                      className={inputClasses}
-                      placeholder="2nd Year / Manager"
-                    />
-                  </div>
+                <div>
+                  <label className={labelClasses}>College / Organization</label>
+                  <input
+                    type="text"
+                    value={form.college}
+                    onChange={handleChange("college")}
+                    className={inputClasses}
+                    placeholder="AIIMS Kalyani"
+                  />
                 </div>
 
                 <div>
@@ -232,37 +220,19 @@ export default function Register() {
                 </div>
 
                 <div>
-                  <label className={labelClasses}>Type of Pass *</label>
-                  <div className="flex flex-wrap gap-3">
-                    {passTypeOptions.map((opt) => (
-                      <button
-                        type="button"
-                        key={opt}
-                        onClick={() => setForm((prev) => ({ ...prev, passType: opt }))}
-                        className={
-                          "flex-1 min-w-[100px] text-[11px] tracking-[0.2em] uppercase px-5 py-4 font-semibold border transition-all duration-300 " +
-                          (form.passType === opt
-                            ? "bg-ted-red text-white border-ted-red"
-                            : "bg-white/5 text-white/50 border-white/10 hover:text-white hover:border-white/20")
-                        }
-                      >
-                        {opt}
-                      </button>
-                    ))}
-                  </div>
+                  <label className={labelClasses}>Type of Pass</label>
+                  {form.passType ? (
+                    <div className="w-full bg-white/5 border border-ted-red/40 text-white px-5 py-4 text-sm flex items-center justify-between">
+                      <span className="font-semibold tracking-wide">{form.passType}</span>
+                      <span className="text-white/30 text-[10px] uppercase tracking-[0.2em]">Locked</span>
+                    </div>
+                  ) : (
+                    <div className="w-full bg-white/5 border border-ted-red/40 text-ted-red px-5 py-4 text-sm">
+                      No pass selected — please go back and choose a pass from the homepage.
+                    </div>
+                  )}
                 </div>
 
-                <div>
-                  <label className={labelClasses}>Number of Passes</label>
-                  <input
-                    type="number"
-                    min="1"
-                    max="10"
-                    value={form.numPasses}
-                    onChange={handleChange("numPasses")}
-                    className={inputClasses}
-                  />
-                </div>
                 <div className="border border-white/10 rounded-lg bg-white/5 p-8">
                  <h3 className="text-white text-2xl font-bold mb-6">
                   Payment
@@ -305,11 +275,16 @@ export default function Register() {
 
                 <button
                   type="submit"
-                  disabled={status === "submitting"}
+                  disabled={status === "submitting" || !form.passType}
                   className="w-full mt-4 text-[11px] tracking-[0.25em] uppercase px-8 py-5 bg-ted-red text-white hover:bg-white hover:text-black font-semibold transition-all duration-300 disabled:opacity-50"
                 >
                   {status === "submitting" ? "Submitting..." : "Submit Registration"}
                 </button>
+
+                <p className="text-white text-sm text-center font-bold leading-relaxed pt-2">
+                  Every transaction is for a single ticket valid for single entry.
+                  Please carry a valid ID proof during the day of the event.
+                </p>
               </form>
             )}
           </motion.div>
