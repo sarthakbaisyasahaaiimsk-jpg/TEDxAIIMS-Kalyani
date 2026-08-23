@@ -46,7 +46,7 @@ import coorganiser from "@/assets/team/arnav.PNG";
 
 const teamMembers = [
   { name: "Ajinkya Budle", role: "Licensee & Organiser", photo: licensee },
-  { name: "Arnav Priyadarshi", role: "Co-Organiser", photo: licensee },
+  { name: "Arnav Priyadarshi", role: "Co-Organiser", photo: coorganiser },
   { name: "Aritra Roy", role: "Chief Coordinator", photo: chiefCoordinator },
   { name: "Shazeb Eyad", role: "Compliance Coordinator", photo: managementCoordinator },
   { name: "Sarthak Baisya Saha", role: "Joint Secretary", photo: eventManagementHead },
