@@ -28,7 +28,8 @@ const products = [
 function ProductCard({ product, delay }) {
   return (
     <ScrollReveal delay={delay}>
-      <div className="aspect-square bg-white/5 border border-white/8 overflow-hidden mb-8">
+      <div className="h-full flex flex-col">
+        <div className="aspect-square bg-white/5 border border-white/8 overflow-hidden mb-8">
           <img
             src={product.image}
             alt={product.title}
