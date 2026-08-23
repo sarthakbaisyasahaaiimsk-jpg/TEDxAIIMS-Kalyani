@@ -2,66 +2,95 @@ import { motion } from 'framer-motion';
 import Navbar from '@/components/tedx/Navbar';
 import Footer from '@/components/tedx/Footer';
 import ScrollReveal from '@/components/tedx/ScrollReveal';
-import chiefCoordinator from "@/assets/team/chief-coordinator.jpg";
-import managementCoordinator from "@/assets/team/management-coordinator.jpg";
-import eventManagementHead from "@/assets/team/event-management-head.jpg";
-import stageLead from "@/assets/team/stage-lead.jpg";
-import decorationLead from "@/assets/team/decoration-lead.jpg";
-import ticketingRegistrationLead from "@/assets/team/ticketing-registration-lead.jpg";
-import auditoriumLead from "@/assets/team/auditorium-lead.jpg";
-import seatingLead from "@/assets/team/seating-lead.jpg";
-import programmeSchedulingLead from "@/assets/team/programme-scheduling-lead.jpg";
-import photographyVideographyHead from "@/assets/team/photography-videography-head.jpg";
-import speakerRelationsHead from "@/assets/team/speaker-relations-head.jpg";
-import speakerQueryCoordinationLead from "@/assets/team/speaker-query-coordination-lead.jpg";
-import contentCurationHead from "@/assets/team/content-curation-head.jpg";
-import proofreadingLead from "@/assets/team/proofreading-lead.jpg";
-import editorialLead from "@/assets/team/editorial-lead.jpg";
-import itPrHead from "@/assets/team/it-pr-head.jpg";
-import lightsSoundHead from "@/assets/team/lights-sound-head.jpg";
-import designHead from "@/assets/team/design-head.jpg";
-import socialMediaHead from "@/assets/team/social-media-head.jpg";
-import websiteHead from "@/assets/team/website-head.jpg";
-import digitalTicketingHead from "@/assets/team/digital-ticketing-head.jpg";
-import culturalHead from "@/assets/team/cultural-head.jpg";
-import hospitalityHead from "@/assets/team/hospitality-head.jpg";
-import logisticsHead from "@/assets/team/logistics-head.jpg";
-import transportationLead from "@/assets/team/transportation-lead.jpg";
-import accommodationLead from "@/assets/team/accommodation-lead.jpg";
-import volunteerHead from "@/assets/team/volunteer-head.jpg";
-import foodCateringLead from "@/assets/team/food-catering-lead.jpg";
-import securityHead from "@/assets/team/security-head.jpg";
+import chiefCoordinator from "@/assets/team/aritra.png";
+import managementCoordinator from "@/assets/team/shazeb.png";
+import eventManagementHead from "@/assets/team/sarthak.png";
+import eventManagementHead2 from "@/assets/team/sandesh.png";
+import eventManagementHead3 from "@/assets/team/devdas.png";
+//import stageLead from "@/assets/team/stage-lead.png";
+import decorationLead from "@/assets/team/minnoli.png";
+import ticketingRegistrationLead from "@/assets/team/ticketing-registration-lead.png";
+import auditoriumLead from "@/assets/team/sejal.png";
+//import seatingLead from "@/assets/team/seating-lead.png";
+//import programmeSchedulingLead from "@/assets/team/programme-scheduling-lead.png";
+import photographyVideographyHead from "@/assets/team/saswata.png";
+import speakerRelationsHead from "@/assets/team/charan.png";
+//import speakerQueryCoordinationLead from "@/assets/team/speaker-query-coordination-lead.png";
+import contentCurationHead from "@/assets/team/arham.png";
+//import proofreadingLead from "@/assets/team/proofreading-lead.png";
+import editorialLead from "@/assets/team/moumita.png";
+import curator1 from "@/assets/team/shreyas.png";
+import curator2 from "@/assets/team/agam.png";
+import curator3 from "@/assets/team/arnav.png";
+import itPrHead from "@/assets/team/aryan.png";
+//import lightsSoundHead from "@/assets/team/sarthak.png";
+import designHead from "@/assets/team/bighnaraj.png";
+import socialMediaHead from "@/assets/team/fidha.png";
+import websiteHead from "@/assets/team/sarthak.png";
+import websiteHead2 from "@/assets/team/aritra.png";
+import sponsorship1 from "@/assets/team/sulagna.png;
+import sponsorship2 from "@/assets/team/simran.png;
+//import digitalTicketingHead from "@/assets/team/digital-ticketing-head.png";
+import culturalHead from "@/assets/team/mahima.png";
+import hospitalityHead from "@/assets/team/agam.png";
+import hospitalityHead2 from "@/assets/team/aneesha.png";
+import logisticsHead from "@/assets/team/amaan.png";
+import transportationLead from "@/assets/team/londhe.png";
+import accommodationLead from "@/assets/team/aneesha.png";
+import hospitalityTeam from "@/assets/team/liya.png";
+import foodCateringLead from "@/assets/team/dhruthi.png";
+import securityHead from "@/assets/team/londhe.png";
+import securityHead2 from "@/assets/team/sreejita.png";
+import licensee from "@/assets/team/ajinkya2.png";
+import coorganiser from "@/assets/team/arnav.png";
 
 const teamMembers = [
-  { name: "Name", role: "Chief Coordinator", photo: chiefCoordinator },
-  { name: "Name", role: "Management Coordinator", photo: managementCoordinator },
-  { name: "Name", role: "Event Management Head", photo: eventManagementHead },
-  { name: "Name", role: "Stage Lead", photo: stageLead },
-  { name: "Name", role: "Decoration Lead", photo: decorationLead },
+  { name: "Ajinkya Budle", role: "Licensee & Organiser", photo: licensee },
+  { name: "Arnav Priyadarshi", role: "Co-Organiser", photo: licensee },
+  { name: "Aritra Roy", role: "Chief Coordinator", photo: chiefCoordinator },
+  { name: "Shazeb Eyad", role: "Compliance Coordinator", photo: managementCoordinator },
+  { name: "Sarthak Baisya Saha", role: "Joint Secretary", photo: eventManagementHead },
+  { name: "Sandesh Sonune", role: "Joint Secretary Head", photo: eventManagementHead2 },
+  { name: "Devdas Peenak Jayanteya", role: "Executive Producer", photo: eventManagementHead3 },
+  { name: "Sejal Jha", role: "Venue Lead", photo: auditoriumLead },
+ // { name: "Sarthak Baisya Saha", role: "Lights & Sound Lead", photo: lightsSoundHead },
+  { name: "Minnoli Nath", role: "Decorartion Lead", photo: decorationLead },
+ // { name: "Name", role: "Venue Lead", photo: stageLead },
+ // { name: "Name", role: "Stage Light & Sound Lead", photo: lightsSoundHead },
   { name: "Name", role: "Ticketing & Registration Lead", photo: ticketingRegistrationLead },
-  { name: "Name", role: "Auditorium Lead", photo: auditoriumLead },
-  { name: "Name", role: "Seating Lead", photo: seatingLead },
-  { name: "Name", role: "Programme Scheduling Lead", photo: programmeSchedulingLead },
-  { name: "Name", role: "Photography & Videography Head", photo: photographyVideographyHead },
-  { name: "Name", role: "Speaker Relations Head", photo: speakerRelationsHead },
-  { name: "Name", role: "Speaker Query & Coordination Lead", photo: speakerQueryCoordinationLead },
-  { name: "Name", role: "Content & Curation Head", photo: contentCurationHead },
-  { name: "Name", role: "Proofreading Lead", photo: proofreadingLead },
-  { name: "Name", role: "Editorial Lead", photo: editorialLead },
-  { name: "Name", role: "IT & PR Head", photo: itPrHead },
-  { name: "Name", role: "Lights & Sound Head", photo: lightsSoundHead },
-  { name: "Name", role: "Design Head", photo: designHead },
-  { name: "Name", role: "Social Media Head", photo: socialMediaHead },
-  { name: "Name", role: "Website Head", photo: websiteHead },
-  { name: "Name", role: "Digital Ticketing Head", photo: digitalTicketingHead },
-  { name: "Name", role: "Cultural Head", photo: culturalHead },
-  { name: "Name", role: "Hospitality Head", photo: hospitalityHead },
-  { name: "Name", role: "Logistics Head", photo: logisticsHead },
-  { name: "Name", role: "Transportation Lead", photo: transportationLead },
-  { name: "Name", role: "Accommodation Lead", photo: accommodationLead },
-  { name: "Name", role: "Volunteer Head", photo: volunteerHead },
-  { name: "Name", role: "Food & Catering Lead", photo: foodCateringLead },
-  { name: "Name", role: "Security Head", photo: securityHead },
+  { name: "Saswata Saha", role: "Photography & Videography Lead", photo: photographyVideographyHead },
+ // { name: "Name", role: "Auditorium Lead", photo: auditoriumLead },
+ // { name: "Name", role: "Seating Lead", photo: seatingLead },
+ // { name: "Name", role: "Programme Scheduling Lead", photo: programmeSchedulingLead },
+ // { name: "Name", role: "Speaker Query & Coordination Lead", photo: speakerQueryCoordinationLead },
+  { name: "Arham Jain", role: "Chief Curator", photo: contentCurationHead },
+  { name: "Charan Teja", role: "Speaker Relations Lead", photo: speakerRelationsHead },
+ // { name: "Name", role: "Proofreading Lead", photo: proofreadingLead },
+  { name: "Moumita De", role: "Editorial Lead", photo: editorialLead },
+  { name: "Shreyas Ray", role: "Curator", photo: curator1 },
+  { name: "Agam Gao", role: "Curator", photo: curator2 },
+  { name: "Arnav Priyadarshi", role: "Curator", photo: curator3 },
+  { name: "Aryan Kumar", role: "IT & PR Head", photo: itPrHead },
+ // { name: "Name", role: "Lights & Sound Head", photo: lightsSoundHead },
+  { name: "Bighnaraj Mohapatra", role: "Design Lead", photo: designHead },
+  { name: "Fidha K C", role: "Social Media Lead", photo: socialMediaHead },
+  { name: "Sarthak Baisya Saha", role: "Website Lead", photo: websiteHead },
+  { name: "Aritra Roy", role: "Website Lead", photo: websiteHead2 },
+
+  { name: "Sulagna Pradhan", role: "Sponsorship & Marketing Head", photo: sponsorship1 },
+  { name: "Simran Kaushik", role: "Sponsorship & Marketing Head", photo: sponsorship2 },
+ // { name: "Name", role: "Digital Ticketing Head", photo: digitalTicketingHead },
+  { name: "Mahima Raj", role: "Cultural Head", photo: culturalHead },
+  { name: "Agam Gao", role: "Hospitality Head", photo: hospitalityHead },
+  { name: "Aneesha Dasari", role: "Hospitality Head & Accomodation Lead", photo: hospitalityHead2 },
+ // { name: "Aneesha Dasari", role: "Accommodation Lead", photo: accommodationLead },
+  { name: "Londhe Aditya Shashingar", role: "Transportation Lead", photo: transportationLead },
+  
+ // { name: "Name", role: "Volunteer Head", photo: volunteerHead },
+  { name: "Kuppireddy Dhruthi Sri", role: "Food & Dining Lead", photo: foodCateringLead },
+  { name: "Amaan Khan", role: "Operations & Logistics Head", photo: logisticsHead },
+  { name: "Londhe Aditya Shashingar", role: "Security Head", photo: securityHead },
+  { name: "Srijita Bhowal", role: "Security Head", photo: securityHead2 },
 ];
 
 const TeamCard = ({ member, index }) => (
