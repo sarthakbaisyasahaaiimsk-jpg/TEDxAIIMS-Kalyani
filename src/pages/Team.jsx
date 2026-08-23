@@ -89,6 +89,7 @@ const teamMembers = [
  // { name: "Name", role: "Volunteer Head", photo: volunteerHead },
   { name: "Kuppireddy Dhruthi Sri", role: "Food & Dining Lead", photo: foodCateringLead },
   { name: "Amaan Khan", role: "Operations & Logistics Head", photo: logisticsHead },
+  { name: "Liya Alsa Deepak", role: "Hopitality Team", photo: hospitalityTeam },
  // { name: "Londhe Aditya Shashingar", role: "Security Head", photo: securityHead },
   { name: "Srijita Bhowal", role: "Security Head", photo: securityHead2 },
 ];
