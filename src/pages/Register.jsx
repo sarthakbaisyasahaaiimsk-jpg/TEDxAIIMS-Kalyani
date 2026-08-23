@@ -1,110 +1,41 @@
-import React, { useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, Link } from "react-router-dom";
 import ScrollReveal from "../components/tedx/ScrollReveal";
 import logo from "../assets/logo-white.png";
-import paymentQR1 from "../assets/qrgeneral.jpeg";
-import paymentQR2 from "../assets/qrpremium.jpeg";
-import paymentQR3 from "../assets/qrvip.jpeg";
-
-const FORM_ACTION_URL =
-  "https://docs.google.com/forms/u/0/d/e/1FAIpQLSecTSzVq2MVxyHdbQ_QPwxt8gHIYj8E4g9g8iV2yBkfTPBYZw/formResponse";
-
-const ENTRY = {
-  fullName: "entry.1200385473",
-  email: "entry.952837880",
-  contact: "entry.1594828258",
-  college: "entry.1914126563",
-  diet: "entry.610749920",
-  passType: "entry.1088215050",
-  transactionId: "entry.1180537060",
-};
-
-const dietOptions = ["Veg", "Non-Veg"];
-
-const initialFormState = {
-  fullName: "",
-  email: "",
-  contact: "",
-  college: "",
-  diet: "",
-  passType: "",
-  transactionId: "",
-};
 
 // Maps the pass key in the homepage link (?pass=general|premium|vip)
-// to the display label shown/submitted on the registration form.
+// to the display label used to prefill the embedded Google Form.
 const PASS_LABELS = {
   general: "General",
   premium: "Premium",
   vip: "VIP",
 };
 
-const QR_BY_PASS = {
-  General: paymentQR1,
-  Premium: paymentQR2,
-  VIP: paymentQR3,
-};
+// Your Google Form's "Type of Pass" entry id (same one used in ENTRY.passType
+// in the custom-form version). Needed to prefill + lock the value via the
+// viewform URL's usp=pp_url query pattern.
+const PASS_TYPE_ENTRY_ID = "entry.1088215050";
+
+// Base viewform URL (NOT formResponse — that's only for direct POSTs).
+const GOOGLE_FORM_VIEW_URL =
+  "https://docs.google.com/forms/d/e/1FAIpQLSecTSzVq2MVxyHdbQ_QPwxt8gHIYj8E4g9g8iV2yBkfTPBYZw/viewform";
 
 export default function Register() {
   const [searchParams] = useSearchParams();
   const preselectedPass = (searchParams.get("pass") || "").toLowerCase();
   const lockedPassType = PASS_LABELS[preselectedPass] || "";
 
-  const [form, setForm] = useState({
-    ...initialFormState,
-    passType: lockedPassType,
-  });
-  const [status, setStatus] = useState("idle"); // idle | submitting | success | error
-
-  const handleChange = (field) => (e) => {
-    setForm((prev) => ({ ...prev, [field]: e.target.value }));
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    if (
-        !form.fullName ||
-        !form.email ||
-        !form.contact ||
-        !form.passType ||
-        !form.transactionId
-   ) {
-    setStatus("error");
-    return;
-    }
-
-    setStatus("submitting");
-
-    const data = new FormData();
-    data.append(ENTRY.fullName, form.fullName);
-    data.append(ENTRY.email, form.email);
-    data.append(ENTRY.contact, form.contact);
-    data.append(ENTRY.college, form.college);
-    data.append(ENTRY.diet, form.diet);
-    data.append(ENTRY.passType, form.passType);
-    data.append(ENTRY.transactionId, form.transactionId);
-
-    try {
-      await fetch(FORM_ACTION_URL, {
-        method: "POST",
-        mode: "no-cors",
-        body: data,
-      });
-      // no-cors means we can't read the response — assume success.
-      setStatus("success");
-      setForm(initialFormState);
-    } catch (err) {
-      setStatus("error");
-    }
-  };
-
-  const inputClasses =
-    "w-full bg-white/5 border border-white/10 text-white placeholder-white/30 px-5 py-4 text-sm focus:outline-none focus:border-ted-red transition-colors duration-300";
-
-  const labelClasses =
-    "block text-white/45 text-[11px] tracking-[0.2em] uppercase font-medium mb-2";
+  // Build a prefilled embed URL. Google Forms will show the pass-type
+  // question already answered — but it does NOT lock/disable it the way
+  // the custom form does. Users can still technically change it inside the
+  // Google Form UI; there is no way to hard-lock a field in a native
+  // Google Form embed.
+  const embedSrc = lockedPassType
+    ? `${GOOGLE_FORM_VIEW_URL}?embedded=true&${PASS_TYPE_ENTRY_ID}=${encodeURIComponent(
+        lockedPassType
+      )}`
+    : `${GOOGLE_FORM_VIEW_URL}?embedded=true`;
 
   return (
     <section className="relative bg-[#060606] py-28 lg:py-40 overflow-hidden min-h-screen">
@@ -115,6 +46,15 @@ export default function Register() {
         alt="TEDxAIIMSKalyani"
         className="absolute top-10 left-6 lg:top-14 lg:left-16 h-16 lg:h-24 w-auto opacity-90 z-10"
       />
+
+      {lockedPassType && (
+        <Link
+          to="/#register"
+          className="absolute top-10 right-6 lg:top-14 lg:right-16 z-10 text-[11px] tracking-[0.2em] uppercase text-white/50 hover:text-ted-red border border-white/15 hover:border-ted-red px-5 py-3 transition-colors duration-300"
+        >
+          Change tier
+        </Link>
+      )}
 
       <div className="max-w-2xl mx-auto px-6 lg:px-12 relative">
 
@@ -130,171 +70,51 @@ export default function Register() {
           </ScrollReveal>
           <ScrollReveal delay={0.1}>
             <p className="text-white/45 text-lg leading-relaxed font-light max-w-xl mx-auto">
-              Fill in your details below to join TEDxAIIMSKalyani 2026.
+              {lockedPassType
+                ? `Fill in your details below for your ${lockedPassType} pass.`
+                : "Fill in your details below to join TEDxAIIMSKalyani 2026."}
             </p>
           </ScrollReveal>
         </div>
 
+        {!lockedPassType && (
+          <ScrollReveal delay={0.12}>
+            <p className="text-ted-red text-sm text-center mb-8">
+              No pass selected — please go back and choose a pass from the homepage.
+            </p>
+          </ScrollReveal>
+        )}
+
         <ScrollReveal delay={0.15}>
           <motion.div
             whileHover={{ borderColor: "rgba(235,0,40,0.25)" }}
-            className="bg-[#0f0f0f] border border-white/6 p-6 sm:p-10 transition-colors duration-500"
+            className="bg-[#0f0f0f] border border-white/6 p-3 sm:p-6 lg:p-8 transition-colors duration-500"
           >
-            {status === "success" ? (
-              <div className="text-center py-12">
-                <div className="text-ted-red text-5xl font-black mb-4">✓</div>
-                <h3 className="text-white text-2xl font-bold mb-2">You're registered!</h3>
-                <p className="text-white/45 text-sm">
-                  Thanks for signing up for TEDxAIIMSKalyani 2026. We'll be in touch with further details.
-                </p>
-                <button
-                  onClick={() => setStatus("idle")}
-                  className="mt-8 text-[11px] tracking-[0.25em] uppercase px-8 py-4 bg-white/5 text-white/60 hover:bg-white/10 hover:text-white border border-white/8 transition-all duration-300"
-                >
-                  Submit another response
-                </button>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div>
-                  <label className={labelClasses}>Full Name *</label>
-                  <input
-                    type="text"
-                    required
-                    value={form.fullName}
-                    onChange={handleChange("fullName")}
-                    className={inputClasses}
-                    placeholder="Jane Doe"
-                  />
-                </div>
-
-                <div className="grid sm:grid-cols-2 gap-6">
-                  <div>
-                    <label className={labelClasses}>Email Address *</label>
-                    <input
-                      type="email"
-                      required
-                      value={form.email}
-                      onChange={handleChange("email")}
-                      className={inputClasses}
-                      placeholder="jane@example.com"
-                    />
-                  </div>
-                  <div>
-                    <label className={labelClasses}>Contact Number *</label>
-                    <input
-                      type="tel"
-                      required
-                      value={form.contact}
-                      onChange={handleChange("contact")}
-                      className={inputClasses}
-                      placeholder="98765 43210"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label className={labelClasses}>College / Organization</label>
-                  <input
-                    type="text"
-                    value={form.college}
-                    onChange={handleChange("college")}
-                    className={inputClasses}
-                    placeholder="AIIMS Kalyani"
-                  />
-                </div>
-
-                <div>
-                  <label className={labelClasses}>Dietary Preference</label>
-                  <div className="flex gap-3">
-                    {dietOptions.map((opt) => (
-                      <button
-                        type="button"
-                        key={opt}
-                        onClick={() => setForm((prev) => ({ ...prev, diet: opt }))}
-                        className={
-                          "flex-1 text-[11px] tracking-[0.2em] uppercase px-5 py-4 font-semibold border transition-all duration-300 " +
-                          (form.diet === opt
-                            ? "bg-ted-red text-white border-ted-red"
-                            : "bg-white/5 text-white/50 border-white/10 hover:text-white hover:border-white/20")
-                        }
-                      >
-                        {opt}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                <div>
-                  <label className={labelClasses}>Type of Pass</label>
-                  {form.passType ? (
-                    <div className="w-full bg-white/5 border border-ted-red/40 text-white px-5 py-4 text-sm flex items-center justify-between">
-                      <span className="font-semibold tracking-wide">{form.passType}</span>
-                      <span className="text-white/30 text-[10px] uppercase tracking-[0.2em]">Locked</span>
-                    </div>
-                  ) : (
-                    <div className="w-full bg-white/5 border border-ted-red/40 text-ted-red px-5 py-4 text-sm">
-                      No pass selected — please go back and choose a pass from the homepage.
-                    </div>
-                  )}
-                </div>
-                {form.passType && (
-                <div className="border border-white/10 rounded-lg bg-white/5 p-8">
-                 <h3 className="text-white text-2xl font-bold mb-6">
-                  Payment
-                 </h3>
-
-                <img
-                   src={QR_BY_PASS[form.passType]}
-                   alt="TEDxAIIMSKalyani UPI QR"
-                   className="w-64 mx-auto rounded-lg border border-white/10"
-                 />
-
-                 <p className="text-center text-white/70 mt-6">
-                  Scan the QR code using any UPI app and complete the payment.
-                 </p>
-
-                <p className="text-center text-white/50 mt-2 text-sm">
-                  Please enter the UPI Transaction ID exactly as shown in your payment app.
-                 </p>
-               </div>
-                )}
-               <div>
-                <label className={labelClasses}>
-                   UPI Transaction ID *
-                 </label>
-
-                <input
-                   type="text"
-                   required
-                   value={form.transactionId}
-                    onChange={handleChange("transactionId")}
-                    className={inputClasses}
-                 placeholder="e.g. T240630143245891"
-                  />
-                </div>
-
-                {status === "error" && (
-                  <p className="text-ted-red text-sm text-center">
-                    Please complete all required fields including the UPI Transaction ID.*
-                  </p>
-                )}
-
-                <button
-                  type="submit"
-                  disabled={status === "submitting" || !form.passType}
-                  className="w-full mt-4 text-[11px] tracking-[0.25em] uppercase px-8 py-5 bg-ted-red text-white hover:bg-white hover:text-black font-semibold transition-all duration-300 disabled:opacity-50"
-                >
-                  {status === "submitting" ? "Submitting..." : "Submit Registration"}
-                </button>
-
-                <p className="text-white text-sm text-center font-bold leading-relaxed pt-2">
-                  Every transaction is for a single ticket valid for single entry.
-                  Please carry a valid ID proof during the day of the event.
-                </p>
-              </form>
-            )}
+            <div className="w-full overflow-hidden">
+              <iframe
+                src={embedSrc}
+                width="100%"
+                height="1400"
+                frameBorder="0"
+                marginHeight="0"
+                marginWidth="0"
+                title="Registration Form"
+                className="w-full bg-white"
+              >
+                Loading…
+              </iframe>
+            </div>
           </motion.div>
+        </ScrollReveal>
+
+        <ScrollReveal delay={0.2}>
+          <p className="text-white text-sm text-center font-bold leading-relaxed mt-10">
+            Every transaction is for a single ticket valid for single entry.
+            Please carry a valid ID proof during the day of the event.
+          </p>
+          <p className="text-white/25 text-xs text-center mt-6 font-mono tracking-wider uppercase">
+            Trouble loading the form? Refresh the page or try a different browser.
+          </p>
         </ScrollReveal>
       </div>
     </section>
