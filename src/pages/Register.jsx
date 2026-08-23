@@ -40,6 +40,12 @@ const PASS_LABELS = {
   vip: "VIP",
 };
 
+const QR_BY_PASS = {
+  General: paymentQR1,
+  Premium: paymentQR2,
+  VIP: paymentQR3,
+};
+
 export default function Register() {
   const [searchParams] = useSearchParams();
   const preselectedPass = (searchParams.get("pass") || "").toLowerCase();
@@ -232,14 +238,14 @@ export default function Register() {
                     </div>
                   )}
                 </div>
-
+                {form.passType && (
                 <div className="border border-white/10 rounded-lg bg-white/5 p-8">
                  <h3 className="text-white text-2xl font-bold mb-6">
                   Payment
                  </h3>
 
                 <img
-                   src={paymentQR}
+                   src={QR_BY_PASS[form.passType]}
                    alt="TEDxAIIMSKalyani UPI QR"
                    className="w-64 mx-auto rounded-lg border border-white/10"
                  />
@@ -252,6 +258,7 @@ export default function Register() {
                   Please enter the UPI Transaction ID exactly as shown in your payment app.
                  </p>
                </div>
+                )}
                <div>
                 <label className={labelClasses}>
                    UPI Transaction ID *
