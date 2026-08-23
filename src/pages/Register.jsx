@@ -32,9 +32,9 @@ export default function Register() {
   // Google Form UI; there is no way to hard-lock a field in a native
   // Google Form embed.
   const embedSrc = lockedPassType
-    ? `${GOOGLE_FORM_VIEW_URL}?embedded=true&${PASS_TYPE_ENTRY_ID}=${encodeURIComponent(
+    ? `${GOOGLE_FORM_VIEW_URL}?usp=pp_url&${PASS_TYPE_ENTRY_ID}=${encodeURIComponent(
         lockedPassType
-      )}`
+      )}&embedded=true`
     : `${GOOGLE_FORM_VIEW_URL}?embedded=true`;
 
   return (
