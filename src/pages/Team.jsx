@@ -18,7 +18,7 @@ import speakerRelationsHead from "@/assets/team/charan.PNG";
 //import speakerQueryCoordinationLead from "@/assets/team/speaker-query-coordination-lead.PNG";
 import contentCurationHead from "@/assets/team/arham.PNG";
 //import proofreadingLead from "@/assets/team/proofreading-lead.PNG";
-//import editorialLead from "@/assets/team/moumita.PNG";
+import editorialLead from "@/assets/team/moumita.PNG";
 import curator1 from "@/assets/team/shreyas.PNG";
 import curator2 from "@/assets/team/agam.PNG";
 import curator3 from "@/assets/team/arnav.PNG";
@@ -66,7 +66,7 @@ const teamMembers = [
   { name: "Arham Jain", role: "Chief Curator", photo: contentCurationHead },
   { name: "Charan Teja", role: "Speaker Relations Lead", photo: speakerRelationsHead },
  // { name: "Name", role: "Proofreading Lead", photo: proofreadingLead },
- // { name: "Moumita De", role: "Editorial Lead", photo: editorialLead },
+  { name: "Moumita De", role: "Editorial Lead", photo: editorialLead },
   { name: "Shreyas Ray", role: "Curator", photo: curator1 },
  // { name: "Agam Gao", role: "Curator", photo: curator2 },
  // { name: "Arnav Priyadarshi", role: "Curator", photo: curator3 },
@@ -99,11 +99,20 @@ const TeamCard = ({ member, index }) => (
       whileHover={{ y: -5 }}
       className="group relative overflow-hidden bg-[#0f0f0f] border border-white/5 hover:border-ted-red/25 transition-colors duration-500"
     >
-      {/* Photo placeholder */}
-      <div className="aspect-[3/4] overflow-hidden">
-        <div className="w-full h-full bg-[#1a1a1a] flex items-center justify-center">
-          <span className="text-white/10 text-xs uppercase tracking-widest">Photo</span>
-        </div>
+      {/* Photo */}
+      <div className="aspect-[3/4] overflow-hidden relative">
+        {member.photo ? (
+          <img
+            src={member.photo}
+            alt={member.name}
+            loading="lazy"
+            className="w-full h-full object-cover grayscale-[0.2] group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500"
+          />
+        ) : (
+          <div className="w-full h-full bg-[#1a1a1a] flex items-center justify-center">
+            <span className="text-white/10 text-xs uppercase tracking-widest">Photo</span>
+          </div>
+        )}
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
       </div>
 
