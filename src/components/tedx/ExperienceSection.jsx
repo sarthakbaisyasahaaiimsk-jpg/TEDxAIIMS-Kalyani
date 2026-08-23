@@ -1,35 +1,39 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import ScrollReveal from './ScrollReveal';
-import { Handshake, Lightbulb, MessageSquare, Layers, Users } from 'lucide-react';
+import { Handshake, MessageSquare, Users } from 'lucide-react';
 
 const experiences = [
   {
     icon: Handshake,
+    number: '01',
     title: 'Networking',
     description: 'Meet clinicians, researchers, innovators, entrepreneurs, artists, and students who believe ideas can change the world',
     image: 'https://media.base44.com/images/public/6a3a5e7dc678c621c4d8d234/b42851de8_generated_899df7dc.png',
-    span: 'lg:col-span-2',
   },
   {
     icon: MessageSquare,
+    number: '02',
     title: 'Interactive Discussions',
     description: 'Thought-provoking conversations with speakers and fellow attendees beyond the stage.',
-    span: 'lg:col-span-1',
   },
   {
     icon: Users,
+    number: '03',
     title: 'Community Building',
     description: 'Join a growing network of curious minds united by a passion for learning, collaboration, and meaningful impact',
-    span: 'lg:col-span-1',
   },
 ];
 
 export default function ExperienceSection() {
+  const [lead, ...rest] = experiences;
+  const LeadIcon = lead.icon;
+
   return (
-    <section className="relative bg-[#060606] py-28 lg:py-40">
-      <div className="max-w-7xl mx-auto px-6 lg:px-12">
-        
+    <section className="relative bg-[#060606] py-28 lg:py-40 overflow-hidden">
+      <div className="absolute top-0 left-1/3 w-[600px] h-[600px] bg-ted-red/4 blur-[180px] rounded-full pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto px-6 lg:px-12 relative">
 
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-20 mb-14 items-end">
           <ScrollReveal>
@@ -46,58 +50,54 @@ export default function ExperienceSection() {
           </ScrollReveal>
         </div>
 
-        {/* Top grid row — image cards */}
-        <div className="grid lg:grid-cols-3 gap-3 mb-3">
-          {experiences.slice(0, 3).map((exp, i) => {
-            const Icon = exp.icon;
-            return (
-              <ScrollReveal key={exp.title} delay={i * 0.08} className={exp.span}>
-                <motion.div
-                  whileHover={{ y: -4 }}
-                  className="group relative overflow-hidden border border-white/5 hover:border-ted-red/20 transition-colors duration-500 h-full"
-                >
-                  {exp.image && (
-                    <div className="aspect-video overflow-hidden relative">
-                      <img
-                        src={exp.image}
-                        alt={exp.title}
-                        className="w-full h-full object-cover opacity-40 group-hover:opacity-60 group-hover:scale-105 transition-all duration-700"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#060606] via-[#060606]/50 to-transparent" />
-                    </div>
-                  )}
-                  <div className="relative p-6 lg:p-8">
-                    <div className="flex items-center gap-3 mb-3">
-                      <Icon size={16} className="text-ted-red" strokeWidth={1.5} />
+        <div className="grid lg:grid-cols-5 gap-3">
+          {/* Lead card — large, image-backed */}
+          <ScrollReveal className="lg:col-span-3">
+            <motion.div
+              whileHover={{ y: -4 }}
+              className="group relative overflow-hidden border border-white/5 hover:border-ted-red/25 transition-colors duration-500 h-full min-h-[420px] flex flex-col justify-end"
+            >
+              <div className="absolute inset-0">
+                <img
+                  src={lead.image}
+                  alt={lead.title}
+                  className="w-full h-full object-cover opacity-35 group-hover:opacity-55 group-hover:scale-105 transition-all duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#060606] via-[#060606]/60 to-transparent" />
+              </div>
+
+              <div className="relative p-8 lg:p-10">
+                <span className="text-ted-red/50 font-mono text-xs tracking-[0.3em]">{lead.number}</span>
+                <div className="flex items-center gap-3 mt-4 mb-3">
+                  <LeadIcon size={20} className="text-ted-red" strokeWidth={1.5} />
+                  <h3 className="text-white font-bold text-2xl lg:text-3xl tracking-tight">{lead.title}</h3>
+                </div>
+                <p className="text-white/40 text-sm lg:text-base leading-relaxed max-w-md">{lead.description}</p>
+              </div>
+            </motion.div>
+          </ScrollReveal>
+
+          {/* Stacked side cards */}
+          <div className="lg:col-span-2 grid gap-3">
+            {rest.map((exp, i) => {
+              const Icon = exp.icon;
+              return (
+                <ScrollReveal key={exp.title} delay={(i + 1) * 0.1}>
+                  <motion.div
+                    whileHover={{ y: -4 }}
+                    className="group bg-[#0f0f0f] border border-white/5 hover:border-ted-red/25 p-8 transition-colors duration-500 h-full"
+                  >
+                    <span className="text-ted-red/50 font-mono text-xs tracking-[0.3em]">{exp.number}</span>
+                    <div className="flex items-center gap-3 mt-4 mb-3">
+                      <Icon size={18} className="text-ted-red" strokeWidth={1.5} />
                       <h3 className="text-white font-bold text-lg tracking-tight">{exp.title}</h3>
                     </div>
                     <p className="text-white/35 text-sm leading-relaxed">{exp.description}</p>
-                  </div>
-                </motion.div>
-              </ScrollReveal>
-            );
-          })}
-        </div>
-
-        {/* Bottom grid row — text-only cards */}
-        <div className="grid md:grid-cols-2 gap-3">
-          {experiences.slice(3).map((exp, i) => {
-            const Icon = exp.icon;
-            return (
-              <ScrollReveal key={exp.title} delay={(i + 3) * 0.08}>
-                <motion.div
-                  whileHover={{ y: -4 }}
-                  className="group bg-[#0f0f0f] border border-white/5 hover:border-ted-red/20 p-8 transition-colors duration-500"
-                >
-                  <div className="flex items-center gap-3 mb-4">
-                    <Icon size={16} className="text-ted-red" strokeWidth={1.5} />
-                    <h3 className="text-white font-bold text-lg tracking-tight">{exp.title}</h3>
-                  </div>
-                  <p className="text-white/35 text-sm leading-relaxed">{exp.description}</p>
-                </motion.div>
-              </ScrollReveal>
-            );
-          })}
+                  </motion.div>
+                </ScrollReveal>
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>
