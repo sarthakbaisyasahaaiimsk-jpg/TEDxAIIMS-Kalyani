@@ -4,7 +4,7 @@ import ScrollReveal from './ScrollReveal';
 import { MapPin, Train, Plane, Car } from 'lucide-react';
 // To use your own campus photo: drop the file into src/assets/ (e.g. src/assets/aiims-campus.jpg)
 // then uncomment the line below and use {aiimsCampusImage} as the img src instead of the URL.
-import aiimsCampusImage from '@/assets/aiimsfront.png';
+import aiimsCampusImage from '@/assets/aiimsfront.jpeg';
 
 const travelInfo = [
   {
