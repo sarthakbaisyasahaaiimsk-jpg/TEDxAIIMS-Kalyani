@@ -4,13 +4,13 @@ import Navbar from "@/components/tedx/Navbar";
 import Footer from "@/components/tedx/Footer";
 import ScrollReveal from "@/components/tedx/ScrollReveal";
 // import PhotoGallery3D from "@/components/tedx/PhotoGallery3D"; // temporarily disabled — see note near its usage below
-import tara from "@/assets/IMG_3910.PNG";
-import ajay from "@/assets/IMG_3915.PNG";
-import sumer from "@/assets/IMG_3911.PNG";
-import priyanka from "@/assets/IMG_3913.PNG";
-import dheeraj from "@/assets/IMG_3745.PNG";
-import ankita from "@/assets/IMG_3912.PNG";
-import sasi from "@/assets/IMG_3909.PNG";
+import tara from "@/assets/IMG_3910.png";
+import ajay from "@/assets/IMG_3915.png";
+import sumer from "@/assets/IMG_3911.png";
+import priyanka from "@/assets/IMG_3913.png";
+import dheeraj from "@/assets/IMG_3745.png";
+import ankita from "@/assets/IMG_3912.png";
+import sasi from "@/assets/IMG_3909.png";
 
 const pastEvent = {
   year: "2025",
