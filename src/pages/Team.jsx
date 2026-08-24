@@ -48,6 +48,7 @@ import host from "@/assets/team/aastha.PNG";
 const teamMembers = [
   { name: "Ajinkya Budle", role: "Licensee & Organiser", photo: licensee },
   { name: "Arnav Priyadarshi", role: "Co-Organiser", photo: coorganiser },
+  { name: "Aastha N. Raj", role: "Host", photo: host },
   { name: "Aritra Roy", role: "Chief Coordinator", photo: chiefCoordinator },
   { name: "Shazeb Eyad", role: "Compliance Coordinator", photo: managementCoordinator },
   { name: "Sarthak Baisya Saha", role: "Joint Secretary", photo: eventManagementHead },
