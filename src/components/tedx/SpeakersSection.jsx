@@ -1,95 +1,36 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ScrollReveal from './ScrollReveal';
 
 const speakers = [
   {
-    name: 'Dr. Ananya Sharma',
-    role: 'AI & Diagnostics Researcher',
-    category: 'Technology',
+    name: 'Gyanendra Purohit',
+    role: 'Advocate, Social Activist & Founder, Anand Service Society',
+    category: 'Social Impact',
     image: 'https://media.base44.com/images/public/6a3a5e7dc678c621c4d8d234/bcfd84920_generated_8ac45b79.png',
-    topic: 'When Machines See What Doctors Miss',
-  },
-  {
-    name: 'Dr. Priya Menon',
-    role: 'Surgical Oncologist',
-    category: 'Healthcare',
-    image: 'https://media.base44.com/images/public/6a3a5e7dc678c621c4d8d234/11ba6e7fc_generated_0ab8db57.png',
-    topic: 'Rewriting the Rules of Cancer Care',
-  },
-  {
-    name: 'Arjun Kapoor',
-    role: 'Biotech Entrepreneur',
-    category: 'Entrepreneurship',
-    image: 'https://media.base44.com/images/public/6a3a5e7dc678c621c4d8d234/79150be4b_generated_3d57950c.png',
-    topic: 'Building the Impossible in Biotech',
-  },
-  {
-    name: 'Prof. Kavita Das',
-    role: 'Neuroscience Researcher',
-    category: 'Research',
-    image: 'https://media.base44.com/images/public/6a3a5e7dc678c621c4d8d234/5f6a3dfda_generated_d1fec550.png',
-    topic: 'Mapping the Uncharted Brain',
-  },
-  {
-    name: 'Dr. Meera Iyer',
-    role: 'Global Health Advocate',
-    category: 'Policy',
-    image: 'https://media.base44.com/images/public/6a3a5e7dc678c621c4d8d234/591aa6908_generated_2c43ad3c.png',
-    topic: 'Healthcare Without Borders',
-  },
-  {
-    name: 'Prof. Rajesh Nair',
-    role: 'Genomics Pioneer',
-    category: 'Research',
-    image: 'https://media.base44.com/images/public/6a3a5e7dc678c621c4d8d234/36b9f6c70_generated_3c7ad93d.png',
-    topic: 'Your DNA Is a Map — Learn to Read It',
+    topic: 'A Voice for the Voiceless',
   },
 ];
 
-const categories = ['All', 'Healthcare', 'Technology', 'Research', 'Entrepreneurship', 'Policy'];
+const comingSoonCount = 5;
 
 export default function SpeakersSection() {
-  const [activeCategory, setActiveCategory] = useState('All');
-
-  const filtered = activeCategory === 'All'
-    ? speakers
-    : speakers.filter(s => s.category === activeCategory);
-
   return (
     <section id="speakers" className="relative bg-[#060606] py-28 lg:py-40">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         
 
-        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-14 gap-8">
+        <div className="mb-14">
           <ScrollReveal>
             <h2 className="text-5xl lg:text-7xl font-black text-white tracking-tight leading-none">
               The Speakers
             </h2>
           </ScrollReveal>
-
-          <ScrollReveal delay={0.1}>
-            <div className="flex flex-wrap gap-2">
-              {categories.map(cat => (
-                <button
-                  key={cat}
-                  onClick={() => setActiveCategory(cat)}
-                  className={`text-[10px] tracking-[0.2em] uppercase px-4 py-2 transition-all duration-300 ${
-                    activeCategory === cat
-                      ? 'bg-ted-red text-white'
-                      : 'text-white/35 border border-white/8 hover:text-white hover:border-white/25'
-                  }`}
-                >
-                  {cat}
-                </button>
-              ))}
-            </div>
-          </ScrollReveal>
         </div>
 
         <motion.div layout className="grid md:grid-cols-2 lg:grid-cols-3 gap-3">
           <AnimatePresence mode="popLayout">
-            {filtered.map((speaker, i) => (
+            {speakers.map((speaker, i) => (
               <motion.div
                 key={speaker.name}
                 layout
@@ -122,6 +63,32 @@ export default function SpeakersSection() {
                       <p className="text-white/25 text-xs font-light italic">"{speaker.topic}"</p>
                     </div>
                   </div>
+                </motion.div>
+              </motion.div>
+            ))}
+
+            {Array.from({ length: comingSoonCount }).map((_, i) => (
+              <motion.div
+                key={`coming-soon-${i}`}
+                layout
+                initial={{ opacity: 0, scale: 0.96 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.96 }}
+                transition={{ duration: 0.35, delay: (speakers.length + i) * 0.06 }}
+              >
+                <motion.div
+                  whileHover={{ y: -5 }}
+                  transition={{ duration: 0.3 }}
+                  className="group relative overflow-hidden bg-[#0f0f0f] border border-white/5 hover:border-ted-red/25 transition-colors duration-500 aspect-[3/4] flex flex-col items-center justify-center text-center px-6"
+                >
+                  <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.03),transparent_70%)]" />
+                  <span className="text-white/20 text-5xl font-black tracking-tight">?</span>
+                  <p className="mt-4 text-white/60 text-sm tracking-[0.2em] uppercase font-medium">
+                    More Speakers
+                  </p>
+                  <p className="text-ted-red text-[10px] tracking-[0.3em] uppercase mt-1">
+                    Coming Soon
+                  </p>
                 </motion.div>
               </motion.div>
             ))}
