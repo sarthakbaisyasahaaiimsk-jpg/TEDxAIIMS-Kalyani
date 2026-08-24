@@ -1,13 +1,14 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ScrollReveal from './ScrollReveal';
+import purohit from '@/assets/purohit.jpg';
 
 const speakers = [
   {
     name: 'Gyanendra Purohit',
     role: 'Advocate, Social Activist & Founder, Anand Service Society',
     category: 'Social Impact',
-    image: 'https://media.base44.com/images/public/6a3a5e7dc678c621c4d8d234/bcfd84920_generated_8ac45b79.png',
+    image: purohit,
     topic: 'A Voice for the Voiceless',
   },
 ];
