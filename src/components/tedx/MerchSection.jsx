@@ -12,14 +12,14 @@ const products = [
   {
     key: "tshirt",
     title: "TEDxAIIMS Kalyani T-Shirt",
-    price: "TBA",
+    price: "289",
     tag: "Apparel",
     image: tshirtImage,
   },
   {
     key: "totebag",
     title: "TEDxAIIMS Kalyani Tote Bag",
-    price: "TBA",
+    price: "149",
     tag: "Accessory",
     image: totebagImage,
   },
