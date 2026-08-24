@@ -198,7 +198,7 @@ export default function RegistrationSection() {
                 </div>
 
                 <div className="flex-shrink-0 w-full lg:w-auto">
-                  
+                  <a
                     href={BOOKMYSHOW_URL}
                     target="_blank"
                     rel="noopener noreferrer"
