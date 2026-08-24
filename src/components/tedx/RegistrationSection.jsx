@@ -2,7 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import ScrollReveal from "./ScrollReveal";
 import { ArrowRight, Check, Armchair } from "lucide-react";
-import { Link } from "react-router-dom";
+import RazorpayButton from "./RazorpayButton";
 
 // Make sure your BookMyShow logo file is saved at src/assets/bookmyshow-logo.png
 // (rename the import path below if your actual filename is different)
@@ -46,7 +46,7 @@ const themeStyles = {
 const passTypes = [
   {
     title: "General",
-    price: "₹379",
+    price: "₹349",
     features: [
       "Full day event pass",
       "Basic Goodies Set",
@@ -55,10 +55,11 @@ const passTypes = [
     seating: "Single seat in general seating area",
     theme: "none",
     key: "general",
+    razorpayButtonId: "pl_TTMZSvrYY6OxEV",
   },
   {
     title: "Premium",
-    price: "₹549",
+    price: "₹449",
     features: [
       "Full day event pass",
       "Basic Goodies Set + Customised TEDx Tote Bag",
@@ -70,10 +71,11 @@ const passTypes = [
     seating: "Single seat in premium seating area",
     theme: "red",
     key: "premium",
+    razorpayButtonId: "pl_TTa71X9ut4TSqw",
   },
   {
     title: "VIP",
-    price: "₹649",
+    price: "₹549",
     features: [
       "Full day event pass",
       "Basic Goodies Set + Customised TEDx Tote Bag & Mug",
@@ -86,6 +88,7 @@ const passTypes = [
     seating: "Single seat in VIP seating area",
     theme: "gold",
     key: "vip",
+    razorpayButtonId: "pl_TTaCzzGXoFWwGE",
   },
 ];
 
@@ -143,13 +146,10 @@ export default function RegistrationSection() {
                     </span>
                   </div>
 
-                  <Link
-                    to={`/register?pass=${pass.key}`}
-                    className={"mt-6 w-full text-[11px] tracking-[0.25em] uppercase px-8 py-4 flex items-center justify-center gap-3 font-semibold transition-all duration-300 " + t.button}
-                  >
-                    Register Now
-                    <ArrowRight size={13} />
-                  </Link>
+                  <RazorpayButton
+                    paymentButtonId={pass.razorpayButtonId}
+                    className="mt-6 w-full"
+                  />
                 </motion.div>
               </ScrollReveal>
             );
@@ -198,7 +198,7 @@ export default function RegistrationSection() {
                 </div>
 
                 <div className="flex-shrink-0 w-full lg:w-auto">
-                  <a
+                  
                     href={BOOKMYSHOW_URL}
                     target="_blank"
                     rel="noopener noreferrer"
