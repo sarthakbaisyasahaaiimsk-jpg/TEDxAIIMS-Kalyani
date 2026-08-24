@@ -2,6 +2,7 @@ import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ScrollReveal from './ScrollReveal';
 import purohit from '@/assets/purohit.jpg';
+import anjana from '@/assets/anjana.PNG';
 
 const speakers = [
   {
@@ -11,9 +12,18 @@ const speakers = [
     image: purohit,
     topic: 'A Voice for the Voiceless',
   },
+
+  {
+    name: 'Dr. Anjana Aggarwal',
+    role: 'Scientist & Research Policy Advisor, PETA India',
+    category: 'Science & Ethics',
+    image: anjana,
+    topic: "Science's Next Frontier: Beyond Animal Models",
+  },
+  
 ];
 
-const comingSoonCount = 5;
+const comingSoonCount = 4;
 
 export default function SpeakersSection() {
   return (
