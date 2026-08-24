@@ -43,6 +43,7 @@ import securityHead from "@/assets/team/londhe.PNG";
 import securityHead2 from "@/assets/team/sreejita.PNG";
 import licensee from "@/assets/team/ajinkya2.PNG";
 import coorganiser from "@/assets/team/arnav.PNG";
+import host from "@/assets/team/aastha.PNG";
 
 const teamMembers = [
   { name: "Ajinkya Budle", role: "Licensee & Organiser", photo: licensee },
