@@ -130,7 +130,7 @@ const PastTEDx = () => {
           <ScrollReveal delay={0.26}>
             <div className="mb-20">
               <p className="text-white/30 text-xs tracking-wide mb-3 text-center sm:hidden">
-                Drag to explore, tap a photo to zoom
+                Tap a photo to zoom
               </p>
               <PhotoGallery3D />
             </div>
