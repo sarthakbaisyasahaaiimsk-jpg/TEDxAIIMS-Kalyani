@@ -3,7 +3,7 @@ import { Play, ExternalLink } from "lucide-react";
 import Navbar from "@/components/tedx/Navbar";
 import Footer from "@/components/tedx/Footer";
 import ScrollReveal from "@/components/tedx/ScrollReveal";
-// import PhotoGallery3D from "@/components/tedx/PhotoGallery3D"; // temporarily disabled — see note near its usage below
+import PhotoGallery3D from "@/components/tedx/PhotoGallery3D"; // temporarily disabled — see note near its usage below
 import tara from "@/assets/IMG_3910.png";
 import ajay from "@/assets/IMG_3915.png";
 import sumer from "@/assets/IMG_3911.png";
@@ -126,7 +126,7 @@ const PastTEDx = () => {
           {/* 3D Photo gallery — temporarily disabled (large uncompressed images
               were causing slow load times and high data usage). Re-enable by
               uncommenting once images are compressed. */}
-          {/*
+        
           <ScrollReveal delay={0.26}>
             <div className="mb-20">
               <p className="text-white/30 text-xs tracking-wide mb-3 text-center sm:hidden">
@@ -135,7 +135,6 @@ const PastTEDx = () => {
               <PhotoGallery3D />
             </div>
           </ScrollReveal>
-          */}
 
           <ScrollReveal delay={0.28}>
             <div className="border-t border-white/5 mb-20" />
