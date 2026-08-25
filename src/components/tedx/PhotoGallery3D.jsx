@@ -443,9 +443,37 @@ export default function PhotoGallery3D() {
 
     let loadedCount = 0;
 
+    // Progressive reveal: don't block the whole gallery on all 73
+    // images downloading. Show it as soon as a reasonably-sized first
+    // batch is ready, then keep streaming the rest in the background
+    // (setupShapes() re-randomizes into the shape grid as more finish,
+    // since Shape() picks a random path from imagePaths lazily via
+    // "p:" at construction time in setupShapes()).
+    const REVEAL_THRESHOLD = Math.min(
+      12,
+      imagePaths.length
+    );
+    let revealed = false;
+
+    function maybeReveal() {
+      if (revealed) return;
+
+      if (
+        loadedCount >= REVEAL_THRESHOLD ||
+        loadedCount === imagePaths.length
+      ) {
+        revealed = true;
+        setTimeout(() => setLoaded(true), 200);
+      }
+    }
+
     imagePaths.forEach((path) => {
       const img = new Image();
 
+      // Loading="lazy" has no effect on manually-constructed Image()
+      // objects, but decoding="async" lets the browser decode off the
+      // main thread instead of blocking layout/paint.
+      img.decoding = "async";
       img.src = path;
 
       img.addEventListener("load", () => {
@@ -456,15 +484,7 @@ export default function PhotoGallery3D() {
         );
 
         setProgress(pct);
-
-        if (
-          loadedCount === imagePaths.length
-        ) {
-          setTimeout(
-            () => setLoaded(true),
-            300
-          );
-        }
+        maybeReveal();
       });
 
       img.addEventListener("error", () => {
@@ -475,15 +495,7 @@ export default function PhotoGallery3D() {
         );
 
         setProgress(pct);
-
-        if (
-          loadedCount === imagePaths.length
-        ) {
-          setTimeout(
-            () => setLoaded(true),
-            300
-          );
-        }
+        maybeReveal();
       });
     });
 
@@ -722,7 +734,11 @@ export default function PhotoGallery3D() {
         sketchState.hover
       );
 
-      if (Math.random() < 0.01) {
+      // Reduced from 0.01 (~1% per frame, effectively multiple times
+      // per second at 60fps) to lower the frequency of full-canvas
+      // getImageData/putImageData calls, which are the most expensive
+      // operation in this render loop.
+      if (Math.random() < 0.003) {
         sketchState.glitch.draw(t);
       }
 
