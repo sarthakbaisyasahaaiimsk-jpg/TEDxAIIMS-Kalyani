@@ -15,7 +15,7 @@ const speakers = [
 
   {
     name: 'Dr. Anjana Aggarwal',
-    role: 'Scientist & Research Policy Advisor, PETA India',
+    role: 'Scientist & Research Policy Advisor',
     category: 'Science & Ethics',
     image: anjana,
     topic: "Science's Next Frontier: Beyond Animal Models",
