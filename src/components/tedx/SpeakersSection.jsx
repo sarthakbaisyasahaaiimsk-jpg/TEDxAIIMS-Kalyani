@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import ScrollReveal from './ScrollReveal';
 import purohit from '@/assets/purohit.jpg';
 import anjana from '@/assets/anjana.PNG';
+import debarati from '@/assets/debarati.jpg'
 
 const speakers = [
   {
@@ -20,10 +21,18 @@ const speakers = [
     image: anjana,
     topic: "Science's Next Frontier: Beyond Animal Models",
   },
+
+  {
+    name: 'Debarati Mukhopadhyay',
+    role: 'Bestselling Author, Civil Service Officer & Public Speaker',
+    category: 'Literature & Storytelling',
+    image: debarati,
+    topic: "Unearthing the Forgotten: History, Resilience & the Power of Story",
+  },
   
 ];
 
-const comingSoonCount = 4;
+const comingSoonCount = 3;
 
 export default function SpeakersSection() {
   return (
