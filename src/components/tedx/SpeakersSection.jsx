@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import ScrollReveal from './ScrollReveal';
 import purohit from '@/assets/purohit.jpg';
 import anjana from '@/assets/anjana.PNG';
-import debarati from '@/assets/debarati.jpg'
+import debarati from '@/assets/debarati.jpeg'
 
 const speakers = [
   {
