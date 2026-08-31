@@ -75,7 +75,7 @@ const passTypes = [
   },
   {
     title: "VIP",
-    price: "₹449",
+    price: "₹499",
     features: [
       "Full day event pass",
       "Basic Goodies Set + Customised TEDx Tote Bag & Mug",
