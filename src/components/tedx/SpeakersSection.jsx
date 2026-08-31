@@ -4,7 +4,7 @@ import ScrollReveal from './ScrollReveal';
 import purohit from '@/assets/purohit.jpg';
 import anjana from '@/assets/anjana.PNG';
 import debarati from '@/assets/debarati.jpeg'
-import justics from '@/assets/justice.jpeg'
+import justice from '@/assets/justice.jpeg'
 //import geneva from '@/assets/geneva.png'
 
 const speakers = [
