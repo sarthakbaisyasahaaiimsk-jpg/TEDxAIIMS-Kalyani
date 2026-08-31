@@ -25,19 +25,19 @@ const speakers = [
   },
 
   {
-    name: 'Debarati Mukhopadhyay',
-    role: 'Bestselling Author, Civil Service Officer & Public Speaker',
-    category: 'Literature & Storytelling',
-    image: debarati,
-    topic: "Unearthing the Forgotten: History, Resilience & the Power of Story",
-  },
-
-  {
     name: 'Hon’ble Justice Pinaki Chandra Ghose ',
     role: 'Former Judge, Supreme Court of India & First Lokpal of India',
     category: 'Law & Justice',
     image: justice,
     topic: "Upholding Justice: A Life on the Bench and Beyond",
+  },
+  
+  {
+    name: 'Debarati Mukhopadhyay',
+    role: 'Bestselling Author, Civil Service Officer & Public Speaker',
+    category: 'Literature & Storytelling',
+    image: debarati,
+    topic: "Unearthing the Forgotten: History, Resilience & the Power of Story",
   },
   
 ];
