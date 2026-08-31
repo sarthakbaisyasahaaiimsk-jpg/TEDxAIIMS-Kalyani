@@ -9,37 +9,71 @@ import tiramisulogo from '@/assets/letstiramisu.png';
 import reflecto from '@/assets/reflecto.png';
 import horizon from '@/assets/horizon.png';
 import ramen from '@/assets/ramen.png';
+import plum from '@/assets/plum.png';
+import bbq from '@/assets/bbq.png';
+import bizarre from '@/assets/bizarre.png';
+import candle from '@/assets/candle.jpeg';
 const partners = [
   {
     name: 'PETA INDIA',
     role: 'Associate Partner',
     logo: petalogo,
   },
-  {
-    name: 'Ethical EduFabrica',
-    role: 'Education Partner',
-    logo: edufabricalogo,
-  },
-  {
-    name: "Let's Tiramisu",
-    role: 'Dessert Partner',
-    logo: tiramisulogo,
-  },
+
   {
     name: 'Reflecto Productions',
     role: 'Media Partner',
     logo: reflecto,
   },
+
+  {
+    name: 'Bizaree',
+    role: 'Hydration Partner',
+    logo: bizarre,
+  },
+
+  {
+    name: 'Melting Heart Aromatic Candles',
+    role: 'Decor Partner',
+    logo: candle,
+  },
+  
+  {
+    name: 'Ethical EduFabrica',
+    role: 'Education Partner',
+    logo: edufabricalogo,
+  },
+
+  {
+    name: 'Plum',
+    role: 'Gifting Partner',
+    logo: plum,
+  },
+
+  {
+    name: 'Barbeque Nation',
+    role: 'Official Food Partner',
+    logo: bbq,
+  },
+  
+  {
+    name: "Let's Tiramisu",
+    role: 'Dessert Partner',
+    logo: tiramisulogo,
+  },
+  
+  {
+    name: 'Hosshi Ramen',
+    role: 'Japanese Cuisine Partner',
+    logo: ramen,
+  },
+
   {
     name: 'Horizon Sponsorship Group',
     role: 'Supporting Partner',
     logo: horizon,
   },
-  {
-    name: 'Hosshi Ramen',
-    role: 'Food Partner',
-    logo: ramen,
-  },
+
 ];
 export default function SponsorsSection() {
   return (
