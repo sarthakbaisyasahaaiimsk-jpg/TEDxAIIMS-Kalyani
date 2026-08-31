@@ -46,7 +46,7 @@ const themeStyles = {
 const passTypes = [
   {
     title: "General",
-    price: "₹349",
+    price: "₹299",
     features: [
       "Full day event pass",
       "Basic Goodies Set",
@@ -59,7 +59,7 @@ const passTypes = [
   },
   {
     title: "Premium",
-    price: "₹449",
+    price: "₹399",
     features: [
       "Full day event pass",
       "Basic Goodies Set + Customised TEDx Tote Bag",
@@ -75,7 +75,7 @@ const passTypes = [
   },
   {
     title: "VIP",
-    price: "₹549",
+    price: "₹449",
     features: [
       "Full day event pass",
       "Basic Goodies Set + Customised TEDx Tote Bag & Mug",
