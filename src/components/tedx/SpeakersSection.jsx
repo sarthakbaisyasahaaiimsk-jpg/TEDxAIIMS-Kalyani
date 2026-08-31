@@ -4,6 +4,8 @@ import ScrollReveal from './ScrollReveal';
 import purohit from '@/assets/purohit.jpg';
 import anjana from '@/assets/anjana.PNG';
 import debarati from '@/assets/debarati.jpeg'
+import justics from '@/assets/justice.jpeg'
+//import geneva from '@/assets/geneva.png'
 
 const speakers = [
   {
@@ -29,10 +31,18 @@ const speakers = [
     image: debarati,
     topic: "Unearthing the Forgotten: History, Resilience & the Power of Story",
   },
+
+  {
+    name: 'Hon’ble Justice Pinaki Chandra Ghose ',
+    role: 'Former Judge, Supreme Court of India & First Lokpal of India',
+    category: 'Law & Justice',
+    image: justice,
+    topic: "Upholding Justice: A Life on the Bench and Beyond",
+  },
   
 ];
 
-const comingSoonCount = 3;
+const comingSoonCount = 2;
 
 export default function SpeakersSection() {
   return (
