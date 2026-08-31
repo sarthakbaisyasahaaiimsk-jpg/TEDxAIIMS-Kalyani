@@ -8,7 +8,7 @@ import eventManagementHead from "@/assets/team/sarthak.PNG";
 import eventManagementHead2 from "@/assets/team/sandesh.PNG";
 import eventManagementHead3 from "@/assets/team/devdas.PNG";
 //import stageLead from "@/assets/team/stage-lead.PNG";
-import decorationLead from "@/assets/team/minnoli.PNG";
+//import decorationLead from "@/assets/team/minnoli.PNG";
 //import ticketingRegistrationLead from "@/assets/team/ticketing-registration-lead.PNG";
 import auditoriumLead from "@/assets/team/sejal.PNG";
 //import seatingLead from "@/assets/team/seating-lead.PNG";
@@ -56,7 +56,7 @@ const teamMembers = [
   { name: "Devdas Peenak Jayanteya", role: "Executive Producer", photo: eventManagementHead3 },
   { name: "Sejal Jha", role: "Venue Lead", photo: auditoriumLead },
  // { name: "Sarthak Baisya Saha", role: "Lights & Sound Lead", photo: lightsSoundHead },
-  { name: "Minnoli Nath", role: "Decorartion Lead", photo: decorationLead },
+ // { name: "Minnoli Nath", role: "Decorartion Lead", photo: decorationLead },
  // { name: "Name", role: "Venue Lead", photo: stageLead },
  // { name: "Name", role: "Stage Light & Sound Lead", photo: lightsSoundHead },
  // { name: "Name", role: "Ticketing & Registration Lead", photo: ticketingRegistrationLead },
