@@ -5,72 +5,70 @@ import { ChevronDown, Mic, Coffee, Flag, Star, Users, Music, Award } from 'lucid
 
 const scheduleItems = [
   {
-    title: 'Breakfast',
-    description: 'Start the day right with breakfast as attendees begin to arrive.',
-    type: 'break',
-    icon: Coffee,
-  },
-  {
+    time: '9:00 - 10:00',
     title: 'Security and Pass Collection',
     description: 'Security check-in and badge collection, your first step into the Uncharted.',
     type: 'logistics',
     icon: Flag,
   },
   {
+    time: '10:00 - 10:20',
     title: 'Guest Entry & Formalities',
     description: 'Guest entry and formalities take place in the Green Room.',
     type: 'logistics',
     icon: Users,
   },
   {
+    time: '10:00 - 10:20',
     title: 'Seating & Speaker Entry',
     description: 'Attendees take their seats in the Auditorium as our speakers make their entry.',
     type: 'logistics',
     icon: Users,
   },
   {
+    time: '10:20 - 10:50',
     title: 'Opening Ceremony',
     description: 'Introduction; National Anthem; Lamp Lighting; Felicitation of Guests; Address by Executive Director; Photograph Session.',
     type: 'ceremony',
     icon: Star,
   },
   {
+    time: '10:50 - 11:00',
     title: 'TEDx Intro & Video',
     description: 'A cinematic introduction to TEDx, setting the stage for the talks ahead.',
     type: 'ceremony',
     icon: Star,
   },
   {
+    time: '11:00 - 12:30',
     title: 'Talks 1, 2 & 3',
     description: 'The first three TEDx talks of the day.',
     type: 'talks',
     icon: Mic,
   },
   {
+    time: '12:30 - 1:45',
     title: 'Lunch Break & Meet and Greet',
     description: 'A break to refuel and network with fellow attendees, speakers, and guests.',
     type: 'break',
     icon: Coffee,
   },
   {
-    title: 'Ads',
-    description: 'A short break featuring sponsor advertisements.',
-    type: 'logistics',
-    icon: Flag,
-  },
-  {
+    time: '2:00 - 3:30',
     title: 'Talks 4, 5 & 6',
     description: 'The final three TEDx talks of the day.',
     type: 'talks',
     icon: Mic,
   },
   {
+    time: '3:30 - 4:00',
     title: 'Closing Ceremony & Sponsor Announcement',
     description: 'A heartfelt closing ceremony, including the announcement of our sponsors.',
     type: 'ceremony',
     icon: Award,
   },
   {
+    time: '4:00 - 5:00',
     title: 'High Tea',
     description: 'High tea to close out the event and continue conversations from the day.',
     type: 'break',
@@ -143,13 +141,18 @@ export default function ScheduleSection() {
                             {item.title}
                           </h3>
                         </div>
-                        <motion.div
-                          animate={{ rotate: isExpanded ? 180 : 0 }}
-                          transition={{ duration: 0.2 }}
-                          className="text-white/20 flex-shrink-0"
-                        >
-                          <ChevronDown size={14} />
-                        </motion.div>
+                        <div className="flex items-center gap-3 flex-shrink-0">
+                          <span className={`text-xs font-medium tracking-tight ${styles.label}`}>
+                            {item.time}
+                          </span>
+                          <motion.div
+                            animate={{ rotate: isExpanded ? 180 : 0 }}
+                            transition={{ duration: 0.2 }}
+                            className="text-white/20"
+                          >
+                            <ChevronDown size={14} />
+                          </motion.div>
+                        </div>
                       </div>
 
                       <AnimatePresence>
