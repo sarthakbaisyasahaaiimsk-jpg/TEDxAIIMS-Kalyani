@@ -13,6 +13,7 @@ import plum from '@/assets/plum.png';
 import bbq from '@/assets/bbq.png';
 import bizarre from '@/assets/bizarre.png';
 import candle from '@/assets/candle.jpeg';
+import marwad from '@/assets/marwad.png';
 const partners = [
   {
     name: 'PETA INDIA',
@@ -66,6 +67,12 @@ const partners = [
     name: 'Hosshi Ramen',
     role: 'Japanese Cuisine Partner',
     logo: ramen,
+  },
+
+  {
+    name: 'Marwad Tea Point',
+    role: 'Beverage Partner',
+    logo: marwad,
   },
 
   {
