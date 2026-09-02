@@ -32,17 +32,9 @@ const speakers = [
     topic: "Upholding Justice: A Life on the Bench and Beyond",
   },
   
-  {
-    name: 'Debarati Mukhopadhyay',
-    role: 'Bestselling Author, Civil Service Officer & Public Speaker',
-    category: 'Literature & Storytelling',
-    image: debarati,
-    topic: "Unearthing the Forgotten: History, Resilience & the Power of Story",
-  },
-  
 ];
 
-const comingSoonCount = 2;
+const comingSoonCount = 3;
 
 export default function SpeakersSection() {
   return (
