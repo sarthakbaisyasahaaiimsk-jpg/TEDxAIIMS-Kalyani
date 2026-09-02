@@ -14,6 +14,7 @@ import bbq from '@/assets/bbq.png';
 import bizarre from '@/assets/bizarre.png';
 import candle from '@/assets/candle.jpeg';
 import marwad from '@/assets/marwad.png';
+import festee from '@/assets/festee.png';
 const partners = [
   {
     name: 'PETA INDIA',
@@ -73,6 +74,12 @@ const partners = [
     name: 'Marwad Tea Point',
     role: 'Beverage Partner',
     logo: marwad,
+  },
+
+  {
+    name: 'Festee',
+    role: 'Merchandise Partner',
+    logo: festee,
   },
 
   {
