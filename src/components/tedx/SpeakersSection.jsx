@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import ScrollReveal from './ScrollReveal';
 import purohit from '@/assets/purohit.jpg';
 import anjana from '@/assets/anjana.PNG';
-import debarati from '@/assets/debarati.jpeg'
+import debarati from '@/assets/debarati.PNG'
 import justice from '@/assets/justice.jpeg'
 //import geneva from '@/assets/geneva.png'
 
@@ -31,10 +31,18 @@ const speakers = [
     image: justice,
     topic: "Upholding Justice: A Life on the Bench and Beyond",
   },
+
+  {
+    name: 'Nilanjana Maulik',
+    role: 'Secretary General, ARDSI Calcutta Chapter & Dementia Care Advocate',
+    category: 'Health & Caregiving',
+    image: debarati,
+    topic: "Even When Memories Fade, Dignity Never Does",
+  },
   
 ];
 
-const comingSoonCount = 3;
+const comingSoonCount = 1;
 
 export default function SpeakersSection() {
   return (
