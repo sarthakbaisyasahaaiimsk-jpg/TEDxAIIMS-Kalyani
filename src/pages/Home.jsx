@@ -29,7 +29,6 @@ export default function Home() {
         <ThemeSection />
         <FrontiersSection />
         <SpeakersSection />
-        <SneakPeekSection />
         <ScheduleSection />
         <ExperienceSection />
         <VenueSection />
