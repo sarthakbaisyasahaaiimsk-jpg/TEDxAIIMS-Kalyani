@@ -1,57 +1,36 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ScrollReveal from './ScrollReveal';
-import { Brain, Microscope, Globe, FlaskConical, Rocket, Users, Sparkles } from 'lucide-react';
+import { Brain, Globe, FlaskConical, Users, } from 'lucide-react';
 
 const frontiers = [
   {
-    icon: Brain,
+    icon: Users,
     num: '01',
-    title: 'Artificial Intelligence',
-    subtitle: 'Machine minds, human purpose',
-    description: 'From diagnostic algorithms that outperform specialists to language models that democratize knowledge — AI is rewriting the rules of what machines can do for humanity.',
+    title: 'Social Impact',
+    subtitle: 'A voice for the voiceless',
+    description: 'From building deaf-friendly institutions to reuniting thousands of families, Gyanendra Purohit\'s work shows how grief can be transformed into a lifelong mission for dignity and inclusion.',
   },
   {
-    icon: Microscope,
+    icon: FlaskConical,
     num: '02',
-    title: 'Precision Medicine',
-    subtitle: 'Your genome, your therapy',
-    description: 'Treatments tailored to your DNA, lifestyle, and environment. Precision medicine promises to end the era of one-size-fits-all healthcare forever.',
+    title: 'Science & Ethics',
+    subtitle: 'Beyond animal models',
+    description: 'Dr. Anjana Aggarwal challenges the conventions of biomedical research, advocating a shift toward modern, human-relevant and animal-free methods for the next generation of science.',
   },
   {
     icon: Globe,
     num: '03',
-    title: 'Global Health',
-    subtitle: 'Equity beyond borders',
-    description: 'Pandemics reminded us that health is borderless. The next frontier is building systems resilient enough to protect every community on Earth.',
+    title: 'Law & Justice',
+    subtitle: 'A life on the bench and beyond',
+    description: 'From the Supreme Court to becoming India\'s first Lokpal, Justice Pinaki Chandra Ghose\'s career reflects a lifelong engagement with justice, accountability and human rights.',
   },
   {
-    icon: FlaskConical,
+    icon: Brain,
     num: '04',
-    title: 'Biotechnology',
-    subtitle: 'Engineering life itself',
-    description: 'CRISPR gene editing, lab-grown organs, and synthetic biology — we are entering an era where biology becomes a programmable medium.',
-  },
-  {
-    icon: Rocket,
-    num: '05',
-    title: 'Entrepreneurship',
-    subtitle: 'Ideas that disrupt industries',
-    description: 'The most consequential companies of the next decade will solve problems we haven\'t fully understood yet. Entrepreneurship is the engine of the uncharted.',
-  },
-  {
-    icon: Users,
-    num: '06',
-    title: 'Leadership',
-    subtitle: 'Navigating without a map',
-    description: 'True leadership emerges when the playbook is blank. We explore how visionaries lead teams, institutions, and nations through uncertainty.',
-  },
-  {
-    icon: Sparkles,
-    num: '07',
-    title: 'Human Potential',
-    subtitle: 'Beyond the measurable',
-    description: 'Consciousness, creativity, resilience — the most complex systems in the universe reside within us. What happens when we turn our tools of discovery inward?',
+    title: 'Health & Caregiving',
+    subtitle: 'Even when memories fade',
+    description: 'With nearly three decades in dementia care, Nilanjana Maulik\'s work is rooted in a simple belief: even as memory fades, the need for dignity, connection and compassion never does.',
   },
 ];
 
@@ -72,8 +51,8 @@ export default function FrontiersSection() {
           </ScrollReveal>
           <ScrollReveal delay={0.1}>
             <p className="text-white/40 text-base leading-relaxed font-light">
-              Seven frontiers. Seven territories where the next decade's breakthroughs
-              are waiting to be discovered. Hover to explore each domain.
+              Five voices. Five territories of thought — law, science, social
+              impact and care — brought to life on one stage. Hover to explore each speaker.
             </p>
           </ScrollReveal>
         </div>
