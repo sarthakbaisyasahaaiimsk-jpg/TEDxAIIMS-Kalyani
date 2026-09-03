@@ -59,7 +59,7 @@ const speakers = [
   
 ];
 
-const comingSoonCount = 1;
+const comingSoonCount = 0;
 
 export default function SpeakersSection() {
   return (
