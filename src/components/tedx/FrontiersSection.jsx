@@ -1,12 +1,20 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ScrollReveal from './ScrollReveal';
-import { Brain, Globe, FlaskConical, Users, Rocket } from 'lucide-react';
+import { Brain, Globe, FlaskConical, Users, Rocket, Heart } from 'lucide-react';
 
 const frontiers = [
   {
-    icon: Rocket,
+    icon: Globe,
     num: '01',
+    title: 'Law & Justice',
+    subtitle: 'A life on the bench and beyond',
+    description: 'From the Supreme Court to becoming India\'s first Lokpal, Justice Pinaki Chandra Ghose\'s career reflects a lifelong engagement with justice, accountability and human rights.',
+  },
+  
+  {
+    icon: Rocket,
+    num: '02',
     title: 'Digital Health & Governance',
     subtitle: 'Medicine meets technology',
     description: 'A UPSC AIR 1 holder turned physician-technocrat, Dr. Karthik Adapa bridges medicine, AI and public policy as WHO-SEARO\'s Regional Adviser for Digital Health, shaping equitable, technology-enabled healthcare across nations.',
@@ -14,32 +22,35 @@ const frontiers = [
   
   
   {
-    icon: Users,
-    num: '02',
-    title: 'Social Impact',
-    subtitle: 'A voice for the voiceless',
-    description: 'From building deaf-friendly institutions to reuniting thousands of families, Gyanendra Purohit\'s work shows how grief can be transformed into a lifelong mission for dignity and inclusion.',
-  },
-  {
     icon: FlaskConical,
     num: '03',
     title: 'Science & Ethics',
     subtitle: 'Beyond animal models',
     description: 'Dr. Anjana Aggarwal challenges the conventions of biomedical research, advocating a shift toward modern, human-relevant and animal-free methods for the next generation of science.',
   },
+
   {
-    icon: Globe,
+    icon: Users,
     num: '04',
-    title: 'Law & Justice',
-    subtitle: 'A life on the bench and beyond',
-    description: 'From the Supreme Court to becoming India\'s first Lokpal, Justice Pinaki Chandra Ghose\'s career reflects a lifelong engagement with justice, accountability and human rights.',
+    title: 'Social Impact',
+    subtitle: 'A voice for the voiceless',
+    description: 'From building deaf-friendly institutions to reuniting thousands of families, Gyanendra Purohit\'s work shows how grief can be transformed into a lifelong mission for dignity and inclusion.',
   },
+  
   {
     icon: Brain,
     num: '05',
     title: 'Health & Caregiving',
     subtitle: 'Even when memories fade',
     description: 'With nearly three decades in dementia care, Nilanjana Maulik\'s work is rooted in a simple belief: even as memory fades, the need for dignity, connection and compassion never does.',
+  },
+
+  {
+    icon: Heart,
+    num: '06',
+    title: 'Caregiving & Social Entrepreneurship',
+    subtitle: 'Bringing the Overlooked Into the Conversation',
+    description: 'Bhavana Issar has spent 25 years building support systems for family caregivers — the often-invisible voices in healthcare — through Caregiver Saathi, turning an overlooked reality into a movement for dignity and care.',
   },
 ];
 
