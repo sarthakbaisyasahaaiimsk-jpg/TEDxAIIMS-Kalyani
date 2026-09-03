@@ -6,6 +6,7 @@ import anjana from '@/assets/anjana.PNG';
 import debarati from '@/assets/debarati.PNG'
 import justice from '@/assets/justice.jpeg'
 import geneva from '@/assets/kartik.jpeg'
+import issar from '@/assets/bhavana.jpeg'
 
 const speakers = [
   {
@@ -46,6 +47,14 @@ const speakers = [
     category: 'Health & Caregiving',
     image: debarati,
     topic: "Even When Memories Fade, Dignity Never Does",
+  },
+
+  {
+    name: 'Bhavana Issar',
+    role: 'Founder & CEO, Caregiver Saathi',
+    category: 'Caregiving & Social Entrepreneurship',
+    image: issar,
+    topic: "Bringing the Family Caregiver Into the Conversation",
   },
   
 ];
