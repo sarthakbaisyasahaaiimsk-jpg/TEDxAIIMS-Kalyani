@@ -5,9 +5,17 @@ import purohit from '@/assets/purohit.jpg';
 import anjana from '@/assets/anjana.PNG';
 import debarati from '@/assets/debarati.PNG'
 import justice from '@/assets/justice.jpeg'
-//import geneva from '@/assets/geneva.png'
+import geneva from '@/assets/kartik.jpeg'
 
 const speakers = [
+  {
+    name: 'Dr. Karthik Adapa',
+    role: 'IAS Officer & Regional Adviser for Digital Health and AI, WHO-SEARO',
+    category: 'Digital Health & Policy',
+    image: geneva,
+    topic: "Where Medicine, Technology and Governance Meet",
+  },
+    
   {
     name: 'Gyanendra Purohit',
     role: 'Advocate, Social Activist & Founder, Anand Service Society',
