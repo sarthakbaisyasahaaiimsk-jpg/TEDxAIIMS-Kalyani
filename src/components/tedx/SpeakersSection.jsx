@@ -10,11 +10,28 @@ import issar from '@/assets/bhavana.jpeg'
 
 const speakers = [
   {
+    name: 'Hon’ble Justice Pinaki Chandra Ghose ',
+    role: 'Former Judge, Supreme Court of India & First Lokpal of India',
+    category: 'Law & Justice',
+    image: justice,
+    topic: "Upholding Justice: A Life on the Bench and Beyond",
+  },
+  
+  
+  {
     name: 'Dr. Karthik Adapa',
     role: 'IAS Officer & Regional Adviser for Digital Health and AI, WHO-SEARO',
     category: 'Digital Health & Policy',
     image: geneva,
     topic: "Where Medicine, Technology and Governance Meet",
+  },
+
+  {
+    name: 'Dr. Anjana Aggarwal',
+    role: 'Scientist & Research Policy Advisor',
+    category: 'Science & Ethics',
+    image: anjana,
+    topic: "Science's Next Frontier: Beyond Animal Models",
   },
     
   {
@@ -25,21 +42,6 @@ const speakers = [
     topic: 'A Voice for the Voiceless',
   },
 
-  {
-    name: 'Dr. Anjana Aggarwal',
-    role: 'Scientist & Research Policy Advisor',
-    category: 'Science & Ethics',
-    image: anjana,
-    topic: "Science's Next Frontier: Beyond Animal Models",
-  },
-
-  {
-    name: 'Hon’ble Justice Pinaki Chandra Ghose ',
-    role: 'Former Judge, Supreme Court of India & First Lokpal of India',
-    category: 'Law & Justice',
-    image: justice,
-    topic: "Upholding Justice: A Life on the Bench and Beyond",
-  },
 
   {
     name: 'Nilanjana Maulik',
