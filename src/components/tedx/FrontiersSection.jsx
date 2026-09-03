@@ -1,33 +1,42 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import ScrollReveal from './ScrollReveal';
-import { Brain, Globe, FlaskConical, Users, } from 'lucide-react';
+import { Brain, Globe, FlaskConical, Users, Rocket } from 'lucide-react';
 
 const frontiers = [
   {
-    icon: Users,
+    icon: Rocket,
     num: '01',
+    title: 'Digital Health & Governance',
+    subtitle: 'Medicine meets technology',
+    description: 'A UPSC AIR 1 holder turned physician-technocrat, Dr. Karthik Adapa bridges medicine, AI and public policy as WHO-SEARO\'s Regional Adviser for Digital Health, shaping equitable, technology-enabled healthcare across nations.',
+  },
+  
+  
+  {
+    icon: Users,
+    num: '02',
     title: 'Social Impact',
     subtitle: 'A voice for the voiceless',
     description: 'From building deaf-friendly institutions to reuniting thousands of families, Gyanendra Purohit\'s work shows how grief can be transformed into a lifelong mission for dignity and inclusion.',
   },
   {
     icon: FlaskConical,
-    num: '02',
+    num: '03',
     title: 'Science & Ethics',
     subtitle: 'Beyond animal models',
     description: 'Dr. Anjana Aggarwal challenges the conventions of biomedical research, advocating a shift toward modern, human-relevant and animal-free methods for the next generation of science.',
   },
   {
     icon: Globe,
-    num: '03',
+    num: '04',
     title: 'Law & Justice',
     subtitle: 'A life on the bench and beyond',
     description: 'From the Supreme Court to becoming India\'s first Lokpal, Justice Pinaki Chandra Ghose\'s career reflects a lifelong engagement with justice, accountability and human rights.',
   },
   {
     icon: Brain,
-    num: '04',
+    num: '05',
     title: 'Health & Caregiving',
     subtitle: 'Even when memories fade',
     description: 'With nearly three decades in dementia care, Nilanjana Maulik\'s work is rooted in a simple belief: even as memory fades, the need for dignity, connection and compassion never does.',
@@ -51,8 +60,8 @@ export default function FrontiersSection() {
           </ScrollReveal>
           <ScrollReveal delay={0.1}>
             <p className="text-white/40 text-base leading-relaxed font-light">
-              Five voices. Five territories of thought — law, science, social
-              impact and care — brought to life on one stage. Hover to explore each speaker.
+              Six voices. Six territories of thought — law, science, social
+              impact, care and technology — brought to life on one stage. Hover to explore each speaker.
             </p>
           </ScrollReveal>
         </div>
